@@ -5,4 +5,5 @@ using System.Collections.Generic;
 public class CombatEncounter : ScriptableObject
 {
     public Sprite Background;
+    public GameObject PhysicsObject;
 }

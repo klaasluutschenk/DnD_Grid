@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd122d5571122a449e233422e04d423, type: 3}
   m_Name: Combat Encounter Test 1
   m_EditorClassIdentifier: 
-  Background: {fileID: 0}
+  Background: {fileID: 268168019893906643, guid: 1282a8525a75f644296088c4ddf7c7a8, type: 3}
+  PhysicsObject: {fileID: 5496054743207719919, guid: 2ba1523fa90a2da4b9f8e3f32a7c6258, type: 3}
