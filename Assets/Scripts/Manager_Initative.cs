@@ -49,6 +49,11 @@ public class Manager_Initative : MonoBehaviour
     {
         characters.Add(character_Initative);
         UpdateInitiativeOrder();
+
+        if (character_Initative.IsPlayer)
+        {
+            OnCombatEncounterStarted();
+        }
     }
 
     private void OnCombatEncounterLoaded(CombatEncounter combatEncounter)
@@ -62,9 +67,10 @@ public class Manager_Initative : MonoBehaviour
 
             character_Initative newCharacter =
                 new character_Initative(
+                    character.Character.IsPlayer,
                     character.Character.name,
                     character.Character.initiative,
-                    character.Character.Sprite);
+                    character.Character.Sprite); ;
 
             if (character.Character.InitativeColor == Color.black)
             {
@@ -209,13 +215,15 @@ public class Manager_Initative : MonoBehaviour
 [Serializable]
 public class character_Initative
 {
+    public bool IsPlayer;
     public string Name;
     public int Initiative;
     public Color InitativeColor;
     public Sprite Sprite;
 
-    public character_Initative(string Name, int Initiative, Sprite Sprite)
+    public character_Initative(bool IsPlayer, string Name, int Initiative, Sprite Sprite)
     {
+        this.IsPlayer = IsPlayer;
         this.Name = Name;
         this.Initiative = Initiative;
         this.Sprite = Sprite;

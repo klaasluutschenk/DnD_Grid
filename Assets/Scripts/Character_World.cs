@@ -71,6 +71,8 @@ public class Character_World : MonoBehaviour
 
         SetInitativeSelection(false);
 
+        tile = Manager_Grid.Instance.GetTileByWorldPosition(transform.position);
+
         SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.name));
 
         SetHP(character.HealthPoints);
@@ -90,11 +92,6 @@ public class Character_World : MonoBehaviour
             return;
 
         image_Initiative.color = character_Initative.InitativeColor;
-    }
-
-    private void OnInitiativeSet()
-    {
-        image_Initiative.color = Color.blue;
     }
 
     public void Damage(int damage)
@@ -147,6 +144,8 @@ public class Character_World : MonoBehaviour
     public void Kill()
     {
         OnDeSpawned?.Invoke(this);
+        tile.ClearCharacter();
+
         Destroy(this.gameObject);
     }
 }

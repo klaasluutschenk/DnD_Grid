@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 public class Manager_Grid : MonoBehaviour
@@ -26,7 +27,7 @@ public class Manager_Grid : MonoBehaviour
         Instance = this;
 
         Manager_Combat.OnCombatEncounterEnded += OnCombatEncounterEnded;
-        Manager_Combat.OnCombatEncounterLoaded += OnCombatEncounterLoaded;
+        Manager_Combat.OnGridRequest += OnGridRequest;
     }
 
     private void OnCombatEncounterEnded()
@@ -35,7 +36,7 @@ public class Manager_Grid : MonoBehaviour
         ClearGrid();
     }
 
-    private void OnCombatEncounterLoaded(CombatEncounter combatEncounter)
+    private void OnGridRequest(CombatEncounter combatEncounter)
     {
         SpawnPhysics(combatEncounter.PhysicsObject);
         GenerateGrid(combatEncounter.Background);
@@ -89,6 +90,24 @@ public class Manager_Grid : MonoBehaviour
     private void SpawnPhysics(GameObject physicsObjectToSpawn)
     {
         physicsObject = Instantiate(physicsObjectToSpawn, physicsContainer);
+    }
+
+    #endregion
+
+    #region Functions
+
+    public void RemoveTile(Tile tile)
+    {
+        if (!tiles.Contains(tile))
+            return;
+
+        tiles.Remove(tile);
+        Destroy(tile.gameObject);
+    }
+
+    public Tile GetTileByWorldPosition(Vector3 position)
+    {
+        return tiles.Where(w => w.transform.position == position).FirstOrDefault();
     }
 
     #endregion

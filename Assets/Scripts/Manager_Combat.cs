@@ -8,6 +8,7 @@ public class Manager_Combat : MonoBehaviour
     public static Manager_Combat Instance;
 
     public static Action OnCombatEncounterEnded;
+    public static Action<CombatEncounter> OnGridRequest;
     public static Action<CombatEncounter> OnCombatEncounterLoaded;
     public static Action OnCombatEncounterStarted;
 
@@ -41,6 +42,10 @@ public class Manager_Combat : MonoBehaviour
     private IEnumerator StartCombatEcounterRoutine(CombatEncounter combatEncounter)
     {
         OnCombatEncounterEnded?.Invoke();
+
+        yield return null;
+
+        OnGridRequest?.Invoke(combatEncounter);
 
         yield return null;
 

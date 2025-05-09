@@ -8,4 +8,5 @@ public class CombatEncounter : ScriptableObject
     public GameObject PhysicsObject;
 
     public List<CombatEncounter_Character> Characters;
+    public List<Character> SpawnableCharacters;
 }

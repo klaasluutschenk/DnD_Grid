@@ -17,6 +17,11 @@ public class PhysicsObject : MonoBehaviour
         if (!removeTiles)
             return;
 
-        Destroy(collision.gameObject);
+        Tile tile = collision.gameObject.GetComponent<Tile>();
+
+        if (tile == null)
+            return;
+
+        Manager_Grid.Instance.RemoveTile(tile);
     }
 }
