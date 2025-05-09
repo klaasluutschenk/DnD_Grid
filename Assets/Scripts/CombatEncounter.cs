@@ -6,4 +6,6 @@ public class CombatEncounter : ScriptableObject
 {
     public Sprite Background;
     public GameObject PhysicsObject;
+
+    public List<CombatEncounter_Character> Characters;
 }

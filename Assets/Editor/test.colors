@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12323, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Presets:
+  - m_Name: grass
+    m_Color: {r: 0.5512282, g: 0.7921569, b: 0.32549024, a: 1}
+  - m_Name: green
+    m_Color: {r: 0.03404235, g: 0.8018868, b: 0.11935844, a: 1}
+  - m_Name: dark green
+    m_Color: {r: 0.118265904, g: 0.3490566, b: 0.018111428, a: 1}
+  - m_Name: yellow
+    m_Color: {r: 0.9528302, g: 0.92914146, b: 0.05842829, a: 1}
+  - m_Name: orange
+    m_Color: {r: 0.9137255, g: 0.5467394, b: 0, a: 1}
+  - m_Name: light red
+    m_Color: {r: 1, g: 0.45637324, b: 0.3820755, a: 1}
+  - m_Name: red
+    m_Color: {r: 0.6981132, g: 0.16099468, b: 0, a: 1}
+  - m_Name: dark red
+    m_Color: {r: 0.2735849, g: 0.06309251, b: 0, a: 1}
+  - m_Name: brown
+    m_Color: {r: 0.41509432, g: 0.33146483, b: 0.20950516, a: 1}
+  - m_Name: cyan
+    m_Color: {r: 0.10679956, g: 0.9056604, b: 0.79483575, a: 1}
+  - m_Name: blue
+    m_Color: {r: 0.043137256, g: 0.4841241, b: 0.8509804, a: 1}
+  - m_Name: dark Blue
+    m_Color: {r: 0.043253824, g: 0.24401973, b: 0.33962262, a: 1}
+  - m_Name: purple
+    m_Color: {r: 0.38792422, g: 0, b: 0.6886792, a: 1}
+  - m_Name: pink
+    m_Color: {r: 0.8490566, g: 0.5486828, b: 0.8038676, a: 1}
