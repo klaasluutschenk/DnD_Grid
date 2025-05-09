@@ -52,10 +52,16 @@ public class InitativeContainer : MonoBehaviour
         newUI.Setup(character_Initative);
 
         activeUIs.Add(newUI);
+        activeCharacters.Add(character_Initative);
     }
     
     private void OrderUI()
     {
         activeUIs = activeUIs.OrderByDescending(a => a.Character.Initiative).ToList();
+
+        foreach(Initiative_UI initiative_UI in activeUIs)
+        {
+            initiative_UI.transform.SetAsLastSibling();
+        }
     }
 }

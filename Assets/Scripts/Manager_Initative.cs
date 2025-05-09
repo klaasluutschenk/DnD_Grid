@@ -30,6 +30,8 @@ public class Manager_Initative : MonoBehaviour
         Manager_Combat.OnCombatEncounterEnded += OnCombatEncounterEnded;
         Manager_Combat.OnCombatEncounterLoaded += OnCombatEncounterLoaded;
         Manager_Combat.OnCombatEncounterStarted += OnCombatEncounterStarted;
+
+        CustomInitiativeUI.OnCharacterSet += OnCharacterSet;
     }
 
     private void Update()
@@ -41,6 +43,12 @@ public class Manager_Initative : MonoBehaviour
     private void OnCombatEncounterEnded()
     {
         characters.Clear();
+    }
+
+    private void InjectCharcter(character_Initative character_Initative)
+    {
+        characters.Add(character_Initative);
+        UpdateInitiativeOrder();
     }
 
     private void OnCombatEncounterLoaded(CombatEncounter combatEncounter)
@@ -76,6 +84,7 @@ public class Manager_Initative : MonoBehaviour
             if (character.Character.CustomInitiative)
             {
                 customInitatives.Add(newCharacter);
+                continue;
             }
 
             characters.Add(newCharacter);
@@ -184,6 +193,16 @@ public class Manager_Initative : MonoBehaviour
         Color randomColor = availableColors[randomIndex];
 
         return randomColor;
+    }
+
+    private void OnCharacterSet(character_Initative character_Initative)
+    {
+        if (!customInitatives.Contains(character_Initative))
+            return;
+
+        InjectCharcter(character_Initative);
+        customInitatives.Remove(character_Initative);
+        CheckCustomInitiative();
     }
 }
 
