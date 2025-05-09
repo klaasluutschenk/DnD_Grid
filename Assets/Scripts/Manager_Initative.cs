@@ -55,7 +55,8 @@ public class Manager_Initative : MonoBehaviour
             character_Initative newCharacter =
                 new character_Initative(
                     character.Character.name,
-                    character.Character.initiative);
+                    character.Character.initiative,
+                    character.Character.Sprite);
 
             if (character.Character.InitativeColor == Color.black)
             {
@@ -192,10 +193,12 @@ public class character_Initative
     public string Name;
     public int Initiative;
     public Color InitativeColor;
+    public Sprite Sprite;
 
-    public character_Initative(string Name, int Initiative)
+    public character_Initative(string Name, int Initiative, Sprite Sprite)
     {
         this.Name = Name;
         this.Initiative = Initiative;
+        this.Sprite = Sprite;
     }
 }

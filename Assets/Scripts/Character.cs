@@ -8,7 +8,7 @@ public class Character : ScriptableObject
 
     public string Name;
     public Color InitativeColor;
-    public Sprite Image;
+    public Sprite Sprite;
 
     public int initiative;
 
