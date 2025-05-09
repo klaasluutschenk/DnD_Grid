@@ -18,6 +18,8 @@ public class Manager_Characters : MonoBehaviour
 
         Manager_Combat.OnCombatEncounterEnded += OnCombatEncounterEnded;
         Manager_Combat.OnCombatEncounterLoaded += OnCombatEncounterLoaded;
+
+        Character_World.OnDeSpawned += OnDeSpawned;
     }
 
     private void OnCombatEncounterEnded()
@@ -42,5 +44,13 @@ public class Manager_Characters : MonoBehaviour
 
             activeWorldCharacters.Add(newWorldCharacter);
         }
+    }
+
+    private void OnDeSpawned(Character_World character_World)
+    {
+        if (!activeWorldCharacters.Contains(character_World))
+            return;
+
+        activeWorldCharacters.Remove(character_World);
     }
 }

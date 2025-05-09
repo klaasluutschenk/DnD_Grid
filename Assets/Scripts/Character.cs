@@ -7,7 +7,10 @@ public class Character : ScriptableObject
     public bool CustomInitiative;
 
     public string Name;
+    public Color InitativeColor;
     public Sprite Image;
+
+    public int initiative;
 
     public int HealthPoints;
 }

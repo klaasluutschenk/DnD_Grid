@@ -125,6 +125,9 @@ MonoBehaviour:
   image_Initiative: {fileID: 2109967516577541392}
   image_CharacterSprite: {fileID: 5824597128704461515}
   text_CharacterHP: {fileID: 1754024160627403104}
+  color_Healthy: {r: 0, g: 0.627451, b: 0, a: 1}
+  color_Wounded: {r: 1, g: 0.5686275, b: 0, a: 1}
+  color_Dying: {r: 0.627451, g: 0, b: 0, a: 1}
 --- !u!1 &2958648461590445363
 GameObject:
   m_ObjectHideFlags: 0

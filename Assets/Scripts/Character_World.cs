@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 public class Character_World : MonoBehaviour
 {
@@ -17,6 +19,10 @@ public class Character_World : MonoBehaviour
     [SerializeField] private Image image_CharacterSprite;
     [SerializeField] private TextMeshProUGUI text_CharacterHP;
 
+    [SerializeField] private Color color_Healthy = default;
+    [SerializeField] private Color color_Wounded = default;
+    [SerializeField] private Color color_Dying = default;
+
     private Character character;
     private Tile tile;
 
@@ -25,11 +31,38 @@ public class Character_World : MonoBehaviour
     private void Awake()
     {
         OnSpawned?.Invoke(this);
+
+        Manager_Initative.OnInitiativeOrderUpdated += OnInitiativeOrderUpdated;
+        Manager_Initative.OnInitiativeSelectionUpdated += OnInitiativeSelectionUpdated;
     }
 
     private void OnDestroy()
     {
+        Manager_Initative.OnInitiativeOrderUpdated -= OnInitiativeOrderUpdated;
+        Manager_Initative.OnInitiativeSelectionUpdated -= OnInitiativeSelectionUpdated;
+
         OnDeSpawned?.Invoke(this);
+    }
+
+    private void OnInitiativeOrderUpdated(List<character_Initative> initiativeOrder)
+    {
+        character_Initative myCharacter = initiativeOrder.Where(c => c.Name == character.Name).FirstOrDefault();
+
+        if (myCharacter == null)
+            return;
+
+        SetInitativeColor(myCharacter);
+    }
+
+    private void OnInitiativeSelectionUpdated(character_Initative character_Initative)
+    {
+        SetInitativeSelection(character_Initative.Name == character.Name);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+            Damage(1);
     }
 
     public void Setup(Character character)
@@ -37,6 +70,8 @@ public class Character_World : MonoBehaviour
         this.character = character;
 
         SetInitativeSelection(false);
+
+        SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.name));
 
         SetHP(character.HealthPoints);
 
@@ -47,6 +82,14 @@ public class Character_World : MonoBehaviour
     private void SetInitativeSelection(bool isActive)
     {
         gameObject_InitiativeSelection.SetActive(isActive);
+    }
+
+    private void SetInitativeColor(character_Initative character_Initative)
+    {
+        if (character_Initative == null)
+            return;
+
+        image_Initiative.color = character_Initative.InitativeColor;
     }
 
     private void OnInitiativeSet()
@@ -77,7 +120,33 @@ public class Character_World : MonoBehaviour
 
         health = value;
 
-        image_HP.fillAmount = health / character.HealthPoints;
+        if (health == 0)
+        {
+            Kill();
+            return;
+        }
+
+        float healthPercentage = (float)health / (float)character.HealthPoints;
+
+        image_HP.fillAmount = healthPercentage;
+        SetHealthColor(healthPercentage);
+
         text_CharacterHP.text = health.ToString();
+    }
+
+    private void SetHealthColor(float percentage)
+    {
+        if (percentage > 0.5f)
+            image_HP.color = color_Healthy;
+        else if (percentage > 0.25f)
+            image_HP.color = color_Wounded;
+        else
+            image_HP.color = color_Dying;
+    }
+
+    public void Kill()
+    {
+        OnDeSpawned?.Invoke(this);
+        Destroy(this.gameObject);
     }
 }
