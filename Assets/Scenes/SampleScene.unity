@@ -3065,6 +3065,9 @@ MonoBehaviour:
   inputField_Heal: {fileID: 1216828651}
   button_Movement: {fileID: 150058618}
   button_Spawn: {fileID: 505451072}
+  playerCamera: {fileID: 519420031}
+  mouseGridPosition: {x: 0, y: 0, z: 0}
+  oldMouseGridPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &1068726223
 Transform:
   m_ObjectHideFlags: 0

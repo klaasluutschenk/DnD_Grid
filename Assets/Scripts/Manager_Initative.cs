@@ -45,6 +45,42 @@ public class Manager_Initative : MonoBehaviour
         characters.Clear();
     }
 
+    public void InjectNewCharacter(Character character)
+    {
+        if (IsCharacterInPlay(character.name))
+            return;
+
+        character_Initative newCharacter =
+                new character_Initative(
+                    character.IsPlayer,
+                    character.name,
+                    character.initiative,
+                    character.Sprite);
+
+        if (character.InitativeColor == Color.black)
+        {
+            Color asignedColor = GetRandomAvailableColor();
+
+            newCharacter.InitativeColor = asignedColor;
+
+            LockColor(asignedColor);
+        }
+        else
+        {
+            newCharacter.InitativeColor = character.InitativeColor;
+
+            LockColor(character.InitativeColor);
+        }
+
+        if (character.CustomInitiative)
+        {
+            customInitatives.Add(newCharacter);
+            return;
+        }
+
+        characters.Add(newCharacter);
+    }
+
     private void InjectCharcter(character_Initative character_Initative)
     {
         characters.Add(character_Initative);
@@ -62,38 +98,7 @@ public class Manager_Initative : MonoBehaviour
 
         foreach (CombatEncounter_Character character in combatEncounter.Characters)
         {
-            if (IsCharacterInPlay(character.Character.name))
-                continue;
-
-            character_Initative newCharacter =
-                new character_Initative(
-                    character.Character.IsPlayer,
-                    character.Character.name,
-                    character.Character.initiative,
-                    character.Character.Sprite); ;
-
-            if (character.Character.InitativeColor == Color.black)
-            {
-                Color asignedColor = GetRandomAvailableColor();
-
-                newCharacter.InitativeColor = asignedColor;
-
-                LockColor(asignedColor);
-            }
-            else
-            {
-                newCharacter.InitativeColor = character.Character.InitativeColor;
-
-                LockColor(character.Character.InitativeColor);
-            }
-
-            if (character.Character.CustomInitiative)
-            {
-                customInitatives.Add(newCharacter);
-                continue;
-            }
-
-            characters.Add(newCharacter);
+            InjectNewCharacter(character.Character);
         }
 
         CheckCustomInitiative();

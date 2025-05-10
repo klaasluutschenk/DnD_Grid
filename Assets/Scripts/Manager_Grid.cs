@@ -66,6 +66,8 @@ public class Manager_Grid : MonoBehaviour
                 float xPos = (-gridWidth / 2) + x + 0.5f;
                 float yPos = (-gridHeight / 2) + y + 0.5f;
 
+                newTile.Setup(new Vector2(x, y));
+
                 newTile.transform.position = new Vector3(xPos, yPos, -1);
 
                 newTile.gameObject.name = $"Tile {x} {y}";
@@ -108,6 +110,21 @@ public class Manager_Grid : MonoBehaviour
     public Tile GetTileByWorldPosition(Vector3 position)
     {
         return tiles.Where(w => w.transform.position == position).FirstOrDefault();
+    }
+
+    public Tile GetTileByGridPosition(Vector2 gridPosition)
+    {
+        return tiles.Where(w => w.GridPosition == gridPosition).FirstOrDefault();
+    }
+
+    public Tile GetSelectedTiles()
+    {
+        return tiles.Where(w => w.IsSelected).FirstOrDefault();
+    }
+
+    public Tile GetHighlightedTiles()
+    {
+        return tiles.Where(w => w.IsHiglighted).FirstOrDefault();
     }
 
     #endregion

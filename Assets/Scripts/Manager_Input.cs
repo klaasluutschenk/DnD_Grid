@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class Manager_Input : MonoBehaviour
 {
@@ -19,11 +20,20 @@ public class Manager_Input : MonoBehaviour
 
     [SerializeField] private Button button_Spawn = default;
 
+    [SerializeField] private Camera playerCamera;
+
     private InputState inputState = InputState.None;
 
     private int selectionRadius = 1;
     private int damageValue = 1;
     private int healValue = 1;
+
+    public Vector3 mouseGridPosition;
+    public Vector3 oldMouseGridPosition;
+    private int display;
+
+    private List<Tile> highlightedTiles = new List<Tile>();
+    private List<Tile> selectedtiles = new List<Tile>();
 
     private void Awake()
     {
@@ -94,6 +104,7 @@ public class Manager_Input : MonoBehaviour
             case InputState.None:
                 break;
             case InputState.Selection:
+                Selection();
                 break;
             case InputState.Damage:
                 break;
@@ -109,14 +120,99 @@ public class Manager_Input : MonoBehaviour
         }
     }
 
+    #region Mouse
+
+    private void SetMousePosition()
+    {
+        Vector3 mouseWorldPosition;
+
+#if UNITY_EDITOR
+        mouseWorldPosition = playerCamera.ScreenToWorldPoint(Input.mousePosition);
+#else
+        Vector3 relativeMousePosition = Display.RelativeMouseAt(Input.mousePosition);
+        display = (int)relativeMousePosition.z;
+
+        if (display != 9)
+            return;
+
+        mouseWorldPosition = playerCamera.ScreenToWorldPoint(relativeMousePosition);
+#endif
+
+        float relativeXPos = Mathf.Round(mouseWorldPosition.x + 0.5f) - 0.5f;
+        float relativeYPos = Mathf.Round(mouseWorldPosition.y + 0.5f) - 0.5f;
+
+        mouseGridPosition = new Vector3(relativeXPos, relativeYPos, -1);
+    }
+
+    private bool HasMouseChanged()
+    {
+        bool hasChanged = oldMouseGridPosition != mouseGridPosition;
+
+        oldMouseGridPosition = mouseGridPosition;
+
+        return hasChanged;
+    }
+
+    #endregion
+
+    #region Selection
+
+    private void Selection()
+    {
+        SetMousePosition();
+
+        if (HasMouseChanged())
+        {
+            highlightedTiles.ForEach(ht => ht.Highlight(false));
+            highlightedTiles.Clear();
+
+            Tile highlightedTile = Manager_Grid.Instance.GetTileByWorldPosition(mouseGridPosition);
+
+            if (highlightedTile == null)
+                return;
+
+            highlightedTile.Highlight(true);
+
+            highlightedTiles.Add(highlightedTile);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            selectedtiles.ForEach(st => st.Select(false));
+            selectedtiles.Clear();
+
+            foreach (Tile tile in highlightedTiles)
+            {
+                tile.Highlight(false);
+                tile.Select(true);
+                selectedtiles.Add(tile);
+            }
+
+            highlightedTiles.Clear();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            highlightedTiles.ForEach(ht => ht.Highlight(false));
+            highlightedTiles.Clear();
+
+            selectedtiles.ForEach(st => st.Select(false));
+            selectedtiles.Clear();
+
+            inputState = InputState.None;
+        }
+    }
+
+    #endregion
+
     #region Spawning
 
     private void Spawn()
     {
-
+        //SetMousePosition();
     }
 
-    #endregion
+#endregion
 }
 
 public enum InputState
