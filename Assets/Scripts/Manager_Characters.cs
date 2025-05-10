@@ -36,14 +36,23 @@ public class Manager_Characters : MonoBehaviour
 
         foreach (CombatEncounter_Character cc in combatEncounter_Characters)
         {
-            Character_World newWorldCharacter = Instantiate(character_World_Prefab, characterContainer);
-
-            newWorldCharacter.transform.position = cc.Position;
-
-            newWorldCharacter.Setup(cc.Character);
-
-            activeWorldCharacters.Add(newWorldCharacter);
+            SpawnCharacter(cc.Character, cc.Position);
         }
+    }
+
+    public void SpawnCharacter(Character character, Vector3 position)
+    {
+        Character_World newWorldCharacter = Instantiate(character_World_Prefab, characterContainer);
+
+        newWorldCharacter.gameObject.name = character.Name;
+
+        newWorldCharacter.transform.position = position;
+
+        newWorldCharacter.Setup(character);
+
+        activeWorldCharacters.Add(newWorldCharacter);
+
+        Manager_Initative.Instance.InjectNewCharacter(character);
     }
 
     private void OnDeSpawned(Character_World character_World)

@@ -6,6 +6,8 @@ using System;
 public class CustomInitiativeUI : MonoBehaviour
 {
     public static Action<character_Initative> OnCharacterSet;
+    
+    public Action<CustomInitiativeUI> OnRemove;
 
     [SerializeField] private TextMeshProUGUI characterName = default;
     [SerializeField] private Image characterSprite = default;
@@ -40,6 +42,6 @@ public class CustomInitiativeUI : MonoBehaviour
     {
         character.Initiative = index;
         OnCharacterSet?.Invoke(character);
-        Destroy(gameObject);
+        OnRemove?.Invoke(this);
     }
 }

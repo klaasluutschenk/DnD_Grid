@@ -27,6 +27,8 @@ public class CustomInitativePanel : MonoBehaviour
 
             newUi.Setup(character);
 
+            newUi.OnRemove += Remove;
+
             activePanels.Add(newUi);
         }
     }
@@ -34,5 +36,13 @@ public class CustomInitativePanel : MonoBehaviour
     private void OnInitativeSetup()
     {
         container.gameObject.SetActive(false);
+    }
+
+    private void Remove(CustomInitiativeUI customInitiativeUI)
+    {
+        customInitiativeUI.OnRemove -= Remove;
+
+        activePanels.Remove(customInitiativeUI);
+        Destroy(customInitiativeUI.gameObject);
     }
 }

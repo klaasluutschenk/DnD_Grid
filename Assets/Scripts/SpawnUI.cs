@@ -1,16 +1,30 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class SpawnUI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Action<Character> OnClicked;
+
+    [SerializeField] private TextMeshProUGUI text_Name = default;
+    [SerializeField] private Image image_Sprite = default;
+    [SerializeField] private Button button = default;
+
+    private Character character;
+
+    public void Setup(Character character)
     {
-        
+        this.character = character;
+
+        text_Name.text = character.Name;
+        image_Sprite.sprite = character.Sprite;
+
+        button.onClick.AddListener(OnButtonClicked);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnButtonClicked()
     {
-        
+        OnClicked?.Invoke(character);
     }
 }

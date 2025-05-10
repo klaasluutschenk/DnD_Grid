@@ -410,6 +410,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 99567483}
+  - component: {fileID: 99567484}
   m_Layer: 5
   m_Name: Spawn
   m_TagString: Untagged
@@ -437,6 +438,21 @@ RectTransform:
   m_AnchoredPosition: {x: 710, y: 0}
   m_SizeDelta: {x: 500, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &99567484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99567482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc475e283d16a14ab4dd6b954a021e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnUI_Prefab: {fileID: 7651322112118527277, guid: 6b2dbad0a8917e44f9af6b87c2ef68ed, type: 3}
+  prefabContainer: {fileID: 1948762244}
+  container: {fileID: 566645137}
 --- !u!1 &109774557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1830,7 +1846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &566645137
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4911,7 +4927,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 15
+    m_Top: 20
     m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 0

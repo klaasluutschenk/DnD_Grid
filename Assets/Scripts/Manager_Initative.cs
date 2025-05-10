@@ -47,7 +47,7 @@ public class Manager_Initative : MonoBehaviour
 
     public void InjectNewCharacter(Character character)
     {
-        if (IsCharacterInPlay(character.name))
+        if (IsCharacterInPlay(character.Name))
             return;
 
         character_Initative newCharacter =
@@ -75,10 +75,13 @@ public class Manager_Initative : MonoBehaviour
         if (character.CustomInitiative)
         {
             customInitatives.Add(newCharacter);
+            CheckCustomInitiative();
             return;
         }
 
         characters.Add(newCharacter);
+
+        UpdateInitiativeOrder();
     }
 
     private void InjectCharcter(character_Initative character_Initative)
@@ -95,11 +98,6 @@ public class Manager_Initative : MonoBehaviour
     private void OnCombatEncounterLoaded(CombatEncounter combatEncounter)
     {
         LoadColors();
-
-        foreach (CombatEncounter_Character character in combatEncounter.Characters)
-        {
-            InjectNewCharacter(character.Character);
-        }
 
         CheckCustomInitiative();
         UpdateInitiativeOrder();
@@ -173,7 +171,7 @@ public class Manager_Initative : MonoBehaviour
         CheckCustomInitiative();
     }
 
-    private bool IsCharacterInPlay(string characterName)
+    public bool IsCharacterInPlay(string characterName)
     {
         foreach (character_Initative character_Initative in characters)
         {

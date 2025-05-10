@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
 public class Manager_Input : MonoBehaviour
 {
     public static Manager_Input Instance;
+
+    public static Action OnSpawnRequest;
+    public static Action OnStopSpawnRequest;
 
     [SerializeField] private Button button_Selection = default;
     [SerializeField] private TMP_InputField inputField_Selection = default;
@@ -38,6 +42,8 @@ public class Manager_Input : MonoBehaviour
     private List<Tile> selectedtiles = new List<Tile>();
 
     private Character_World movementSelection;
+
+    private Character characterToSpawn;
 
     private void Awake()
     {
@@ -121,6 +127,8 @@ public class Manager_Input : MonoBehaviour
         selectionRadius = 1;
         inputState = InputState.Spawn;
         isLocked = true;
+
+        OnSpawnRequest?.Invoke();
     }
 
     #endregion
@@ -382,11 +390,53 @@ public class Manager_Input : MonoBehaviour
 
     #region Spawning
 
-    private bool blockSpawn = true;
+    public void SetCharacterToSpawn(Character character)
+    {
+        characterToSpawn = character;
+    }
 
     private void Spawn()
     {
         SetMousePosition();
+
+        if (HasMouseChanged())
+        {
+            HighlightTile();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            foreach (Tile tile in highlightedTiles)
+            {
+                if (tile.WorldCharacter != null)
+                    continue;
+
+                Manager_Characters.Instance.SpawnCharacter(characterToSpawn, tile.transform.position);
+
+                if (!Manager_Initative.Instance.IsCharacterInPlay(characterToSpawn.Name) && characterToSpawn.CustomInitiative)
+                {
+                    StopSpawn();
+                    return;
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            StopSpawn();
+        }
+    }
+
+    private void StopSpawn()
+    {
+        OnStopSpawnRequest?.Invoke();
+        characterToSpawn = null;
+
+        ClearHighlights();
+        ClearSelection();
+
+        inputState = InputState.None;
+        isLocked = false;
     }
 
 #endregion
