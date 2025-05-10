@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 using System.Collections.Generic;
 
 public class Manager_Input : MonoBehaviour
@@ -23,6 +24,7 @@ public class Manager_Input : MonoBehaviour
     [SerializeField] private Camera playerCamera;
 
     private InputState inputState = InputState.None;
+    private bool isLocked = false;
 
     private int selectionRadius = 1;
     private int damageValue = 1;
@@ -34,6 +36,8 @@ public class Manager_Input : MonoBehaviour
 
     private List<Tile> highlightedTiles = new List<Tile>();
     private List<Tile> selectedtiles = new List<Tile>();
+
+    private Character_World movementSelection;
 
     private void Awake()
     {
@@ -57,7 +61,11 @@ public class Manager_Input : MonoBehaviour
 
     private void OnSelectionClicked()
     {
+        if (isLocked)
+            return;
+
         inputState = InputState.Selection;
+        isLocked = true;
     }
 
     private void OnSelectionChanged(string value)
@@ -67,7 +75,12 @@ public class Manager_Input : MonoBehaviour
 
     private void OnDamageClicked()
     {
+        if (isLocked)
+            return;
+
+        selectionRadius = 1;
         inputState = InputState.Damage;
+        isLocked = true;
     }
 
     private void OnDamageChanged(string value)
@@ -77,7 +90,12 @@ public class Manager_Input : MonoBehaviour
 
     private void OnHealClicked()
     {
+        if (isLocked)
+            return;
+
+        selectionRadius = 1;
         inputState = InputState.Heal;
+        isLocked = true;
     }
 
     private void OnHealChanged(string value)
@@ -87,12 +105,22 @@ public class Manager_Input : MonoBehaviour
 
     private void OnMovementClicked()
     {
+        if (isLocked)
+            return;
+
+        selectionRadius = 1;
         inputState = InputState.Movement;
+        isLocked = true;
     }
 
     private void OnSpawnedClicked()
     {
+        if (isLocked)
+            return;
+
+        selectionRadius = 1;
         inputState = InputState.Spawn;
+        isLocked = true;
     }
 
     #endregion
@@ -107,10 +135,13 @@ public class Manager_Input : MonoBehaviour
                 Selection();
                 break;
             case InputState.Damage:
+                Damage();
                 break;
             case InputState.Heal:
+                Heal();
                 break;
             case InputState.Movement:
+                Movement();
                 break;
             case InputState.Spawn:
                 Spawn();
@@ -153,6 +184,33 @@ public class Manager_Input : MonoBehaviour
         return hasChanged;
     }
 
+    private void HighlightTile()
+    {
+        highlightedTiles.ForEach(ht => ht.Highlight(false));
+        highlightedTiles.Clear();
+
+        Tile highlightedTile = Manager_Grid.Instance.GetTileByWorldPosition(mouseGridPosition);
+
+        if (highlightedTile == null)
+            return;
+
+        highlightedTile.Highlight(true);
+
+        highlightedTiles.Add(highlightedTile);
+    }
+
+    private void ClearHighlights()
+    {
+        highlightedTiles.ForEach(ht => ht.Highlight(false));
+        highlightedTiles.Clear();
+    }
+
+    private void ClearSelection()
+    {
+        selectedtiles.ForEach(st => st.Select(false));
+        selectedtiles.Clear();
+    }
+
     #endregion
 
     #region Selection
@@ -163,23 +221,12 @@ public class Manager_Input : MonoBehaviour
 
         if (HasMouseChanged())
         {
-            highlightedTiles.ForEach(ht => ht.Highlight(false));
-            highlightedTiles.Clear();
-
-            Tile highlightedTile = Manager_Grid.Instance.GetTileByWorldPosition(mouseGridPosition);
-
-            if (highlightedTile == null)
-                return;
-
-            highlightedTile.Highlight(true);
-
-            highlightedTiles.Add(highlightedTile);
+            HighlightTile();
         }
 
         if (Input.GetMouseButtonDown(0))
         {
-            selectedtiles.ForEach(st => st.Select(false));
-            selectedtiles.Clear();
+            ClearSelection();
 
             foreach (Tile tile in highlightedTiles)
             {
@@ -193,13 +240,141 @@ public class Manager_Input : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            highlightedTiles.ForEach(ht => ht.Highlight(false));
-            highlightedTiles.Clear();
+            if (selectedtiles.Count > 0)
+            {
+                ClearSelection();
+                return;
+            }
 
-            selectedtiles.ForEach(st => st.Select(false));
-            selectedtiles.Clear();
+            ClearHighlights();
+            ClearSelection();
 
             inputState = InputState.None;
+            isLocked = false;
+        }
+    }
+
+    #endregion
+
+    #region Damage
+
+    private void Damage()
+    {
+        SetMousePosition();
+
+        if (HasMouseChanged())
+        {
+            HighlightTile();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            foreach (Tile tile in highlightedTiles)
+            {
+                if (tile.WorldCharacter == null)
+                    continue;
+
+                tile.WorldCharacter.Damage(damageValue);
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            ClearHighlights();
+            ClearSelection();
+
+            inputState = InputState.None;
+            isLocked = false;
+        }
+    }
+
+    #endregion
+
+    #region Movement
+
+    private void Movement()
+    {
+        SetMousePosition();
+
+        if (HasMouseChanged())
+        {
+            HighlightTile();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (movementSelection == null)
+            {
+                Tile movementTile = highlightedTiles.FirstOrDefault();
+                Character_World selectedCharacter = movementTile.WorldCharacter;
+
+                if (selectedCharacter != null)
+                {
+                    movementSelection = selectedCharacter;
+                    movementTile.Select(true);
+                    selectedtiles.Add(movementTile);
+                }                
+            }
+            else
+            {
+                Tile movementTile = highlightedTiles.FirstOrDefault();
+                if (movementTile.WorldCharacter == null)
+                {
+                    movementSelection.Move(movementTile);
+                    movementSelection = null;
+                    ClearSelection();
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (movementSelection != null)
+            {
+                movementSelection = null;
+                ClearSelection();
+                return;
+            }
+
+            ClearHighlights();
+            ClearSelection();
+
+            inputState = InputState.None;
+            isLocked = false;
+        }
+    }
+
+    #endregion
+
+    #region Heal
+
+    private void Heal()
+    {
+        SetMousePosition();
+
+        if (HasMouseChanged())
+        {
+            HighlightTile();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            foreach (Tile tile in highlightedTiles)
+            {
+                if (tile.WorldCharacter == null)
+                    continue;
+
+                tile.WorldCharacter.Heal(healValue);
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            ClearHighlights();
+            ClearSelection();
+
+            inputState = InputState.None;
+            isLocked = false;
         }
     }
 
@@ -207,9 +382,11 @@ public class Manager_Input : MonoBehaviour
 
     #region Spawning
 
+    private bool blockSpawn = true;
+
     private void Spawn()
     {
-        //SetMousePosition();
+        SetMousePosition();
     }
 
 #endregion

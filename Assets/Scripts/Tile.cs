@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public Character Character => character;
+    public Character_World WorldCharacter => worldCharacter;
     public bool IsSelected => isSelected;
     public bool IsHiglighted => isHighlighted;
     public Vector2 GridPosition => gridPosition;
@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject gameObject_Selected = default;
     [SerializeField] private GameObject gameObject_Highlighted = default;
 
-    private Character character;
+    private Character_World worldCharacter;
 
     private bool isSelected = false;
     private bool isHighlighted = false;
@@ -22,14 +22,14 @@ public class Tile : MonoBehaviour
         this.gridPosition = gridPosition;
     }
 
-    public void SetCharacter(Character character)
+    public void SetWorldCharacter(Character_World worldCharacter)
     {
-        this.character = character;
+        this.worldCharacter = worldCharacter;
     }
 
     public void ClearCharacter()
     {
-        character = null;
+        worldCharacter = null;
     }
 
     public void Select(bool isSelected)

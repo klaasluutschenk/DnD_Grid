@@ -72,6 +72,7 @@ public class Character_World : MonoBehaviour
         SetInitativeSelection(false);
 
         tile = Manager_Grid.Instance.GetTileByWorldPosition(transform.position);
+        tile.SetWorldCharacter(this);
 
         SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.name));
 
@@ -79,6 +80,18 @@ public class Character_World : MonoBehaviour
 
         image_CharacterSprite.enabled = !character.IsPlayer;
         text_CharacterHP.enabled = character.IsPlayer;
+    }
+
+    public void Move(Tile targetTile)
+    {
+        if (tile != null)
+            tile.SetWorldCharacter(null);
+
+        tile = targetTile;
+
+        transform.position = tile.transform.position;
+
+        tile.SetWorldCharacter(this);
     }
 
     private void SetInitativeSelection(bool isActive)
