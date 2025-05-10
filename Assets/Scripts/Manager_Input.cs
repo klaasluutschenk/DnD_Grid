@@ -40,6 +40,7 @@ public class Manager_Input : MonoBehaviour
 
     private List<Tile> highlightedTiles = new List<Tile>();
     private List<Tile> selectedtiles = new List<Tile>();
+    private List<Tile> movementTiles = new List<Tile>();
 
     private Character_World movementSelection;
 
@@ -157,6 +158,30 @@ public class Manager_Input : MonoBehaviour
             default:
                 break;
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            selectionRadius = 1;
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            selectionRadius = 2;
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            selectionRadius = 3;
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            selectionRadius = 4;
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            selectionRadius = 5;
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+            selectionRadius = 6;
+
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+            selectionRadius = 7;
+
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+            selectionRadius = 8;
     }
 
     #region Mouse
@@ -192,19 +217,114 @@ public class Manager_Input : MonoBehaviour
         return hasChanged;
     }
 
-    private void HighlightTile()
+    private void HighlightTile(bool checkLineOfSight, bool checkAlliedTile)
     {
         highlightedTiles.ForEach(ht => ht.Highlight(false));
         highlightedTiles.Clear();
+        
+        List<Tile> tiles = new List<Tile>();
 
+        // Get Main Tile
         Tile highlightedTile = Manager_Grid.Instance.GetTileByWorldPosition(mouseGridPosition);
 
         if (highlightedTile == null)
             return;
 
-        highlightedTile.Highlight(true);
+        tiles.Add(highlightedTile);
 
-        highlightedTiles.Add(highlightedTile);
+        //Get Radius tiles
+
+        int currentRadiusCheck = 0;
+        while(currentRadiusCheck < selectionRadius - 1 && currentRadiusCheck < 20)
+        {
+            List<Tile> tiles2 = new List<Tile>();
+
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                List<Tile> surroundingTiles = new List<Tile>();
+
+                surroundingTiles = Manager_Grid.Instance.GetSurroundingTiles(tiles[i], true);
+
+                foreach (Tile tile in surroundingTiles)
+                {
+                    if (!tiles2.Contains(tile))
+                    {
+                        tiles2.Add(tile);
+                    }
+                }
+            }
+
+            foreach (Tile tile in tiles2)
+            {
+                if (!tiles.Contains(tile))
+                {
+                    tiles.Add(tile);
+                }
+            }
+
+            currentRadiusCheck++;
+        }
+
+        if (checkLineOfSight)
+        {
+            List<Tile> tilesInLineOfSight = new List<Tile>();
+
+            foreach (Tile tile in tiles)
+            {
+                if (Manager_Grid.Instance.HasLineOfSight(highlightedTile, tile))
+                    tilesInLineOfSight.Add(tile);
+            }
+
+            tiles = tilesInLineOfSight;
+        }        
+
+        tiles.ForEach(st => st.Highlight(true));
+
+        highlightedTiles.AddRange(tiles);
+    }
+
+    private void MovementHighlight(Tile tile)
+    {
+        List<Tile> tiles = new List<Tile>();
+
+        tiles.Add(tile);
+
+        int movement = tile.WorldCharacter.Character.Movement;
+
+        int currentRadiusCheck = 0;
+        while (currentRadiusCheck < movement && currentRadiusCheck < 50)
+        {
+            List<Tile> tiles2 = new List<Tile>();
+
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                List<Tile> surroundingTiles = new List<Tile>();
+
+                surroundingTiles = Manager_Grid.Instance.GetSurroundingAlliedTile(tiles[i], true, tile.WorldCharacter.Character.IsPlayerTeam);
+
+                foreach (Tile surroundingTile in surroundingTiles)
+                {
+                    if (!tiles2.Contains(surroundingTile))
+                    {
+                        tiles2.Add(surroundingTile);
+                    }
+                }
+            }
+
+            foreach (Tile tile2 in tiles2)
+            {
+                if (!tiles.Contains(tile2))
+                {
+                    tiles.Add(tile2);
+                }
+            }
+
+            currentRadiusCheck++;
+        }
+
+        tiles.ForEach(st => st.Movement(true));
+
+        movementTiles.AddRange(tiles);
     }
 
     private void ClearHighlights()
@@ -219,6 +339,12 @@ public class Manager_Input : MonoBehaviour
         selectedtiles.Clear();
     }
 
+    private void ClearMovementTiles()
+    {
+        movementTiles.ForEach(st => st.Movement(false));
+        movementTiles.Clear();
+    }
+
     #endregion
 
     #region Selection
@@ -229,7 +355,7 @@ public class Manager_Input : MonoBehaviour
 
         if (HasMouseChanged())
         {
-            HighlightTile();
+            HighlightTile(true, false);
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -272,7 +398,7 @@ public class Manager_Input : MonoBehaviour
 
         if (HasMouseChanged())
         {
-            HighlightTile();
+            HighlightTile(true, false);
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -306,7 +432,7 @@ public class Manager_Input : MonoBehaviour
 
         if (HasMouseChanged())
         {
-            HighlightTile();
+            HighlightTile(false, false);
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -319,8 +445,8 @@ public class Manager_Input : MonoBehaviour
                 if (selectedCharacter != null)
                 {
                     movementSelection = selectedCharacter;
-                    movementTile.Select(true);
-                    selectedtiles.Add(movementTile);
+
+                    MovementHighlight(movementTile);
                 }                
             }
             else
@@ -331,6 +457,7 @@ public class Manager_Input : MonoBehaviour
                     movementSelection.Move(movementTile);
                     movementSelection = null;
                     ClearSelection();
+                    ClearMovementTiles();
                 }
             }
         }
@@ -341,11 +468,13 @@ public class Manager_Input : MonoBehaviour
             {
                 movementSelection = null;
                 ClearSelection();
+                ClearMovementTiles();
                 return;
             }
 
             ClearHighlights();
             ClearSelection();
+            ClearMovementTiles();
 
             inputState = InputState.None;
             isLocked = false;
@@ -362,7 +491,7 @@ public class Manager_Input : MonoBehaviour
 
         if (HasMouseChanged())
         {
-            HighlightTile();
+            HighlightTile(true, false);
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -401,7 +530,7 @@ public class Manager_Input : MonoBehaviour
 
         if (HasMouseChanged())
         {
-            HighlightTile();
+            HighlightTile(false, false);
         }
 
         if (Input.GetMouseButtonDown(0))

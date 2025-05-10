@@ -1900,6 +1900,9 @@ MonoBehaviour:
   tilePrefab: {fileID: 5409413336208748848, guid: 5f03a580edb7e0f42bd77e012eaa46f2, type: 3}
   physicsContainer: {fileID: 1208703}
   gridContainer: {fileID: 416914403}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!4 &579079007
 Transform:
   m_ObjectHideFlags: 0

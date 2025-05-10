@@ -5,15 +5,20 @@ public class Tile : MonoBehaviour
     public Character_World WorldCharacter => worldCharacter;
     public bool IsSelected => isSelected;
     public bool IsHiglighted => isHighlighted;
+    public bool IsMovement => isMovement;
     public Vector2 GridPosition => gridPosition;
+    public Transform DetectionCube => transform_detectionCube;
 
     [SerializeField] private GameObject gameObject_Selected = default;
     [SerializeField] private GameObject gameObject_Highlighted = default;
+    [SerializeField] private GameObject gameObject_Movement = default;
+    [SerializeField] private Transform transform_detectionCube = default;
 
     private Character_World worldCharacter;
 
     private bool isSelected = false;
     private bool isHighlighted = false;
+    private bool isMovement = false;
 
     private Vector2 gridPosition;
 
@@ -50,5 +55,15 @@ public class Tile : MonoBehaviour
         this.isHighlighted = isHighlighted;
 
         gameObject_Highlighted.SetActive(isHighlighted);
+    }
+
+    public void Movement(bool isMovement)
+    {
+        if (this.isMovement == isMovement)
+            return;
+
+        this.isMovement = isMovement;
+
+        gameObject_Movement.SetActive(isMovement);
     }
 }

@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPlayer: 1
   CustomInitiative: 1
+  IsPlayerTeam: 1
   Name: Test 1
   InitativeColor: {r: 0.118265904, g: 0.3490566, b: 0.018111428, a: 1}
   Sprite: {fileID: 0}
   initiative: 15
   HealthPoints: 10
+  Movement: 6

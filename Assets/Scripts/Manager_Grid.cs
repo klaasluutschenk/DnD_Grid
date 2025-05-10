@@ -16,6 +16,8 @@ public class Manager_Grid : MonoBehaviour
     [SerializeField] private Transform physicsContainer = default;
     [SerializeField] private Transform gridContainer = default;
 
+    [SerializeField] private LayerMask layerMask = default;
+
     private bool isGridGenerated;
 
     private List<Tile> tiles = new List<Tile>();
@@ -125,6 +127,114 @@ public class Manager_Grid : MonoBehaviour
     public Tile GetHighlightedTiles()
     {
         return tiles.Where(w => w.IsHiglighted).FirstOrDefault();
+    }
+
+    public List<Tile> GetSurroundingAlliedTile(Tile tile, bool lineOfSight, bool IsPlayerTeam)
+    {
+        List<Tile> surroundingTiles = GetSurroundingTiles(tile, lineOfSight);
+        List<Tile> alliedTiles = new List<Tile>();
+
+        foreach (Tile surroundingTile in surroundingTiles)
+        {
+            if (surroundingTile.WorldCharacter == null)
+            {
+                alliedTiles.Add(surroundingTile);
+            }
+            else if (surroundingTile.WorldCharacter.Character.IsPlayerTeam == IsPlayerTeam)
+            {
+                alliedTiles.Add(surroundingTile);
+            }
+        }
+
+        return alliedTiles;
+    }
+
+    public List<Tile> GetSurroundingTiles(Tile tile, bool lineOfSight = false)
+    {
+        List<Tile> surroundingTiles = new List<Tile>();
+
+        Tile UpTile = GetTileByGridPosition(new Vector2(tile.GridPosition.x, tile.GridPosition.y + 1));
+        
+        if (UpTile != null)
+        {
+            if (lineOfSight)
+            {
+                if (HasLineOfSight(tile, UpTile, transform.up))
+                {
+                    surroundingTiles.Add(UpTile);
+                }
+            }
+            else
+                surroundingTiles.Add(UpTile);
+        }
+
+        Tile downTile = GetTileByGridPosition(new Vector2(tile.GridPosition.x, tile.GridPosition.y - 1));
+
+        if (downTile != null)
+        {
+            if (lineOfSight)
+            {
+                if (HasLineOfSight(tile, downTile, -transform.up))
+                {
+                    surroundingTiles.Add(downTile);
+                }
+            }
+            else
+                surroundingTiles.Add(downTile);
+        }
+
+        Tile LeftTile = GetTileByGridPosition(new Vector2(tile.GridPosition.x - 1, tile.GridPosition.y));
+
+        if (LeftTile != null)
+        {
+            if (lineOfSight)
+            {
+                if (HasLineOfSight(tile, LeftTile, -transform.right))
+                {
+                    surroundingTiles.Add(LeftTile);
+                }
+            }
+            else
+                surroundingTiles.Add(LeftTile);
+        }
+
+        Tile rightTile = GetTileByGridPosition(new Vector2(tile.GridPosition.x + 1, tile.GridPosition.y));
+
+        if (rightTile != null)
+        {
+            if (lineOfSight)
+            {
+                if (HasLineOfSight(tile, rightTile, transform.right))
+                {
+                    surroundingTiles.Add(rightTile);
+                }
+            }
+            else
+                surroundingTiles.Add(rightTile);
+        }
+
+        return surroundingTiles;
+    }
+
+    public bool HasLineOfSight(Tile originTile, Tile targetTile, Vector3 direction)
+    {
+        float distance = Vector3.Distance(originTile.transform.position, targetTile.transform.position);
+
+        if (Physics.Raycast(originTile.DetectionCube.position, direction, distance, layerMask))
+            return false;
+
+        return true;
+    }
+
+    public bool HasLineOfSight(Tile originTile, Tile targetTile)
+    {
+        float distance = Vector3.Distance(originTile.transform.position, targetTile.transform.position);
+        Vector3 direction = targetTile.transform.position - originTile.transform.position;
+
+        if (Physics.Raycast(originTile.DetectionCube.position, direction, distance, layerMask))
+            return false;
+
+        return true;
     }
 
     #endregion

@@ -6,6 +6,8 @@ public class Character : ScriptableObject
     public bool IsPlayer;
     public bool CustomInitiative;
 
+    public bool IsPlayerTeam;
+
     public string Name;
     public Color InitativeColor;
     public Sprite Sprite;
@@ -13,4 +15,5 @@ public class Character : ScriptableObject
     public int initiative;
 
     public int HealthPoints;
+    public int Movement;
 }
