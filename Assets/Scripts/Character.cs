@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "Character", menuName = "Scriptable Objects/Character")]
 public class Character : ScriptableObject
@@ -10,8 +11,7 @@ public class Character : ScriptableObject
 
     public string Name;
 
-    [TextArea]
-    public string Description;
+    [TextArea] public string Description;
 
     public Color InitativeColor;
     public Sprite Sprite;
@@ -24,5 +24,5 @@ public class Character : ScriptableObject
     public int Perception;
     public int Dodge;
 
-
+    public List<Ability> Abilities;
 }

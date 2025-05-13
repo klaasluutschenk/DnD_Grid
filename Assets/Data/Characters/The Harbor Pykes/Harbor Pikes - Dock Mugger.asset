@@ -25,3 +25,6 @@ MonoBehaviour:
   Movement: 6
   Perception: 5
   Dodge: 0
+  Abilities:
+  - {fileID: 11400000, guid: f87f6118b7933394d8f8357052ac6af1, type: 2}
+  - {fileID: 11400000, guid: f3c2892f57a95554a8dab445acbc1400, type: 2}
