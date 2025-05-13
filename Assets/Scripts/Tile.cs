@@ -9,6 +9,7 @@ public class Tile : MonoBehaviour
     public Vector2 GridPosition => gridPosition;
     public Transform DetectionCube => transform_detectionCube;
     public int RoomIndex => roomIndex;
+    public bool IsRevealed => isRevealed;
 
     [SerializeField] private GameObject gameObject_Selected = default;
     [SerializeField] private GameObject gameObject_Highlighted = default;

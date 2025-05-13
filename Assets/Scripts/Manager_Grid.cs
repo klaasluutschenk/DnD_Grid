@@ -15,6 +15,7 @@ public class Manager_Grid : MonoBehaviour
 
     [SerializeField] private Transform physicsContainer = default;
     [SerializeField] private Transform gridContainer = default;
+    [SerializeField] private Transform fogContainer = default;
 
     [SerializeField] private LayerMask layerMask = default;
 
@@ -23,6 +24,7 @@ public class Manager_Grid : MonoBehaviour
     private List<Tile> tiles = new List<Tile>();
 
     private GameObject physicsObject;
+    private GameObject fogObject;
 
     private void Awake()
     {
@@ -36,11 +38,13 @@ public class Manager_Grid : MonoBehaviour
     {
         ClearPhysics();
         ClearGrid();
+        ClearFog();
     }
 
     private void OnGridRequest(CombatEncounter combatEncounter)
     {
         SpawnPhysics(combatEncounter.PhysicsObject);
+        SpawnFog(combatEncounter.FogObject);
         GenerateGrid(combatEncounter.Background);
     }
 
@@ -94,6 +98,29 @@ public class Manager_Grid : MonoBehaviour
     private void SpawnPhysics(GameObject physicsObjectToSpawn)
     {
         physicsObject = Instantiate(physicsObjectToSpawn, physicsContainer);
+    }
+
+    #endregion
+
+    #region Fog
+
+    private void ClearFog()
+    {
+        if (fogObject == null)
+            return;
+
+        Destroy(fogObject);
+        fogObject = null;
+    }
+    
+    private void SpawnFog(GameObject fogObjectToSpawn)
+    {
+        if (fogObjectToSpawn == null)
+        {
+            tiles.ForEach(t => t.Reveal(true));
+        }
+
+        fogObject = Instantiate(fogObjectToSpawn, fogContainer);
     }
 
     #endregion

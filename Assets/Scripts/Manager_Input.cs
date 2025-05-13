@@ -25,6 +25,8 @@ public class Manager_Input : MonoBehaviour
 
     [SerializeField] private Button button_Spawn = default;
 
+    [SerializeField] private Button button_Fog = default;
+
     [SerializeField] private Camera playerCamera;
 
     private InputState inputState = InputState.None;
@@ -41,6 +43,9 @@ public class Manager_Input : MonoBehaviour
     private List<Tile> highlightedTiles = new List<Tile>();
     private List<Tile> selectedtiles = new List<Tile>();
     private List<Tile> movementTiles = new List<Tile>();
+    private List<Tile> fogTiles = new List<Tile>();
+
+    private int currentRoomSelection;
 
     private Character_World movementSelection;
 
@@ -62,6 +67,8 @@ public class Manager_Input : MonoBehaviour
         button_Movement.onClick.AddListener(OnMovementClicked);
 
         button_Spawn.onClick.AddListener(OnSpawnedClicked);
+
+        button_Fog.onClick.AddListener(OnFogClicked);
     }
 
     #region UI Interaction
@@ -132,6 +139,15 @@ public class Manager_Input : MonoBehaviour
         OnSpawnRequest?.Invoke();
     }
 
+    private void OnFogClicked()
+    {
+        if (isLocked)
+            return;
+
+        inputState = InputState.Fog;
+        isLocked = true;
+    }
+
     #endregion
 
     private void Update()
@@ -154,6 +170,9 @@ public class Manager_Input : MonoBehaviour
                 break;
             case InputState.Spawn:
                 Spawn();
+                break;
+            case InputState.Fog:
+                Fog();
                 break;
             default:
                 break;
@@ -569,7 +588,65 @@ public class Manager_Input : MonoBehaviour
         isLocked = false;
     }
 
-#endregion
+    #endregion
+
+    #region Fog
+
+    private void Fog()
+    {
+        SetMousePosition();
+
+        if (HasMouseChanged())
+        {
+            HighLightFogTiles();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            fogTiles.ForEach(ft => ft.Reveal(true));
+            Manager_Fog.Instance.RevealRoom(currentRoomSelection);
+
+            ClearFogtiles();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            ClearFogtiles();
+
+            inputState = InputState.None;
+            isLocked = false;
+        }
+    }
+
+    private void HighLightFogTiles()
+    {
+        ClearFogtiles();
+
+        // Get Main Tile
+        Tile highlightedTile = Manager_Grid.Instance.GetTileByWorldPosition(mouseGridPosition);
+
+        if (highlightedTile == null)
+            return;
+
+        if (Manager_Fog.Instance.IsRoomRevealed(highlightedTile.RoomIndex))
+            return;
+
+        currentRoomSelection = highlightedTile.RoomIndex;
+
+        fogTiles.AddRange(Manager_Grid.Instance.GetTilesByRoomIndex(highlightedTile.RoomIndex));
+
+        fogTiles.ForEach(t => t.FogHighlight(true));
+    }
+
+    private void ClearFogtiles()
+    {
+        fogTiles.ForEach(ht => ht.FogHighlight(false));
+        fogTiles.Clear();
+
+        currentRoomSelection = -1;
+    }
+
+    #endregion
 }
 
 public enum InputState
@@ -579,5 +656,6 @@ public enum InputState
     Damage = 2,
     Heal = 3,
     Movement = 4,
-    Spawn = 5
+    Spawn = 5,
+    Fog = 6
 }

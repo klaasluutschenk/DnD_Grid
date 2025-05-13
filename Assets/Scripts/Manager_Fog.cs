@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -24,6 +25,31 @@ public class Manager_Fog : MonoBehaviour
         fogRooms.Add(fogRoom);
     }
 
+    public void RevealRoom(int index)
+    {
+        FogRoom fogRoom = GetFogRoomByIndex(index);
+
+        if (fogRoom == null)
+            return;
+
+        fogRoom.isRevealed = true;
+    }
+
+    public bool IsRoomRevealed(int index)
+    {
+        FogRoom fogRoom = GetFogRoomByIndex(index);
+
+        if (fogRoom == null)
+            return true;
+
+        return fogRoom.isRevealed;
+    }
+
+    private FogRoom GetFogRoomByIndex(int index)
+    {
+        return fogRooms.Where(fr => fr.Index == index).FirstOrDefault();
+    }
+
     private IEnumerator Start()
     {
         // Wait a few frame to give the grid time to generate.
@@ -38,6 +64,8 @@ public class Manager_Fog : MonoBehaviour
                 List<Tile> tile = Manager_Grid.Instance.GetTilesByRoomIndex(fogRoom.Index);
 
                 tile.ForEach(t => t.Reveal(true));
+
+                fogRoom.isRevealed = true;
             }
         }
     }
@@ -48,10 +76,5 @@ public class FogRoom
 {
     public int Index;
     public bool RevealAtStart;
-
-    public FogRoom(int index, bool revealAtStart)
-    {
-        Index = index;
-        RevealAtStart = revealAtStart;
-    }
+    public bool isRevealed;
 }
