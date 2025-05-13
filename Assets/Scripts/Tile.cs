@@ -40,6 +40,8 @@ public class Tile : MonoBehaviour
     public void SetWorldCharacter(Character_World worldCharacter)
     {
         this.worldCharacter = worldCharacter;
+
+        RevealWorldCharacter(isRevealed);
     }
 
     public void ClearCharacter()
@@ -90,6 +92,8 @@ public class Tile : MonoBehaviour
         this.isRevealed = isRevealed;
 
         gameObject_Fog.SetActive(!isRevealed);
+
+        RevealWorldCharacter(isRevealed);
     }
 
     public void FogHighlight(bool isFogHighlighted)
@@ -100,5 +104,16 @@ public class Tile : MonoBehaviour
         this.isFogHighlighted = isFogHighlighted;
 
         gameObject_Fog_Highlight.SetActive(isFogHighlighted);
+    }
+
+    private void RevealWorldCharacter(bool reveal)
+    {
+        if (worldCharacter == null)
+            return;
+
+        if (reveal)
+            worldCharacter.Reveal();
+        else
+            worldCharacter.Hide();
     }
 }

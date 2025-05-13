@@ -12,6 +12,7 @@ public class Character_World : MonoBehaviour
 
     public Character Character => character;
     public Tile Tile => tile;
+    public bool IsRevealed => isRevealed;
 
     [SerializeField] private GameObject gameObject_InitiativeSelection;
     [SerializeField] private Image image_HP;
@@ -23,10 +24,13 @@ public class Character_World : MonoBehaviour
     [SerializeField] private Color color_Wounded = default;
     [SerializeField] private Color color_Dying = default;
 
+    [SerializeField] private GameObject gameObject_Canvas = default;
+
     private Character character;
     private Tile tile;
 
     private int health;
+    private bool isRevealed;
 
     private void Awake()
     {
@@ -42,6 +46,23 @@ public class Character_World : MonoBehaviour
         Manager_Initative.OnInitiativeSelectionUpdated -= OnInitiativeSelectionUpdated;
 
         OnDeSpawned?.Invoke(this);
+    }
+
+    public void Reveal()
+    {
+        if (isRevealed)
+            return;
+
+        gameObject_Canvas.SetActive(true);
+        isRevealed = true;
+
+        Manager_Initative.Instance.InjectNewCharacter(character);
+    }
+
+    public void Hide()
+    {
+        gameObject_Canvas.SetActive(false);
+        isRevealed = false;
     }
 
     private void OnInitiativeOrderUpdated(List<character_Initative> initiativeOrder)

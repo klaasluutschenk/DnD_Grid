@@ -128,6 +128,7 @@ MonoBehaviour:
   color_Healthy: {r: 0, g: 0.627451, b: 0, a: 1}
   color_Wounded: {r: 1, g: 0.5686275, b: 0, a: 1}
   color_Dying: {r: 0.627451, g: 0, b: 0, a: 1}
+  gameObject_Canvas: {fileID: 8724754955745880192}
 --- !u!1 &2958648461590445363
 GameObject:
   m_ObjectHideFlags: 0

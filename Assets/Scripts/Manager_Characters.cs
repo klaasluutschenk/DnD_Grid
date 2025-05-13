@@ -52,7 +52,8 @@ public class Manager_Characters : MonoBehaviour
 
         activeWorldCharacters.Add(newWorldCharacter);
 
-        Manager_Initative.Instance.InjectNewCharacter(character);
+        if (newWorldCharacter.IsRevealed)
+            Manager_Initative.Instance.InjectNewCharacter(character);
     }
 
     private void OnDeSpawned(Character_World character_World)
