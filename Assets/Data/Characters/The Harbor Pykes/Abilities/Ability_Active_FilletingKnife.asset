@@ -15,6 +15,6 @@ MonoBehaviour:
   Name: Filleting Knife
   Description: Lash out with a sharp knife that cuts through both flesh and fish.
   HasOutcomes: 1
-  Outcome1: 1 Damage.
+  Outcome1: Miss.
   Outcome2: 1 Damage.
   Outcome3: 2 Damage.

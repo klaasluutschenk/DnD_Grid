@@ -23,7 +23,7 @@ MonoBehaviour:
   HealthPoints: 25
   Armor: 0
   Movement: 8
-  Perception: 10
+  Perception: 8
   Dodge: 0
   Abilities:
   - {fileID: 11400000, guid: 8e8ed260dd4a3584a8e309ef52fe81a7, type: 2}
