@@ -3010,7 +3010,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5946143987737094779}
   m_Layer: 0
-  m_Name: Combat Encounter Test 1 PhysicsObjec
+  m_Name: Combat Encounter Test 1 PhysicsObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

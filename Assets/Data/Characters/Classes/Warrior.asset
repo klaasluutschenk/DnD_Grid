@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: Test 2
+  m_Name: Warrior
   m_EditorClassIdentifier: 
   IsPlayer: 0
-  CustomInitiative: 1
+  CustomInitiative: 0
   IsPlayerTeam: 0
-  Name: Test 2
+  Name: The Warrior
   Description: 
-  InitativeColor: {r: 0, g: 0, b: 0, a: 1}
+  InitativeColor: {r: 0.9137255, g: 0.5467394, b: 0, a: 1}
   Sprite: {fileID: 0}
-  initiative: 10
-  HealthPoints: 6
+  initiative: 0
+  HealthPoints: 12
   Armor: 0
-  Movement: 4
+  Movement: 7
   Perception: 0
   Dodge: 0
   Abilities: []
