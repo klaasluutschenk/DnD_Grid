@@ -189,14 +189,15 @@ public class Manager_Input : MonoBehaviour
     private void SetMousePosition()
     {
         Vector3 mouseWorldPosition;
+        Vector3 relativeMousePosition = Vector3.zero;
 
 #if UNITY_EDITOR
         mouseWorldPosition = playerCamera.ScreenToWorldPoint(Input.mousePosition);
 #else
-        Vector3 relativeMousePosition = Display.RelativeMouseAt(Input.mousePosition);
+        relativeMousePosition = Display.RelativeMouseAt(Input.mousePosition);
         display = (int)relativeMousePosition.z;
 
-        if (display != 9)
+        if (display == 0)
             return;
 
         mouseWorldPosition = playerCamera.ScreenToWorldPoint(relativeMousePosition);
