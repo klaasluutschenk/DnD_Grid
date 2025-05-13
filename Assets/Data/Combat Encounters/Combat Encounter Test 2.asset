@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd122d5571122a449e233422e04d423, type: 3}
   m_Name: Combat Encounter Test 2
   m_EditorClassIdentifier: 
-  Background: {fileID: 5961144562251795797, guid: 573854e3acaf7d845ab9f1b8fb98e188, type: 3}
+  Background: {fileID: 7716209651230841834, guid: c5968a7e3e4591c49a7ab7cc31d59911, type: 3}
   PhysicsObject: {fileID: 5496054743207719919, guid: 8bdbe65ecf3d54f42a3f8bd89f0e27a2, type: 3}
   Characters:
   - Character: {fileID: 11400000, guid: d1f10c5fae11cf74abbe9ffd40e13b4e, type: 2}

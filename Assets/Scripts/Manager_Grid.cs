@@ -109,6 +109,11 @@ public class Manager_Grid : MonoBehaviour
         Destroy(tile.gameObject);
     }
 
+    public List<Tile> GetTilesByRoomIndex(int roomIndex)
+    {
+        return tiles.Where(t => t.RoomIndex == roomIndex).ToList();
+    }
+
     public Tile GetTileByWorldPosition(Vector3 position)
     {
         return tiles.Where(w => w.transform.position == position).FirstOrDefault();
