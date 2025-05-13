@@ -46,7 +46,7 @@ public class Character_World : MonoBehaviour
 
     private void OnInitiativeOrderUpdated(List<character_Initative> initiativeOrder)
     {
-        character_Initative myCharacter = initiativeOrder.Where(c => c.Name == character.Name).FirstOrDefault();
+        character_Initative myCharacter = initiativeOrder.Where(c => c.Character.Name == character.Name).FirstOrDefault();
 
         if (myCharacter == null)
             return;
@@ -56,7 +56,7 @@ public class Character_World : MonoBehaviour
 
     private void OnInitiativeSelectionUpdated(character_Initative character_Initative)
     {
-        SetInitativeSelection(character_Initative.Name == character.Name);
+        SetInitativeSelection(character_Initative.Character.Name == character.Name);
     }
 
     private void Update()
@@ -74,7 +74,7 @@ public class Character_World : MonoBehaviour
         tile = Manager_Grid.Instance.GetTileByWorldPosition(transform.position);
         tile.SetWorldCharacter(this);
 
-        SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.name));
+        SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.Name));
 
         SetHP(character.HealthPoints);
 

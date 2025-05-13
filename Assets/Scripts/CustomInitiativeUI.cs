@@ -21,8 +21,8 @@ public class CustomInitiativeUI : MonoBehaviour
     {
         character = character_Initative;
 
-        characterName.text = character.Name;
-        characterSprite.sprite = character.Sprite;
+        characterName.text = character.Character.Name;
+        characterSprite.sprite = character.Character.Sprite;
 
         SetupButtons();
     }

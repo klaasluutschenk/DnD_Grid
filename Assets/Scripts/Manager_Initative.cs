@@ -52,10 +52,8 @@ public class Manager_Initative : MonoBehaviour
 
         character_Initative newCharacter =
                 new character_Initative(
-                    character.IsPlayer,
-                    character.name,
-                    character.initiative,
-                    character.Sprite);
+                    character,
+                    character.initiative);
 
         if (character.InitativeColor == Color.black)
         {
@@ -89,7 +87,7 @@ public class Manager_Initative : MonoBehaviour
         characters.Add(character_Initative);
         UpdateInitiativeOrder();
 
-        if (character_Initative.IsPlayer)
+        if (character_Initative.Character.IsPlayer)
         {
             OnCombatEncounterStarted();
         }
@@ -118,7 +116,7 @@ public class Manager_Initative : MonoBehaviour
 
     public character_Initative GetInitiativeCharacter(string characterName)
     {
-        return characters.Where(c => c.Name == characterName).FirstOrDefault();
+        return characters.Where(c => c.Character.Name == characterName).FirstOrDefault();
     }
 
     private void UpdateInitiativeSelection()
@@ -175,7 +173,7 @@ public class Manager_Initative : MonoBehaviour
     {
         foreach (character_Initative character_Initative in characters)
         {
-            if (character_Initative.Name == characterName)
+            if (character_Initative.Character.Name == characterName)
                 return true;
         }
 
@@ -218,17 +216,14 @@ public class Manager_Initative : MonoBehaviour
 [Serializable]
 public class character_Initative
 {
-    public bool IsPlayer;
-    public string Name;
+    public Character Character;
+
     public int Initiative;
     public Color InitativeColor;
-    public Sprite Sprite;
 
-    public character_Initative(bool IsPlayer, string Name, int Initiative, Sprite Sprite)
+    public character_Initative(Character Character, int Initiative)
     {
-        this.IsPlayer = IsPlayer;
-        this.Name = Name;
+        this.Character = Character;
         this.Initiative = Initiative;
-        this.Sprite = Sprite;
     }
 }

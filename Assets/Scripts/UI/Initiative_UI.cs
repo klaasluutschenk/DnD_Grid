@@ -27,9 +27,9 @@ public class Initiative_UI : MonoBehaviour
         character = character_Initative;
 
         image_Initiative.color = character.InitativeColor;
-        image_CharacterSprite.sprite = character.Sprite;
+        image_CharacterSprite.sprite = character.Character.Sprite;
 
-        text_CharacterName.text = character.Name;
+        text_CharacterName.text = character.Character.Name;
 
         if (text_Initative != null)
             text_Initative.text = character_Initative.Initiative.ToString();
