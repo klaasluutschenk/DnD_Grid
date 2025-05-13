@@ -55,6 +55,7 @@ public class CharacterInformationPanel : MonoBehaviour
         StartCoroutine(RefreshContainer());
     }
 
+    // Very Hacky solution to circumvent the dynamic size breaking.
     private IEnumerator RefreshContainer()
     {
         container.gameObject.SetActive(false);
