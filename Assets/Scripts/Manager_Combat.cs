@@ -53,6 +53,7 @@ public class Manager_Combat : MonoBehaviour
         OnCombatEncounterLoaded?.Invoke(activeCombatEncounter);
 
         yield return null;
+        yield return null;
 
         OnCombatEncounterStarted?.Invoke();
     }

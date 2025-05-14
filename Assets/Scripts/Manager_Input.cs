@@ -27,6 +27,12 @@ public class Manager_Input : MonoBehaviour
 
     [SerializeField] private Button button_Fog = default;
 
+    [SerializeField] private Button button_StatusEffect = default;
+    [SerializeField] private TMP_InputField inputField_StatusEffectValue = default;
+    [SerializeField] private TMP_InputField inputField_StatusEffectDuration = default;
+    [SerializeField] private TMP_Dropdown dropDown_StatusEffectType = default;
+    
+
     [SerializeField] private Camera playerCamera;
 
     private InputState inputState = InputState.None;
@@ -35,6 +41,10 @@ public class Manager_Input : MonoBehaviour
     private int selectionRadius = 1;
     private int damageValue = 1;
     private int healValue = 1;
+
+    private int statusEffectValue = 1;
+    private int statusEffectDuration = 1;
+    private StatusEffectType statuseEffectType = StatusEffectType.None;
 
     public Vector3 mouseGridPosition;
     public Vector3 oldMouseGridPosition;
@@ -69,6 +79,11 @@ public class Manager_Input : MonoBehaviour
         button_Spawn.onClick.AddListener(OnSpawnedClicked);
 
         button_Fog.onClick.AddListener(OnFogClicked);
+
+        button_StatusEffect.onClick.AddListener(OnStatusEffectClicked);
+        inputField_StatusEffectValue.onValueChanged.AddListener(OnStatusEffectValueChanged);
+        inputField_StatusEffectDuration.onValueChanged.AddListener(OnStatusEffectDurationChanged);
+        dropDown_StatusEffectType.onValueChanged.AddListener(OnStatusEffectTypeChanged);
     }
 
     #region UI Interaction
@@ -148,6 +163,31 @@ public class Manager_Input : MonoBehaviour
         isLocked = true;
     }
 
+    private void OnStatusEffectClicked()
+    {
+        if (isLocked)
+            return;
+
+        selectionRadius = 1;
+        inputState = InputState.StatusEffect;
+        isLocked = true;
+    }
+
+    private void OnStatusEffectValueChanged(string value)
+    {
+        statusEffectValue = int.Parse(value);
+    }
+
+    private void OnStatusEffectDurationChanged(string value)
+    {
+        statusEffectDuration = int.Parse(value);
+    }
+
+    private void OnStatusEffectTypeChanged(int statusEffectType)
+    {
+        statuseEffectType = (StatusEffectType)statusEffectType;
+    }
+
     #endregion
 
     private void Update()
@@ -173,6 +213,9 @@ public class Manager_Input : MonoBehaviour
                 break;
             case InputState.Fog:
                 Fog();
+                break;
+            case InputState.StatusEffect:
+                StatusEffect();
                 break;
             default:
                 break;
@@ -647,6 +690,40 @@ public class Manager_Input : MonoBehaviour
     }
 
     #endregion
+
+    #region Status Effect
+
+    private void StatusEffect()
+    {
+        SetMousePosition();
+
+        if (HasMouseChanged())
+        {
+            HighlightTile(true, false);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            foreach (Tile tile in highlightedTiles)
+            {
+                if (tile.WorldCharacter == null)
+                    continue;
+
+                tile.WorldCharacter.ApplyStatusEffect(statusEffectValue, statusEffectDuration, statuseEffectType);
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            ClearHighlights();
+            ClearSelection();
+
+            inputState = InputState.None;
+            isLocked = false;
+        }
+    }
+
+    #endregion
 }
 
 public enum InputState
@@ -657,5 +734,6 @@ public enum InputState
     Heal = 3,
     Movement = 4,
     Spawn = 5,
-    Fog = 6
+    Fog = 6,
+    StatusEffect = 7
 }

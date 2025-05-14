@@ -26,11 +26,18 @@ public class Character_World : MonoBehaviour
 
     [SerializeField] private GameObject gameObject_Canvas = default;
 
+    [SerializeField] private ParticleSystem particleSystem_Burn = default;
+    [SerializeField] private ParticleSystem particleSystem_Poison = default;
+    [SerializeField] private ParticleSystem particleSystem_Bleed = default;
+    [SerializeField] private ParticleSystem particleSystem_Heal = default;
+
     private Character character;
     private Tile tile;
 
     private int health;
     private bool isRevealed;
+
+    private List<StatusEffect> statusEffects = new List<StatusEffect>();
 
     private void Awake()
     {
@@ -118,6 +125,75 @@ public class Character_World : MonoBehaviour
     private void SetInitativeSelection(bool isActive)
     {
         gameObject_InitiativeSelection.SetActive(isActive);
+
+        if (isActive)
+        {
+            StartTurn();
+        }
+    }
+
+    private void StartTurn()
+    {
+        HandleStatusEffects();
+    }
+
+    private void HandleStatusEffects()
+    {
+        StatusEffect heal = GetStatusEffect(StatusEffectType.Heal);
+        if (heal != null)
+        {
+            Heal(heal.Value);
+
+            if (!heal.indefinite)
+            {
+                heal.Duration--;
+
+                if (heal.Duration <= 0)
+                    CleanseStatusEffect(StatusEffectType.Heal);
+            }
+        }
+
+        StatusEffect burn = GetStatusEffect(StatusEffectType.Burn);
+        if (burn != null)
+        {
+            Damage(burn.Value);
+
+            if (!burn.indefinite)
+            {
+                burn.Duration--;
+
+                if (burn.Duration <= 0)
+                    CleanseStatusEffect(StatusEffectType.Burn);
+            }
+        }
+
+        StatusEffect poison = GetStatusEffect(StatusEffectType.Poison);
+        if (poison != null)
+        {
+            Damage(poison.Value);
+
+            if (!poison.indefinite)
+            {
+                poison.Duration--;
+
+                if (poison.Duration <= 0)
+                    CleanseStatusEffect(StatusEffectType.Poison);
+            }
+        }
+
+        StatusEffect bleed = GetStatusEffect(StatusEffectType.Bleed);
+        if (bleed != null)
+        {
+            Damage(bleed.Value);
+
+            if (!bleed.indefinite)
+            {
+                bleed.Duration--;
+
+                if (bleed.Duration <= 0)
+                    CleanseStatusEffect(StatusEffectType.Bleed);
+            }
+        }
     }
 
     private void SetInitativeColor(character_Initative character_Initative)
@@ -182,4 +258,89 @@ public class Character_World : MonoBehaviour
 
         Destroy(this.gameObject);
     }
+
+    public void ApplyStatusEffect(int value, int duration, StatusEffectType statusEffectType)
+    {
+        CleanseStatusEffect(statusEffectType);
+
+        statusEffects.Add(new StatusEffect(value, duration, statusEffectType));
+
+        ToggleStatusEffectParticles(statusEffectType, true);
+    }
+
+    private void CleanseStatusEffect(StatusEffectType statusEffectType)
+    {
+        if (!HasStatusEffect(statusEffectType))
+            return;
+
+        StatusEffect currentStatusEffect = GetStatusEffect(statusEffectType);
+
+        statusEffects.Remove(currentStatusEffect);
+
+        ToggleStatusEffectParticles(statusEffectType, false);
+    }
+
+    private bool HasStatusEffect(StatusEffectType statusEffectType)
+    {
+        return statusEffects.Where(se => se.StatusEffectType == statusEffectType).ToList().Count > 0;
+    }
+
+    private StatusEffect GetStatusEffect(StatusEffectType statusEffectType)
+    {
+        return statusEffects.Where(se => se.StatusEffectType == statusEffectType).FirstOrDefault();
+    }
+
+    private void ToggleStatusEffectParticles(StatusEffectType statusEffectType, bool enable)
+    {
+        ParticleSystem.EmissionModule emission;
+
+        switch (statusEffectType)
+        {
+            case StatusEffectType.None:
+                return;
+            case StatusEffectType.Burn:
+                emission = particleSystem_Burn.emission;
+                break;
+            case StatusEffectType.Poison:
+                emission = particleSystem_Poison.emission;
+                break;
+            case StatusEffectType.Bleed:
+                emission = particleSystem_Bleed.emission;
+                break;
+            case StatusEffectType.Heal:
+                emission = particleSystem_Heal.emission;
+                break;
+            default:
+                break;
+        }
+
+        emission.enabled = enable;
+    }
+}
+
+public class StatusEffect
+{
+    public int Value;
+    public int Duration;
+    public StatusEffectType StatusEffectType;
+
+    public bool indefinite;
+
+    public StatusEffect(int value, int duration, StatusEffectType statusEffectType)
+    {
+        Value = value;
+        Duration = duration;
+        StatusEffectType = statusEffectType;
+
+        indefinite = duration == 0 ? true : false;
+    }
+}
+
+public enum StatusEffectType
+{
+    None = 0,
+    Burn = 1,
+    Poison = 2,
+    Bleed = 3,
+    Heal = 4
 }
