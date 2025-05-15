@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    public Entity Entity => entity;
     public Character_World WorldCharacter => worldCharacter;
     public bool IsSelected => isSelected;
     public bool IsHiglighted => isHighlighted;
@@ -20,6 +21,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject gameObject_Fog_Highlight = default;
 
     private Character_World worldCharacter;
+    private Entity entity;
 
     private bool isSelected = false;
     private bool isHighlighted = false;
@@ -35,6 +37,11 @@ public class Tile : MonoBehaviour
     public void Setup(Vector2 gridPosition)
     {
         this.gridPosition = gridPosition;
+    }
+
+    public void SetEntity(Entity entity)
+    {
+        this.entity = entity;
     }
 
     public void SetWorldCharacter(Character_World worldCharacter)

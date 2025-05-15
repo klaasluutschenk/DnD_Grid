@@ -2,19 +2,14 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "Character", menuName = "Scriptable Objects/Character")]
-public class Character : ScriptableObject
+public class Character : Entity
 {
     public bool IsPlayer;
     public bool CustomInitiative;
 
     public bool IsPlayerTeam;
 
-    public string Name;
-
-    [TextArea] public string Description;
-
     public Color InitativeColor;
-    public Sprite Sprite;
 
     public int initiative;
 

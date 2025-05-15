@@ -5,26 +5,18 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-public class Character_World : MonoBehaviour
+public class Character_World : World_Entity
 {
-    public static Action<Character_World> OnSpawned;
-    public static Action<Character_World> OnDeSpawned;
-
     public Character Character => character;
-    public Tile Tile => tile;
-    public bool IsRevealed => isRevealed;
 
     [SerializeField] private GameObject gameObject_InitiativeSelection;
     [SerializeField] private Image image_HP;
     [SerializeField] private Image image_Initiative;
-    [SerializeField] private Image image_CharacterSprite;
     [SerializeField] private TextMeshProUGUI text_CharacterHP;
 
     [SerializeField] private Color color_Healthy = default;
     [SerializeField] private Color color_Wounded = default;
     [SerializeField] private Color color_Dying = default;
-
-    [SerializeField] private GameObject gameObject_Canvas = default;
 
     [SerializeField] private ParticleSystem particleSystem_Burn = default;
     [SerializeField] private ParticleSystem particleSystem_Poison = default;
@@ -32,44 +24,35 @@ public class Character_World : MonoBehaviour
     [SerializeField] private ParticleSystem particleSystem_Heal = default;
 
     private Character character;
-    private Tile tile;
 
     private int health;
-    private bool isRevealed;
 
     private List<StatusEffect> statusEffects = new List<StatusEffect>();
 
-    private void Awake()
+    protected override void Awake()
     {
-        OnSpawned?.Invoke(this);
+        base.Awake();
 
         Manager_Initative.OnInitiativeOrderUpdated += OnInitiativeOrderUpdated;
         Manager_Initative.OnInitiativeSelectionUpdated += OnInitiativeSelectionUpdated;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
         Manager_Initative.OnInitiativeOrderUpdated -= OnInitiativeOrderUpdated;
         Manager_Initative.OnInitiativeSelectionUpdated -= OnInitiativeSelectionUpdated;
 
-        OnDeSpawned?.Invoke(this);
+        base.OnDestroy();
     }
 
-    public void Reveal()
+    public override void Reveal()
     {
+        base.Reveal();
+
         if (isRevealed)
             return;
 
-        gameObject_Canvas.SetActive(true);
-        isRevealed = true;
-
         Manager_Initative.Instance.InjectNewCharacter(character);
-    }
-
-    public void Hide()
-    {
-        gameObject_Canvas.SetActive(false);
-        isRevealed = false;
     }
 
     private void OnInitiativeOrderUpdated(List<character_Initative> initiativeOrder)
@@ -87,26 +70,18 @@ public class Character_World : MonoBehaviour
         SetInitativeSelection(character_Initative.Character.Name == character.Name);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-            Damage(1);
-    }
+    override 
 
-    public void Setup(Character character)
+    public void SetupCharacter(Character character)
     {
         this.character = character;
 
         SetInitativeSelection(false);
 
-        tile = Manager_Grid.Instance.GetTileByWorldPosition(transform.position);
-        tile.SetWorldCharacter(this);
 
         SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.Name));
 
         SetHP(character.HealthPoints);
-
-        image_CharacterSprite.enabled = !character.IsPlayer;
         text_CharacterHP.enabled = character.IsPlayer;
     }
 

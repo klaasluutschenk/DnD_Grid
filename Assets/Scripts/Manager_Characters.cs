@@ -48,7 +48,7 @@ public class Manager_Characters : MonoBehaviour
 
         newWorldCharacter.transform.position = position;
 
-        newWorldCharacter.Setup(character);
+        newWorldCharacter.SetupCharacter(character);
 
         activeWorldCharacters.Add(newWorldCharacter);
 
@@ -56,8 +56,13 @@ public class Manager_Characters : MonoBehaviour
             Manager_Initative.Instance.InjectNewCharacter(character);
     }
 
-    private void OnDeSpawned(Character_World character_World)
+    private void OnDeSpawned(World_Entity world_Entity)
     {
+        Character_World character_World = world_Entity as Character_World;
+
+        if (character_World == null)
+            return;
+
         if (!activeWorldCharacters.Contains(character_World))
             return;
 

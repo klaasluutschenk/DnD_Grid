@@ -120,15 +120,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697b5c5efad161c4db165299ba612799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image_Sprite: {fileID: 5824597128704461515}
+  gameObject_Canvas: {fileID: 8724754955745880192}
   gameObject_InitiativeSelection: {fileID: 828645643737953777}
   image_HP: {fileID: 2739180961479857267}
   image_Initiative: {fileID: 2109967516577541392}
-  image_CharacterSprite: {fileID: 5824597128704461515}
   text_CharacterHP: {fileID: 1754024160627403104}
   color_Healthy: {r: 0, g: 0.627451, b: 0, a: 1}
   color_Wounded: {r: 1, g: 0.5686275, b: 0, a: 1}
   color_Dying: {r: 0.627451, g: 0, b: 0, a: 1}
-  gameObject_Canvas: {fileID: 8724754955745880192}
   particleSystem_Burn: {fileID: 5824891146510807196}
   particleSystem_Poison: {fileID: 3556050265635233251}
   particleSystem_Bleed: {fileID: 3518242655466566281}
