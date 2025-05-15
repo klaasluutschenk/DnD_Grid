@@ -28,3 +28,4 @@ MonoBehaviour:
     Position: {x: -5.5, y: 2.5, z: -1}
   SpawnableCharacters:
   - {fileID: 11400000, guid: 5eaf7a77c0fc1284f98c059a56a3c511, type: 2}
+  - {fileID: 11400000, guid: ef0cef20046cb394a91ea0bfce0c7ef4, type: 2}

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Ability_Active_HarpoonLauncher
   m_EditorClassIdentifier: 
   Name: Harpoon Launcher
-  Description: 'A large rusty harpoon launcher.
+  Description: 'Reloads between turns:
 
-    Attacks with Advantage against
-    rooted targets.'
+    If interupted, limit the attack to Tier
+    2.'
   HasOutcomes: 1
   Outcome1: Miss.
   Outcome2: 2 Damage.

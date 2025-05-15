@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Background: {fileID: 268168019893906643, guid: 1282a8525a75f644296088c4ddf7c7a8, type: 3}
   PhysicsObject: {fileID: 5496054743207719919, guid: 2ba1523fa90a2da4b9f8e3f32a7c6258, type: 3}
+  FogObject: {fileID: 0}
   Characters:
   - Character: {fileID: 11400000, guid: d1f10c5fae11cf74abbe9ffd40e13b4e, type: 2}
     Position: {x: -1.5, y: 2.5, z: -1}
@@ -31,4 +32,4 @@ MonoBehaviour:
     Position: {x: 12.5, y: 4.5, z: -1}
   SpawnableCharacters:
   - {fileID: 11400000, guid: 5eaf7a77c0fc1284f98c059a56a3c511, type: 2}
-  - {fileID: 11400000, guid: 1600ac4ab50d5644d9088cfbf1970f76, type: 2}
+  - {fileID: 11400000, guid: ef0cef20046cb394a91ea0bfce0c7ef4, type: 2}

@@ -10,17 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee61d1f82d0e2224a93d4576de9fa4bb, type: 3}
-  m_Name: Ability_Active_LukewarmWelcome
+  m_Name: Ability_Active_HorrendousNoise
   m_EditorClassIdentifier: 
-  Name: Lukewarm Welcome
-  Description: 'Second Turn each Round.
+  Name: horrendous Noise
+  Description: 'Spawn 2 Dock Muggers.
 
 
-    If you have been Damaged this round:
-
-
-    Spawn
-    a BlowWhistle.'
+    SelfDestruct.'
   HasOutcomes: 0
   Outcome1: 
   Outcome2: 
