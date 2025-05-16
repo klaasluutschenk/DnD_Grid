@@ -225,7 +225,7 @@ public class Character_World : World_Entity
 
     public void Kill()
     {
-        
+        Remove();
     }
 
     public void ApplyStatusEffect(int value, int duration, StatusEffectType statusEffectType)
