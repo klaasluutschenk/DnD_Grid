@@ -346,13 +346,13 @@ public class Manager_Input : MonoBehaviour
         highlightedTiles.AddRange(tiles);
     }
 
-    private void MovementHighlight(Tile tile)
+    private void MovementHighlight(Tile tile, Character_World character_World)
     {
         List<Tile> tiles = new List<Tile>();
 
         tiles.Add(tile);
 
-        int movement = tile.WorldCharacter.Character.Movement;
+        int movement = character_World.Character.Movement;
 
         int currentRadiusCheck = 0;
         while (currentRadiusCheck < movement && currentRadiusCheck < 50)
@@ -363,7 +363,7 @@ public class Manager_Input : MonoBehaviour
             {
                 List<Tile> surroundingTiles = new List<Tile>();
 
-                surroundingTiles = Manager_Grid.Instance.GetSurroundingAlliedTile(tiles[i], true, tile.WorldCharacter.Character.IsPlayerTeam);
+                surroundingTiles = Manager_Grid.Instance.GetSurroundingAlliedTile(tiles[i], true, character_World.Character.IsPlayerTeam);
 
                 foreach (Tile surroundingTile in surroundingTiles)
                 {
@@ -468,10 +468,12 @@ public class Manager_Input : MonoBehaviour
         {
             foreach (Tile tile in highlightedTiles)
             {
-                if (tile.WorldCharacter == null)
+                Character_World character_World = tile.World_Entity as Character_World;
+
+                if (character_World == null)
                     continue;
 
-                tile.WorldCharacter.Damage(damageValue);
+                character_World.Damage(damageValue);
             }
         }
 
@@ -503,19 +505,19 @@ public class Manager_Input : MonoBehaviour
             if (movementSelection == null)
             {
                 Tile movementTile = highlightedTiles.FirstOrDefault();
-                Character_World selectedCharacter = movementTile.WorldCharacter;
+                Character_World selectedCharacter = movementTile.World_Entity as Character_World;
 
                 if (selectedCharacter != null)
                 {
                     movementSelection = selectedCharacter;
 
-                    MovementHighlight(movementTile);
+                    MovementHighlight(movementTile, selectedCharacter);
                 }                
             }
             else
             {
                 Tile movementTile = highlightedTiles.FirstOrDefault();
-                if (movementTile.WorldCharacter == null)
+                if (movementTile.World_Entity == null)
                 {
                     movementSelection.Move(movementTile);
                     movementSelection = null;
@@ -561,10 +563,12 @@ public class Manager_Input : MonoBehaviour
         {
             foreach (Tile tile in highlightedTiles)
             {
-                if (tile.WorldCharacter == null)
+                Character_World character_World = tile.World_Entity as Character_World;
+
+                if (character_World == null)
                     continue;
 
-                tile.WorldCharacter.Heal(healValue);
+                character_World.Heal(healValue);
             }
         }
 
@@ -600,7 +604,7 @@ public class Manager_Input : MonoBehaviour
         {
             foreach (Tile tile in highlightedTiles)
             {
-                if (tile.WorldCharacter != null)
+                if (tile.World_Entity != null)
                     continue;
 
                 Manager_Characters.Instance.SpawnCharacter(characterToSpawn, tile.transform.position);
@@ -706,10 +710,12 @@ public class Manager_Input : MonoBehaviour
         {
             foreach (Tile tile in highlightedTiles)
             {
-                if (tile.WorldCharacter == null)
+                Character_World character_World = tile.World_Entity as Character_World;
+
+                if (character_World == null)
                     continue;
 
-                tile.WorldCharacter.ApplyStatusEffect(statusEffectValue, statusEffectDuration, statuseEffectType);
+                character_World.ApplyStatusEffect(statusEffectValue, statusEffectDuration, statuseEffectType);
             }
         }
 

@@ -168,11 +168,13 @@ public class Manager_Grid : MonoBehaviour
 
         foreach (Tile surroundingTile in surroundingTiles)
         {
-            if (surroundingTile.WorldCharacter == null)
+            Character_World character_World = surroundingTile.World_Entity as Character_World;
+
+            if (character_World == null)
             {
                 alliedTiles.Add(surroundingTile);
             }
-            else if (surroundingTile.WorldCharacter.Character.IsPlayerTeam == IsPlayerTeam)
+            else if (character_World.Character.IsPlayerTeam == IsPlayerTeam)
             {
                 alliedTiles.Add(surroundingTile);
             }

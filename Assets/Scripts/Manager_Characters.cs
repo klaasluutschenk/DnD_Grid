@@ -19,7 +19,7 @@ public class Manager_Characters : MonoBehaviour
         Manager_Combat.OnCombatEncounterEnded += OnCombatEncounterEnded;
         Manager_Combat.OnCombatEncounterLoaded += OnCombatEncounterLoaded;
 
-        Character_World.OnDeSpawned += OnDeSpawned;
+        World_Entity.OnDeSpawned += OnDeSpawned;
     }
 
     private void OnCombatEncounterEnded()
@@ -48,12 +48,11 @@ public class Manager_Characters : MonoBehaviour
 
         newWorldCharacter.transform.position = position;
 
-        newWorldCharacter.SetupCharacter(character);
+        newWorldCharacter.Setup(character);
 
         activeWorldCharacters.Add(newWorldCharacter);
 
-        if (newWorldCharacter.IsRevealed)
-            Manager_Initative.Instance.InjectNewCharacter(character);
+        // Adding the character to the initiative is handled by the tiles.
     }
 
     private void OnDeSpawned(World_Entity world_Entity)

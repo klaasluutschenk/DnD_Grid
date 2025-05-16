@@ -40,7 +40,15 @@ public class World_Entity : MonoBehaviour
         image_Sprite.enabled = entity.Sprite;
 
         tile = Manager_Grid.Instance.GetTileByWorldPosition(transform.position);
-        tile.SetWorldCharacter(this);
+        tile.SetWorldEntity(this);
+    }
+
+    public virtual void Remove()
+    {
+        OnDeSpawned?.Invoke(this);
+        tile.ClearEntity();
+
+        Destroy(this.gameObject);
     }
 
     #region Revealing & Hiding
@@ -58,6 +66,22 @@ public class World_Entity : MonoBehaviour
     {
         gameObject_Canvas.SetActive(false);
         isRevealed = false;
+    }
+
+    #endregion
+
+    #region Movement
+
+    public void Move(Tile targetTile)
+    {
+        if (tile != null)
+            tile.SetWorldEntity(null);
+
+        tile = targetTile;
+
+        transform.position = tile.transform.position;
+
+        tile.SetWorldEntity(this);
     }
 
     #endregion

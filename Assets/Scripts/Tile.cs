@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public Entity Entity => entity;
-    public Character_World WorldCharacter => worldCharacter;
+    public World_Entity World_Entity => worldEntity;
     public bool IsSelected => isSelected;
     public bool IsHiglighted => isHighlighted;
     public bool IsMovement => isMovement;
@@ -20,8 +19,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject gameObject_Fog = default;
     [SerializeField] private GameObject gameObject_Fog_Highlight = default;
 
-    private Character_World worldCharacter;
-    private Entity entity;
+    private World_Entity worldEntity;
 
     private bool isSelected = false;
     private bool isHighlighted = false;
@@ -39,21 +37,16 @@ public class Tile : MonoBehaviour
         this.gridPosition = gridPosition;
     }
 
-    public void SetEntity(Entity entity)
+    public void SetWorldEntity(World_Entity worldEntity)
     {
-        this.entity = entity;
+        this.worldEntity = worldEntity;
+
+        RevealWorldEntity(isRevealed);
     }
 
-    public void SetWorldCharacter(Character_World worldCharacter)
+    public void ClearEntity()
     {
-        this.worldCharacter = worldCharacter;
-
-        RevealWorldCharacter(isRevealed);
-    }
-
-    public void ClearCharacter()
-    {
-        worldCharacter = null;
+        worldEntity = null;
     }
 
     public void SetFogRoomIndex(int fogRoomIndex)
@@ -100,7 +93,7 @@ public class Tile : MonoBehaviour
 
         gameObject_Fog.SetActive(!isRevealed);
 
-        RevealWorldCharacter(isRevealed);
+        RevealWorldEntity(isRevealed);
     }
 
     public void FogHighlight(bool isFogHighlighted)
@@ -113,14 +106,14 @@ public class Tile : MonoBehaviour
         gameObject_Fog_Highlight.SetActive(isFogHighlighted);
     }
 
-    private void RevealWorldCharacter(bool reveal)
+    private void RevealWorldEntity(bool reveal)
     {
-        if (worldCharacter == null)
+        if (worldEntity == null)
             return;
 
         if (reveal)
-            worldCharacter.Reveal();
+            worldEntity.Reveal();
         else
-            worldCharacter.Hide();
+            worldEntity.Hide();
     }
 }

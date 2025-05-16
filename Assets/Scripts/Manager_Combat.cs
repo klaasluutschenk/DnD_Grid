@@ -48,10 +48,13 @@ public class Manager_Combat : MonoBehaviour
         OnGridRequest?.Invoke(combatEncounter);
 
         yield return null;
+        yield return null;
+        yield return null;
 
         activeCombatEncounter = combatEncounter;
         OnCombatEncounterLoaded?.Invoke(activeCombatEncounter);
 
+        yield return null;
         yield return null;
         yield return null;
 

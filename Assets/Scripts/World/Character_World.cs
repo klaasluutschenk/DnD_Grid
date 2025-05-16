@@ -49,7 +49,7 @@ public class Character_World : World_Entity
     {
         base.Reveal();
 
-        if (isRevealed)
+        if (!isRevealed)
             return;
 
         Manager_Initative.Instance.InjectNewCharacter(character);
@@ -70,31 +70,28 @@ public class Character_World : World_Entity
         SetInitativeSelection(character_Initative.Character.Name == character.Name);
     }
 
-    override 
-
-    public void SetupCharacter(Character character)
+    public override void Setup(Entity entity)
     {
+        Character character = entity as Character;
+
+        SetupCharacter(character);
+
+        base.Setup(entity);
+    }
+
+    private void SetupCharacter(Character character)
+    {
+        if (character == null)
+            return;
+
         this.character = character;
 
         SetInitativeSelection(false);
-
 
         SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.Name));
 
         SetHP(character.HealthPoints);
         text_CharacterHP.enabled = character.IsPlayer;
-    }
-
-    public void Move(Tile targetTile)
-    {
-        if (tile != null)
-            tile.SetWorldCharacter(null);
-
-        tile = targetTile;
-
-        transform.position = tile.transform.position;
-
-        tile.SetWorldCharacter(this);
     }
 
     private void SetInitativeSelection(bool isActive)
@@ -228,10 +225,7 @@ public class Character_World : World_Entity
 
     public void Kill()
     {
-        OnDeSpawned?.Invoke(this);
-        tile.ClearCharacter();
-
-        Destroy(this.gameObject);
+        
     }
 
     public void ApplyStatusEffect(int value, int duration, StatusEffectType statusEffectType)
