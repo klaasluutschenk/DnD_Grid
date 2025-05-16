@@ -16,18 +16,16 @@ MonoBehaviour:
   PhysicsObject: {fileID: 5496054743207719919, guid: 8bdbe65ecf3d54f42a3f8bd89f0e27a2, type: 3}
   FogObject: {fileID: 6097160243529988637, guid: 1712e9af687e44941b57011fa14dfd55, type: 3}
   Characters:
-  - Character: {fileID: 11400000, guid: d1f10c5fae11cf74abbe9ffd40e13b4e, type: 2}
+  - Character: {fileID: 11400000, guid: 2a8d252db458c5d4bb1c8f6837f5b1dd, type: 2}
     Position: {x: -1.5, y: 2.5, z: -1}
   - Character: {fileID: 11400000, guid: febca0f2244f9d045999a753e5f654f0, type: 2}
     Position: {x: 2.5, y: -1.5, z: -1}
-  - Character: {fileID: 11400000, guid: febca0f2244f9d045999a753e5f654f0, type: 2}
+  - Character: {fileID: 11400000, guid: db16fa1a9fb29164bb273c3df9c23978, type: 2}
     Position: {x: 2.5, y: -0.5, z: -1}
   - Character: {fileID: 11400000, guid: febca0f2244f9d045999a753e5f654f0, type: 2}
     Position: {x: 1.5, y: -0.5, z: -1}
   - Character: {fileID: 11400000, guid: 5eaf7a77c0fc1284f98c059a56a3c511, type: 2}
     Position: {x: -5.5, y: 2.5, z: -1}
-  - Character: {fileID: 11400000, guid: 5eaf7a77c0fc1284f98c059a56a3c511, type: 2}
-    Position: {x: -2.5, y: 2.5, z: -1}
   SpawnableCharacters:
   - {fileID: 11400000, guid: 5eaf7a77c0fc1284f98c059a56a3c511, type: 2}
   - {fileID: 11400000, guid: ef0cef20046cb394a91ea0bfce0c7ef4, type: 2}

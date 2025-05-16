@@ -12,6 +12,7 @@ public class Character : Entity
     public Color InitativeColor;
 
     public int initiative;
+    public List<int> AdditionalInitiatives;
 
     public int HealthPoints;
     public int Armor;

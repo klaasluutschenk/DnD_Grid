@@ -55,10 +55,9 @@ public class Manager_Initative : MonoBehaviour
                     character,
                     character.initiative);
 
+        Color asignedColor = GetRandomAvailableColor();
         if (character.InitativeColor == Color.black)
         {
-            Color asignedColor = GetRandomAvailableColor();
-
             newCharacter.InitativeColor = asignedColor;
 
             LockColor(asignedColor);
@@ -78,6 +77,20 @@ public class Manager_Initative : MonoBehaviour
         }
 
         characters.Add(newCharacter);
+
+        if (character.AdditionalInitiatives.Count > 0)
+        {
+            foreach (int initiative in character.AdditionalInitiatives)
+            {
+                character_Initative clone = new character_Initative(
+                    newCharacter.Character,
+                    initiative);
+
+                clone.InitativeColor = asignedColor;
+
+                characters.Add(clone);
+            }
+        }
 
         UpdateInitiativeOrder();
     }

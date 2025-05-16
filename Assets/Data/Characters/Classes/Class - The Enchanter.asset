@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: Character
+  m_Name: Class - The Enchanter
   m_EditorClassIdentifier: 
-  IsPlayer: 0
-  CustomInitiative: 0
-  IsPlayerTeam: 0
-  Name: 
+  Name: The Enchanter
   Description: 
-  InitativeColor: {r: 0, g: 0, b: 0, a: 0}
   Sprite: {fileID: 0}
+  IsPlayer: 1
+  CustomInitiative: 1
+  IsPlayerTeam: 1
+  InitativeColor: {r: 0.10679956, g: 0.9056604, b: 0.79483575, a: 1}
   initiative: 0
-  HealthPoints: 0
+  AdditionalInitiatives: 
+  HealthPoints: 10
   Armor: 0
-  Movement: 0
+  Movement: 7
   Perception: 0
   Dodge: 0
   Abilities: []

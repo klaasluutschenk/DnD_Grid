@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: Sniper
+  m_Name: Class - The Warrior
   m_EditorClassIdentifier: 
-  IsPlayer: 0
-  CustomInitiative: 0
-  IsPlayerTeam: 0
-  Name: The Sniper
+  Name: The Warrior
   Description: 
-  InitativeColor: {r: 0.118265904, g: 0.3490566, b: 0.018111428, a: 1}
   Sprite: {fileID: 0}
+  IsPlayer: 1
+  CustomInitiative: 1
+  IsPlayerTeam: 1
+  InitativeColor: {r: 0.9137255, g: 0.5467394, b: 0, a: 1}
   initiative: 0
-  HealthPoints: 6
+  AdditionalInitiatives: 
+  HealthPoints: 12
   Armor: 0
-  Movement: 6
+  Movement: 7
   Perception: 0
   Dodge: 0
   Abilities: []

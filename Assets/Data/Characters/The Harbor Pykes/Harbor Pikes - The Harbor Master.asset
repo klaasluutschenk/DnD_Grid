@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
   m_Name: Harbor Pikes - The Harbor Master
   m_EditorClassIdentifier: 
+  Name: The Harbor Master
+  Description: Mercenary of the Harbor Pikes
+  Sprite: {fileID: 0}
   IsPlayer: 0
   CustomInitiative: 0
   IsPlayerTeam: 0
-  Name: The Harbor Master
-  Description: Mercenary of the Harbor Pikes
   InitativeColor: {r: 0, g: 0, b: 0, a: 1}
-  Sprite: {fileID: 0}
   initiative: 13
+  AdditionalInitiatives: 04000000
   HealthPoints: 25
   Armor: 0
   Movement: 8
