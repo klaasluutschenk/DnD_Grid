@@ -1,35 +1,56 @@
 using UnityEngine;
+using System;
 
 public class PhysicsObject_Destructable : PhysicsObject
 {
+    public static Action<PhysicsObject_Destructable> OnHighlighted;
+    public static Action<PhysicsObject_Destructable> OnStopHighlighted;
+
     [SerializeField] private int healthPoints = default;
+
+    [SerializeField] private Material defaultMaterial = default;
+    [SerializeField] private Material highLightMaterial = default;
     
     protected override bool RemoveTiles => false;
     protected override bool ShowVisual => true;
 
-    private Manager_Input manager_Input;
+    private MeshRenderer meshRenderer;
+
+    private void Start()
+    {
+        meshRenderer = GetComponent<MeshRenderer>();
+    }
 
     private void OnMouseOver()
     {
-        if (manager_Input == null)
+        OnHighlighted?.Invoke(this);
+    }
+
+    private void OnMouseExit()
+    {
+        OnStopHighlighted?.Invoke(this);
+    }
+
+    public void SetDefault()
+    {
+        meshRenderer.material = defaultMaterial;
+    }
+
+    public void HighLight()
+    {
+        meshRenderer.material = highLightMaterial;
+    }
+
+    public bool Damage(int damage)
+    {
+        healthPoints -= Manager_Input.Instance.DamageValue;
+
+        if (healthPoints <= 0)
         {
-            if (Manager_Input.Instance != null)
-            {
-                manager_Input = Manager_Input.Instance;
-            }
-            else
-                return;
+            Destroy(this.gameObject);
+            return true;
         }
 
-        if (Manager_Input.Instance.InputState != InputState.Damage)
-            return;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            healthPoints -= manager_Input.DamageValue;
-
-            if (healthPoints <= 0)
-                Destroy(this.gameObject);
-        }
+        return false;
     }
 }

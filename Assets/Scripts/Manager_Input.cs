@@ -34,7 +34,8 @@ public class Manager_Input : MonoBehaviour
     [SerializeField] private TMP_InputField inputField_StatusEffectValue = default;
     [SerializeField] private TMP_InputField inputField_StatusEffectDuration = default;
     [SerializeField] private TMP_Dropdown dropDown_StatusEffectType = default;
-    
+
+    [SerializeField] private Button button_Impact = default;
 
     [SerializeField] private Camera playerCamera;
 
@@ -87,6 +88,8 @@ public class Manager_Input : MonoBehaviour
         inputField_StatusEffectValue.onValueChanged.AddListener(OnStatusEffectValueChanged);
         inputField_StatusEffectDuration.onValueChanged.AddListener(OnStatusEffectDurationChanged);
         dropDown_StatusEffectType.onValueChanged.AddListener(OnStatusEffectTypeChanged);
+
+        button_Impact.onClick.AddListener(OnImpactClicked);
     }
 
     #region UI Interaction
@@ -191,6 +194,14 @@ public class Manager_Input : MonoBehaviour
         statuseEffectType = (StatusEffectType)statusEffectType;
     }
 
+    private void OnImpactClicked()
+    {
+        PhysicsObject_Destructable.OnHighlighted += HighLightDestructable;
+        PhysicsObject_Destructable.OnStopHighlighted += StopHighLightDestructable;
+        inputState = InputState.Impact;
+        isLocked = true;
+    }
+
     #endregion
 
     private void Update()
@@ -219,6 +230,9 @@ public class Manager_Input : MonoBehaviour
                 break;
             case InputState.StatusEffect:
                 StatusEffect();
+                break;
+            case InputState.Impact:
+                Impact();
                 break;
             default:
                 break;
@@ -698,6 +712,59 @@ public class Manager_Input : MonoBehaviour
 
     #endregion
 
+    #region Impact
+
+    private PhysicsObject_Destructable target_physicsObject_Destructable;
+    private void Impact()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (target_physicsObject_Destructable == null)
+                return;
+
+            bool isDestroyed = target_physicsObject_Destructable.Damage(damageValue);
+
+            if (isDestroyed)
+                ClearHighlightDestructable();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            ClearHighlightDestructable();
+
+            PhysicsObject_Destructable.OnHighlighted -= HighLightDestructable;
+            PhysicsObject_Destructable.OnStopHighlighted -= StopHighLightDestructable;
+
+            inputState = InputState.None;
+            isLocked = false;
+        }
+    }
+
+    private void HighLightDestructable(PhysicsObject_Destructable target_physicsObject_Destructable)
+    {
+        this.target_physicsObject_Destructable = target_physicsObject_Destructable;
+        this.target_physicsObject_Destructable.HighLight();
+    }
+
+    private void StopHighLightDestructable(PhysicsObject_Destructable target_physicsObject_Destructable)
+    {
+        if (this.target_physicsObject_Destructable == target_physicsObject_Destructable)
+        {
+            ClearHighlightDestructable();
+        }
+    }
+
+    private void ClearHighlightDestructable()
+    {
+        if (target_physicsObject_Destructable == null)
+            return;
+
+        target_physicsObject_Destructable.SetDefault();
+        target_physicsObject_Destructable = null;
+    }
+
+    #endregion
+
     #region Status Effect
 
     private void StatusEffect()
@@ -744,5 +811,6 @@ public enum InputState
     Movement = 4,
     Spawn = 5,
     Fog = 6,
-    StatusEffect = 7
+    StatusEffect = 7,
+    Impact = 8
 }

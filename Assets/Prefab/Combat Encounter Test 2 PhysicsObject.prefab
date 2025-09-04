@@ -765,7 +765,7 @@ GameObject:
   - component: {fileID: 2608519679159999448}
   - component: {fileID: 987919679510627848}
   m_Layer: 7
-  m_Name: Destructable Door (7)
+  m_Name: Destructable Door Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -853,6 +853,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   removeTiles: 0
   healthPoints: 3
+  defaultMaterial: {fileID: 2100000, guid: fa5ed1fe4c5b5db4584e6e1005b04404, type: 2}
+  highLightMaterial: {fileID: 2100000, guid: 3b199940e2ace26439d68916a571cc18, type: 2}
 --- !u!65 &2608519679159999448
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -916,7 +918,7 @@ GameObject:
   - component: {fileID: 4005695424603485713}
   - component: {fileID: 5537766762119221690}
   m_Layer: 7
-  m_Name: Destructable Door (3)
+  m_Name: Destructable Door Vertical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1004,6 +1006,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   removeTiles: 0
   healthPoints: 3
+  defaultMaterial: {fileID: 2100000, guid: fa5ed1fe4c5b5db4584e6e1005b04404, type: 2}
+  highLightMaterial: {fileID: 2100000, guid: 3b199940e2ace26439d68916a571cc18, type: 2}
 --- !u!65 &4005695424603485713
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1367,7 +1371,7 @@ GameObject:
   - component: {fileID: 5125754336600799668}
   - component: {fileID: 276440406022226272}
   m_Layer: 7
-  m_Name: Destructable Door (4)
+  m_Name: Destructable Door Vertical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1455,6 +1459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   removeTiles: 0
   healthPoints: 3
+  defaultMaterial: {fileID: 2100000, guid: fa5ed1fe4c5b5db4584e6e1005b04404, type: 2}
+  highLightMaterial: {fileID: 2100000, guid: 3b199940e2ace26439d68916a571cc18, type: 2}
 --- !u!65 &5125754336600799668
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1518,7 +1524,7 @@ GameObject:
   - component: {fileID: 2361589028873397299}
   - component: {fileID: 6935074964444322882}
   m_Layer: 7
-  m_Name: Destructable Door
+  m_Name: Destructable Door Vertical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1606,6 +1612,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   removeTiles: 0
   healthPoints: 3
+  defaultMaterial: {fileID: 2100000, guid: fa5ed1fe4c5b5db4584e6e1005b04404, type: 2}
+  highLightMaterial: {fileID: 2100000, guid: 3b199940e2ace26439d68916a571cc18, type: 2}
 --- !u!65 &2361589028873397299
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1969,7 +1977,7 @@ GameObject:
   - component: {fileID: 3363110951986140586}
   - component: {fileID: 6230302898100949182}
   m_Layer: 7
-  m_Name: Destructable Door (5)
+  m_Name: Destructable Door Vertical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2057,6 +2065,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   removeTiles: 0
   healthPoints: 3
+  defaultMaterial: {fileID: 2100000, guid: fa5ed1fe4c5b5db4584e6e1005b04404, type: 2}
+  highLightMaterial: {fileID: 2100000, guid: 3b199940e2ace26439d68916a571cc18, type: 2}
 --- !u!65 &3363110951986140586
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2720,7 +2730,7 @@ GameObject:
   - component: {fileID: 3395175045118048524}
   - component: {fileID: 6623886501303790084}
   m_Layer: 7
-  m_Name: Destructable Door (6)
+  m_Name: Destructable Door Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2808,6 +2818,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   removeTiles: 0
   healthPoints: 3
+  defaultMaterial: {fileID: 2100000, guid: fa5ed1fe4c5b5db4584e6e1005b04404, type: 2}
+  highLightMaterial: {fileID: 2100000, guid: 3b199940e2ace26439d68916a571cc18, type: 2}
 --- !u!65 &3395175045118048524
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3321,7 +3333,7 @@ GameObject:
   - component: {fileID: 4235746655993970145}
   - component: {fileID: 4740599313170929841}
   m_Layer: 7
-  m_Name: Destructable Door (2)
+  m_Name: Destructable Door Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3409,6 +3421,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   removeTiles: 0
   healthPoints: 3
+  defaultMaterial: {fileID: 2100000, guid: fa5ed1fe4c5b5db4584e6e1005b04404, type: 2}
+  highLightMaterial: {fileID: 2100000, guid: 3b199940e2ace26439d68916a571cc18, type: 2}
 --- !u!65 &4235746655993970145
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5794,7 +5808,7 @@ GameObject:
   - component: {fileID: 1159026509955856557}
   - component: {fileID: 5069351781910333243}
   m_Layer: 7
-  m_Name: Destructable Door (1)
+  m_Name: Destructable Door Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5882,6 +5896,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   removeTiles: 0
   healthPoints: 3
+  defaultMaterial: {fileID: 2100000, guid: fa5ed1fe4c5b5db4584e6e1005b04404, type: 2}
+  highLightMaterial: {fileID: 2100000, guid: 3b199940e2ace26439d68916a571cc18, type: 2}
 --- !u!65 &1159026509955856557
 BoxCollider:
   m_ObjectHideFlags: 0
