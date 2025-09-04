@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class PhysicsObject : MonoBehaviour
 {
+    protected virtual bool RemoveTiles => removeTiles;
+    protected virtual bool ShowVisual => false;
+
     [SerializeField] private bool removeTiles = default;
 
     private void Awake()
     {
-        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<MeshRenderer>().enabled = ShowVisual;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -14,7 +17,7 @@ public class PhysicsObject : MonoBehaviour
         if (collision.gameObject.layer != 6)
             return;
 
-        if (!removeTiles)
+        if (!RemoveTiles)
             return;
 
         Tile tile = collision.gameObject.GetComponent<Tile>();

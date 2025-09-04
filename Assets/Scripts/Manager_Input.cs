@@ -12,6 +12,9 @@ public class Manager_Input : MonoBehaviour
     public static Action OnSpawnRequest;
     public static Action OnStopSpawnRequest;
 
+    public InputState InputState => inputState;
+    public int DamageValue => damageValue;
+
     [SerializeField] private Button button_Selection = default;
     [SerializeField] private TMP_InputField inputField_Selection = default;
 

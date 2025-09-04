@@ -56,6 +56,9 @@ public class Manager_Fog : MonoBehaviour
         yield return null;
         yield return null;
         yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
 
         foreach (FogRoom fogRoom in fogRooms)
         {

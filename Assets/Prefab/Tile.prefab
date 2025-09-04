@@ -486,7 +486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d588ad2da68c854ca4e3c1ab6045d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomIndex: 0
   gameObject_Selected: {fileID: 3314571528086227096}
   gameObject_Highlighted: {fileID: 1224446619317017590}
   gameObject_Movement: {fileID: 5968586904182277060}
