@@ -30,10 +30,12 @@ public class Manager_Input : MonoBehaviour
 
     [SerializeField] private Button button_Fog = default;
 
-    [SerializeField] private Button button_StatusEffect = default;
-    [SerializeField] private TMP_InputField inputField_StatusEffectValue = default;
-    [SerializeField] private TMP_InputField inputField_StatusEffectDuration = default;
-    [SerializeField] private TMP_Dropdown dropDown_StatusEffectType = default;
+    [SerializeField] private Button button_Burn = default;
+    [SerializeField] private Button button_Venom = default;
+    [SerializeField] private Button button_Bleed = default;
+
+    [SerializeField] private Button button_CleanseBurn = default;
+    [SerializeField] private Button button_CleanseVenom = default;
 
     [SerializeField] private Button button_Impact = default;
 
@@ -45,10 +47,6 @@ public class Manager_Input : MonoBehaviour
     private int selectionRadius = 1;
     private int damageValue = 1;
     private int healValue = 1;
-
-    private int statusEffectValue = 1;
-    private int statusEffectDuration = 1;
-    private StatusEffectType statuseEffectType = StatusEffectType.None;
 
     public Vector3 mouseGridPosition;
     public Vector3 oldMouseGridPosition;
@@ -84,10 +82,12 @@ public class Manager_Input : MonoBehaviour
 
         button_Fog.onClick.AddListener(OnFogClicked);
 
-        button_StatusEffect.onClick.AddListener(OnStatusEffectClicked);
-        inputField_StatusEffectValue.onValueChanged.AddListener(OnStatusEffectValueChanged);
-        inputField_StatusEffectDuration.onValueChanged.AddListener(OnStatusEffectDurationChanged);
-        dropDown_StatusEffectType.onValueChanged.AddListener(OnStatusEffectTypeChanged);
+        button_Burn.onClick.AddListener(OnBurnClicked);
+        button_Venom.onClick.AddListener(OnVenomClicked);
+        button_Bleed.onClick.AddListener(OnBleedClicked);
+
+        button_CleanseBurn.onClick.AddListener(OnCleanseBurnClicked);
+        button_CleanseVenom.onClick.AddListener(OnCleanseVenomClicked);
 
         button_Impact.onClick.AddListener(OnImpactClicked);
     }
@@ -169,29 +169,54 @@ public class Manager_Input : MonoBehaviour
         isLocked = true;
     }
 
-    private void OnStatusEffectClicked()
+    private void OnBurnClicked()
     {
         if (isLocked)
             return;
 
         selectionRadius = 1;
-        inputState = InputState.StatusEffect;
+        inputState = InputState.Burn;
         isLocked = true;
     }
 
-    private void OnStatusEffectValueChanged(string value)
+    private void OnVenomClicked()
     {
-        statusEffectValue = int.Parse(value);
+        if (isLocked)
+            return;
+
+        selectionRadius = 1;
+        inputState = InputState.Venom;
+        isLocked = true;
     }
 
-    private void OnStatusEffectDurationChanged(string value)
+    private void OnBleedClicked()
     {
-        statusEffectDuration = int.Parse(value);
+        if (isLocked)
+            return;
+
+        selectionRadius = 1;
+        inputState = InputState.Bleed;
+        isLocked = true;
     }
 
-    private void OnStatusEffectTypeChanged(int statusEffectType)
+    private void OnCleanseBurnClicked()
     {
-        statuseEffectType = (StatusEffectType)statusEffectType;
+        if (isLocked)
+            return;
+
+        selectionRadius = 1;
+        inputState = InputState.CleanseBurn;
+        isLocked = true;
+    }
+
+    private void OnCleanseVenomClicked()
+    {
+        if (isLocked)
+            return;
+
+        selectionRadius = 1;
+        inputState = InputState.CleanseVenom;
+        isLocked = true;
     }
 
     private void OnImpactClicked()
@@ -214,10 +239,10 @@ public class Manager_Input : MonoBehaviour
                 Selection();
                 break;
             case InputState.Damage:
-                Damage();
+                ApplyEffect(InputState.Damage);
                 break;
             case InputState.Heal:
-                Heal();
+                ApplyEffect(InputState.Heal);
                 break;
             case InputState.Movement:
                 Movement();
@@ -228,11 +253,23 @@ public class Manager_Input : MonoBehaviour
             case InputState.Fog:
                 Fog();
                 break;
-            case InputState.StatusEffect:
-                StatusEffect();
-                break;
             case InputState.Impact:
                 Impact();
+                break;
+            case InputState.Burn:
+                ApplyEffect(InputState.Burn);
+                break;
+            case InputState.Venom:
+                ApplyEffect(InputState.Venom);
+                break;
+            case InputState.Bleed:
+                ApplyEffect(InputState.Bleed);
+                break;
+            case InputState.CleanseBurn:
+                ApplyEffect(InputState.CleanseBurn);
+                break;
+            case InputState.CleanseVenom:
+                ApplyEffect(InputState.CleanseVenom);
                 break;
             default:
                 break;
@@ -423,6 +460,65 @@ public class Manager_Input : MonoBehaviour
     {
         movementTiles.ForEach(st => st.Movement(false));
         movementTiles.Clear();
+    }
+
+    #endregion
+
+    #region Apply Effect
+
+    private void ApplyEffect(InputState effect)
+    {
+        SetMousePosition();
+
+        if (HasMouseChanged())
+        {
+            HighlightTile(true, false);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            foreach (Tile tile in highlightedTiles)
+            {
+                Character_World character_World = tile.World_Entity as Character_World;
+
+                if (character_World == null)
+                    continue;
+
+                switch (effect)
+                {
+                    case InputState.Damage:
+                        character_World.Damage(damageValue);
+                        break;
+                    case InputState.Heal:
+                        character_World.Heal(healValue);
+                        break;
+                    case InputState.Burn:
+                        character_World.ApplyBurn();
+                        break;
+                    case InputState.Venom:
+                        character_World.ApplyVenom();
+                        break;
+                    case InputState.Bleed:
+                        character_World.ApplyBleed();
+                        break;
+                    case InputState.CleanseBurn:
+                        character_World.CleanseBurn();
+                        break;
+                    case InputState.CleanseVenom:
+                        character_World.CleanseVenom();
+                        break;
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            ClearHighlights();
+            ClearSelection();
+
+            inputState = InputState.None;
+            isLocked = false;
+        }
     }
 
     #endregion
@@ -764,42 +860,6 @@ public class Manager_Input : MonoBehaviour
     }
 
     #endregion
-
-    #region Status Effect
-
-    private void StatusEffect()
-    {
-        SetMousePosition();
-
-        if (HasMouseChanged())
-        {
-            HighlightTile(true, false);
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            foreach (Tile tile in highlightedTiles)
-            {
-                Character_World character_World = tile.World_Entity as Character_World;
-
-                if (character_World == null)
-                    continue;
-
-                character_World.ApplyStatusEffect(statusEffectValue, statusEffectDuration, statuseEffectType);
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            ClearHighlights();
-            ClearSelection();
-
-            inputState = InputState.None;
-            isLocked = false;
-        }
-    }
-
-    #endregion
 }
 
 public enum InputState
@@ -811,6 +871,10 @@ public enum InputState
     Movement = 4,
     Spawn = 5,
     Fog = 6,
-    StatusEffect = 7,
-    Impact = 8
+    Impact = 7,
+    Burn = 8,
+    Venom = 9,
+    Bleed = 10,
+    CleanseBurn = 11,
+    CleanseVenom = 12
 }
