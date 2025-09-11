@@ -21,7 +21,7 @@ MonoBehaviour:
   InitativeColor: {r: 0, g: 0, b: 0, a: 1}
   initiative: 13
   AdditionalInitiatives: 04000000
-  HealthPoints: 25
+  HealthPoints: 100
   Armor: 0
   Movement: 8
   Perception: 8

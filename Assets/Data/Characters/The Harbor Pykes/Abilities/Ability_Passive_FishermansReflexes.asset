@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee61d1f82d0e2224a93d4576de9fa4bb, type: 3}
-  m_Name: Ability_Active_HarpoonLauncher
+  m_Name: Ability_Passive_FishermansReflexes
   m_EditorClassIdentifier: 
-  Name: Harpoon Launcher
-  Description: 'Reloads between turns:
+  Name: 'Passive: Fishermans Reflexes'
+  Description: 'Instant Speed, 2 Charges
 
-    If interupted, limit the attack to Tier
-    2.'
-  HasOutcomes: 1
-  Outcome1: Miss.
-  Outcome2: 4 Damage.
-  Outcome3: '10 Damage.
 
-    Pierce 1 with no penalties.'
+    When an enemy within Range 8 is Displaced,
+    Cast Spear Throw at them.'
+  HasOutcomes: 0
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 

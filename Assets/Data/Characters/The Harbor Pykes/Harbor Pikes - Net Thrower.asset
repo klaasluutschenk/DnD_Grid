@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
   m_Name: Harbor Pikes - Net Thrower
   m_EditorClassIdentifier: 
+  Name: Net Thrower
+  Description: Mercenary of the Harbor Pikes
+  Sprite: {fileID: 0}
   IsPlayer: 0
   CustomInitiative: 0
   IsPlayerTeam: 0
-  Name: Net Thrower
-  Description: Mercenary of the Harbor Pikes
   InitativeColor: {r: 0, g: 0, b: 0, a: 1}
-  Sprite: {fileID: 0}
   initiative: 12
-  HealthPoints: 5
+  AdditionalInitiatives: 
+  HealthPoints: 12
   Armor: 0
   Movement: 6
   Perception: 8

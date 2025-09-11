@@ -10,20 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: Class - The Assassin
+  m_Name: Harbor Pikes - Spear Fisher
   m_EditorClassIdentifier: 
-  Name: The Assassin
-  Description: 
+  Name: Spear Fisher
+  Description: Mercenary of the Harbor Pikes
   Sprite: {fileID: 0}
-  IsPlayer: 1
-  CustomInitiative: 1
-  IsPlayerTeam: 1
-  InitativeColor: {r: 0.41509432, g: 0.33146483, b: 0.20950516, a: 1}
-  initiative: 0
+  IsPlayer: 0
+  CustomInitiative: 0
+  IsPlayerTeam: 0
+  InitativeColor: {r: 0, g: 0, b: 0, a: 1}
+  initiative: 18
   AdditionalInitiatives: 
-  HealthPoints: 6
+  HealthPoints: 15
   Armor: 0
-  Movement: 7
+  Movement: 10
   Perception: 0
   Dodge: 0
-  Abilities: []
+  Abilities:
+  - {fileID: 11400000, guid: 2c56a0b72d214664faefcfb0b207c277, type: 2}
+  - {fileID: 11400000, guid: 64d16f7101e98c04ab78666c33247336, type: 2}

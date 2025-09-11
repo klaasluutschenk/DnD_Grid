@@ -16,5 +16,5 @@ MonoBehaviour:
   Description: A heavy meat whacker wildly crashes down.
   HasOutcomes: 1
   Outcome1: Miss.
-  Outcome2: 2 Damage.
-  Outcome3: 4 Damage.
+  Outcome2: 4 Damage.
+  Outcome3: 8 Damage.

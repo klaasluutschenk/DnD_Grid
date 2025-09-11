@@ -10,20 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: Class - The Sniper
+  m_Name: Harbor Pikes - Fishmeat Hammerer
   m_EditorClassIdentifier: 
-  Name: The Sniper
-  Description: 
+  Name: Fishmeat Hammerer
+  Description: Mercenary of the Harbor Pikes
   Sprite: {fileID: 0}
-  IsPlayer: 1
-  CustomInitiative: 1
-  IsPlayerTeam: 1
-  InitativeColor: {r: 0.118265904, g: 0.3490566, b: 0.018111428, a: 1}
-  initiative: 0
+  IsPlayer: 0
+  CustomInitiative: 0
+  IsPlayerTeam: 0
+  InitativeColor: {r: 0, g: 0, b: 0, a: 1}
+  initiative: 5
   AdditionalInitiatives: 
-  HealthPoints: 6
+  HealthPoints: 20
   Armor: 0
   Movement: 6
   Perception: 0
   Dodge: 0
-  Abilities: []
+  Abilities:
+  - {fileID: 11400000, guid: d1eb4b39dd146184ca4bd7d0a6b1ba22, type: 2}
+  - {fileID: 11400000, guid: ac4f5895e8ec63042babaa6443785345, type: 2}

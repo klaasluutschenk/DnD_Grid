@@ -18,5 +18,7 @@ MonoBehaviour:
     Range 2'
   HasOutcomes: 1
   Outcome1: Miss.
-  Outcome2: 1 Damage.
-  Outcome3: 3 Damage.
+  Outcome2: 3 Damage.
+  Outcome3: '6 Damage.
+
+    Cast Net Throw on the target.'
