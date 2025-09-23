@@ -24,11 +24,17 @@ public class Character_World : World_Entity
 
     private Character character;
 
-    private int health;
+    public Stat Health = new Stat(StatType.Health, 0);
+    public Stat Armor = new Stat(StatType.Armor, 0);
+    public Stat Barrier = new Stat(StatType.Barrier, 0);
 
-    private int burnValue;
-    private int venomValue;
-    private int bleedValue;
+    public Stat Burning = new Stat(StatType.Burning, 0);
+    public Stat Poisoned = new Stat(StatType.Poisoned, 0);
+    public Stat Bleeding = new Stat(StatType.Bleeding, 0);
+
+    public Stat Slowed = new Stat(StatType.Slowed, 0);
+    public Stat Stunned = new Stat(StatType.Stunned, 0);
+    public Stat Blinded = new Stat(StatType.Blinded, 0);
 
     protected override void Awake()
     {
@@ -114,26 +120,26 @@ public class Character_World : World_Entity
 
     private void HandleBurn()
     {
-        if (burnValue <= 0)
+        if (!Burning.StatActive)
             return;
 
-        Damage(burnValue);
+        Damage(Burning.StatValue);
     }
 
     private void HandleVenom()
     {
-        if (venomValue <= 0)
+        if (!Poisoned.StatActive)
             return;
 
-        Damage(venomValue);
+        Damage(Poisoned.StatValue);
     }
 
     private void HandleBleed()
     {
-        if (bleedValue <= 0)
+        if (!Bleeding.StatActive)
             return;
 
-        Damage(bleedValue);
+        Damage(Bleeding.StatValue);
         ApplyBleed(false);
     }
 
@@ -147,20 +153,20 @@ public class Character_World : World_Entity
 
     public void Damage(int damage)
     {
-        SetHP(health - damage);
+        SetHP(Health.StatValue - damage);
     }
 
     public void Heal(int heal)
     {
         int trueHeal = heal;
 
-        if (bleedValue > 0)
+        if (Bleeding.StatValue > 0)
         {
-            if (heal >= bleedValue)
+            if (heal >= Bleeding.StatValue)
             {
-                trueHeal = heal - bleedValue;
+                trueHeal = heal - Bleeding.StatValue;
 
-                bleedValue = 0;
+                Bleeding.StatValue = 0;
 
                 ParticleSystem.EmissionModule emission = particleSystem_Bleed.emission;
                 emission.enabled = false;
@@ -168,11 +174,11 @@ public class Character_World : World_Entity
             else
             {
                 trueHeal = 0;
-                bleedValue = bleedValue - heal;
+                Bleeding.StatValue = Bleeding.StatValue - heal;
             }
         }
 
-        SetHP(health + trueHeal);
+        SetHP(Health.StatValue + trueHeal);
     }
 
     private void SetHP(int value)
@@ -183,23 +189,23 @@ public class Character_World : World_Entity
         if (value > character.HealthPoints)
             value = character.HealthPoints;
 
-        if (value == health)
+        if (value == Health.StatValue)
             return;
 
-        health = value;
+        Health.StatValue = value;
 
-        if (health == 0)
+        if (Health.StatValue == 0)
         {
             Kill();
             return;
         }
 
-        float healthPercentage = (float)health / (float)character.HealthPoints;
+        float healthPercentage = (float)Health.StatValue / (float)character.HealthPoints;
 
         image_HP.fillAmount = healthPercentage;
         SetHealthColor(healthPercentage);
 
-        text_CharacterHP.text = health.ToString();
+        text_CharacterHP.text = Health.StatValue.ToString();
     }
 
     private void SetHealthColor(float percentage)
@@ -219,31 +225,31 @@ public class Character_World : World_Entity
 
     public void ApplyBurn(bool apply = true)
     {
-        burnValue = apply ? burnValue + 1 : burnValue - 1;
+        Burning.StatValue = apply ? Burning.StatValue + 1 : Burning.StatValue - 1;
 
         ParticleSystem.EmissionModule emission = particleSystem_Burn.emission;
-        emission.enabled = burnValue > 0;
+        emission.enabled = Burning.StatActive;
     }
 
     public void ApplyVenom(bool apply = true)
     {
-        venomValue = apply ? venomValue + 1 : venomValue - 1;
+        Poisoned.StatValue = apply ? Poisoned.StatValue + 1 : Poisoned.StatValue - 1;
 
         ParticleSystem.EmissionModule emission = particleSystem_Venom.emission;
-        emission.enabled = venomValue > 0;
+        emission.enabled = Poisoned.StatActive;
     }
 
     public void ApplyBleed(bool apply = true)
     {
-        bleedValue = apply ? bleedValue + 1 : bleedValue - 1;
+        Bleeding.StatValue = apply ? Bleeding.StatValue + 1 : Bleeding.StatValue - 1;
 
         ParticleSystem.EmissionModule emission = particleSystem_Bleed.emission;
-        emission.enabled = bleedValue > 0;
+        emission.enabled = Bleeding.StatActive;
     }
 
     public void CleanseBurn()
     {
-        if (burnValue <= 0)
+        if (!Burning.StatActive)
             return;
 
         ApplyBurn(false);
@@ -251,9 +257,36 @@ public class Character_World : World_Entity
     
     public void CleanseVenom()
     {
-        if (venomValue <= 0)
+        if (!Poisoned.StatActive)
             return;
 
         ApplyVenom(false);
     }
+}
+
+public class Stat
+{
+    public StatType StatType;
+    public int StatValue;
+
+    public bool StatActive => StatValue > 0;
+
+    public Stat (StatType statType, int statValue)
+    {
+        StatType = statType;
+        StatValue = statValue;
+    }
+}
+
+public enum StatType
+{
+    Health = 0,
+    Armor = 1,
+    Barrier = 2,
+    Burning = 3,
+    Poisoned = 4,
+    Bleeding = 5,
+    Slowed = 6,
+    Stunned = 7,
+    Blinded = 8
 }
