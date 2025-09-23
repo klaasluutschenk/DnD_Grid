@@ -11,6 +11,8 @@ public class Character_World : World_Entity
 
     [SerializeField] private GameObject gameObject_InitiativeSelection;
     [SerializeField] private Image image_HP;
+    [SerializeField] private Image image_Armor;
+    [SerializeField] private Image image_Barrier;
     [SerializeField] private Image image_Initiative;
     [SerializeField] private TextMeshProUGUI text_CharacterHP;
 
@@ -18,23 +20,19 @@ public class Character_World : World_Entity
     [SerializeField] private Color color_Wounded = default;
     [SerializeField] private Color color_Dying = default;
 
-    [SerializeField] private ParticleSystem particleSystem_Burn = default;
-    [SerializeField] private ParticleSystem particleSystem_Venom = default;
-    [SerializeField] private ParticleSystem particleSystem_Bleed = default;
-
     private Character character;
 
-    public Stat Health = new Stat(StatType.Health, 0);
-    public Stat Armor = new Stat(StatType.Armor, 0);
-    public Stat Barrier = new Stat(StatType.Barrier, 0);
+    public Stat Health;
+    public Stat Armor;
+    public Stat Barrier;
 
-    public Stat Burning = new Stat(StatType.Burning, 0);
-    public Stat Poisoned = new Stat(StatType.Poisoned, 0);
-    public Stat Bleeding = new Stat(StatType.Bleeding, 0);
+    public Stat Burning;
+    public Stat Poisoned;
+    public Stat Bleeding;
 
-    public Stat Slowed = new Stat(StatType.Slowed, 0);
-    public Stat Stunned = new Stat(StatType.Stunned, 0);
-    public Stat Blinded = new Stat(StatType.Blinded, 0);
+    public Stat Slowed;
+    public Stat Stunned;
+    public Stat Blinded;
 
     protected override void Awake()
     {
@@ -86,6 +84,18 @@ public class Character_World : World_Entity
         base.Setup(entity);
     }
 
+    private void SetupStats()
+    {
+        Armor.SetValue(0);
+        Barrier.SetValue(0);
+        Burning.SetValue(0);
+        Poisoned.SetValue(0);
+        Bleeding.SetValue(0);
+        Slowed.SetValue(0);
+        Stunned.SetValue(0);
+        Blinded.SetValue(0);
+    }
+
     private void SetupCharacter(Character character)
     {
         if (character == null)
@@ -97,7 +107,11 @@ public class Character_World : World_Entity
 
         SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.Name));
 
+        SetupStats();
+
         SetHP(character.HealthPoints);
+        SetArmor(character.Armor);
+        SetBarrier(character.Barier);
         text_CharacterHP.enabled = character.IsPlayer;
     }
 
@@ -151,14 +165,36 @@ public class Character_World : World_Entity
         image_Initiative.color = character_Initative.InitativeColor;
     }
 
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
+        if (Barrier.StatActive)
+        {
+            float barrierDamage = damage;
+            damage -= Barrier.StatValue;
+
+            SetBarrier(Barrier.StatValue - barrierDamage);
+
+            if (damage <= 0)
+                return;
+        }
+
+        if (Armor.StatActive)
+        {
+            float armorDamage = damage;
+            damage -= Armor.StatValue;
+
+            SetArmor(Armor.StatValue - armorDamage);
+
+            if (damage <= 0)
+                return;
+        }
+
         SetHP(Health.StatValue - damage);
     }
 
-    public void Heal(int heal)
+    public void Heal(float heal)
     {
-        int trueHeal = heal;
+        float trueHeal = heal;
 
         if (Bleeding.StatValue > 0)
         {
@@ -166,22 +202,31 @@ public class Character_World : World_Entity
             {
                 trueHeal = heal - Bleeding.StatValue;
 
-                Bleeding.StatValue = 0;
-
-                ParticleSystem.EmissionModule emission = particleSystem_Bleed.emission;
-                emission.enabled = false;
+                Bleeding.SetValue(0);
             }
             else
             {
                 trueHeal = 0;
-                Bleeding.StatValue = Bleeding.StatValue - heal;
+                Bleeding.SetValue(Bleeding.StatValue - heal);
             }
         }
 
         SetHP(Health.StatValue + trueHeal);
     }
 
-    private void SetHP(int value)
+    private void SetBarrier(float value)
+    {
+        Barrier.SetValue(value);
+        SetBars();
+    }
+
+    private void SetArmor(float value)
+    {
+        Armor.SetValue(value);
+        SetBars();
+    }
+
+    private void SetHP(float value)
     {
         if (value < 0)
             value = 0;
@@ -192,7 +237,7 @@ public class Character_World : World_Entity
         if (value == Health.StatValue)
             return;
 
-        Health.StatValue = value;
+        Health.SetValue(value);
 
         if (Health.StatValue == 0)
         {
@@ -202,10 +247,82 @@ public class Character_World : World_Entity
 
         float healthPercentage = (float)Health.StatValue / (float)character.HealthPoints;
 
-        image_HP.fillAmount = healthPercentage;
+        SetBars();
         SetHealthColor(healthPercentage);
 
         text_CharacterHP.text = Health.StatValue.ToString();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Armor.SetValue(Armor.StatValue + 5);
+            SetBars();
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Armor.SetValue(Armor.StatValue - 5);
+            SetBars();
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            Barrier.SetValue(Barrier.StatValue + 5);
+            SetBars();
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            Barrier.SetValue(Barrier.StatValue - 5);
+            SetBars();
+        }
+    }
+
+    private void SetBars()
+    {
+        float total = Health.StatValue + Armor.StatValue + Barrier.StatValue;
+
+        // Max Health
+        if (Health.StatValue == character.HealthPoints)
+        {
+            image_HP.fillAmount = Health.StatValue / total;
+            image_Armor.fillAmount = (Health.StatValue + Armor.StatValue) / total;
+            image_Barrier.fillAmount = 1;
+        }
+        else
+        {
+            // Total is under max health
+            if (total < character.HealthPoints)
+            {
+                image_HP.fillAmount = Health.StatValue / character.HealthPoints;
+                image_Armor.fillAmount = (Health.StatValue + Armor.StatValue) / character.HealthPoints;
+                image_Barrier.fillAmount = (Health.StatValue + Armor.StatValue + Barrier.StatValue) / character.HealthPoints;
+            }
+            // Total is above max health, but hp is not at max
+            else
+            {
+                // Only Armor is Active
+                if (Armor.StatActive && !Barrier.StatActive)
+                {
+                    image_HP.fillAmount = Health.StatValue / total;
+                    image_Armor.fillAmount = 1;
+                    image_Barrier.fillAmount = 0;
+                }
+                // Only Barrier is Active
+                else if (!Armor.StatActive && Barrier.StatActive)
+                {
+                    image_HP.fillAmount = Health.StatValue / total;
+                    image_Armor.fillAmount = 0;
+                    image_Barrier.fillAmount = 1;
+                }
+                else
+                {
+                    image_HP.fillAmount = Health.StatValue / total;
+                    image_Armor.fillAmount = (Health.StatValue + Armor.StatValue) / total;
+                    image_Barrier.fillAmount = 1;
+                }
+            }
+        }
     }
 
     private void SetHealthColor(float percentage)
@@ -225,26 +342,17 @@ public class Character_World : World_Entity
 
     public void ApplyBurn(bool apply = true)
     {
-        Burning.StatValue = apply ? Burning.StatValue + 1 : Burning.StatValue - 1;
-
-        ParticleSystem.EmissionModule emission = particleSystem_Burn.emission;
-        emission.enabled = Burning.StatActive;
+        Burning.SetValue(apply ? Burning.StatValue + 1 : Burning.StatValue - 1);
     }
 
     public void ApplyVenom(bool apply = true)
     {
-        Poisoned.StatValue = apply ? Poisoned.StatValue + 1 : Poisoned.StatValue - 1;
-
-        ParticleSystem.EmissionModule emission = particleSystem_Venom.emission;
-        emission.enabled = Poisoned.StatActive;
+        Poisoned.SetValue(apply ? Poisoned.StatValue + 1 : Poisoned.StatValue - 1);
     }
 
     public void ApplyBleed(bool apply = true)
     {
-        Bleeding.StatValue = apply ? Bleeding.StatValue + 1 : Bleeding.StatValue - 1;
-
-        ParticleSystem.EmissionModule emission = particleSystem_Bleed.emission;
-        emission.enabled = Bleeding.StatActive;
+        Bleeding.SetValue(apply ? Bleeding.StatValue + 1 : Bleeding.StatValue - 1);
     }
 
     public void CleanseBurn()
@@ -264,29 +372,25 @@ public class Character_World : World_Entity
     }
 }
 
+[Serializable]
 public class Stat
 {
-    public StatType StatType;
-    public int StatValue;
+    public float StatValue => statValue;
+
+    private float statValue;
+
+    public GameObject Icon;
+
+    public void SetValue(float value)
+    {
+        if (value < 0)
+            value = 0;
+
+        statValue = value;
+
+        if (Icon != null)
+            Icon.SetActive(StatActive);
+    }
 
     public bool StatActive => StatValue > 0;
-
-    public Stat (StatType statType, int statValue)
-    {
-        StatType = statType;
-        StatValue = statValue;
-    }
-}
-
-public enum StatType
-{
-    Health = 0,
-    Armor = 1,
-    Barrier = 2,
-    Burning = 3,
-    Poisoned = 4,
-    Bleeding = 5,
-    Slowed = 6,
-    Stunned = 7,
-    Blinded = 8
 }

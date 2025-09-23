@@ -274,30 +274,6 @@ public class Manager_Input : MonoBehaviour
             default:
                 break;
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            selectionRadius = 1;
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            selectionRadius = 2;
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            selectionRadius = 3;
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            selectionRadius = 4;
-
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-            selectionRadius = 5;
-
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-            selectionRadius = 6;
-
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-            selectionRadius = 7;
-
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-            selectionRadius = 8;
     }
 
     #region Mouse

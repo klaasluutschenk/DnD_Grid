@@ -17,6 +17,7 @@ public class Character : Entity
 
     public int HealthPoints;
     public int Armor;
+    public int Barier;
     public int Movement;
     public int Perception;
     public int Dodge;
