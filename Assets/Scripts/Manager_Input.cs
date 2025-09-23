@@ -42,6 +42,7 @@ public class Manager_Input : MonoBehaviour
     [SerializeField] private Camera playerCamera;
 
     private InputState inputState = InputState.None;
+    private InputState storedInputState = InputState.None;
     private bool isLocked = false;
 
     private int selectionRadius = 1;
@@ -231,6 +232,19 @@ public class Manager_Input : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            storedInputState = inputState;
+            inputState = InputState.Tooltip;
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            inputState = storedInputState;
+            storedInputState = InputState.None;
+
+            Manager_Tooltip.Instance.ClearTooltip();
+        }
+
         switch (inputState)
         {
             case InputState.None:
@@ -270,6 +284,9 @@ public class Manager_Input : MonoBehaviour
                 break;
             case InputState.CleanseVenom:
                 ApplyEffect(InputState.CleanseVenom);
+                break;
+            case InputState.Tooltip:
+                Tooltip();
                 break;
             default:
                 break;
@@ -836,6 +853,30 @@ public class Manager_Input : MonoBehaviour
     }
 
     #endregion
+
+    #region Tooltip
+
+    private void Tooltip()
+    {
+        SetMousePosition();
+
+        if (HasMouseChanged())
+        {
+            HighlightTile(true, false);
+        }
+
+        if (highlightedTiles.Count == 0)
+        {
+            Manager_Tooltip.Instance.ClearTooltip();
+            return;
+        }
+
+        Tile highlightedTile = highlightedTiles[0];
+
+        Manager_Tooltip.Instance.SetToolTip(highlightedTile);
+    }
+
+    #endregion
 }
 
 public enum InputState
@@ -852,5 +893,6 @@ public enum InputState
     Venom = 9,
     Bleed = 10,
     CleanseBurn = 11,
-    CleanseVenom = 12
+    CleanseVenom = 12,
+    Tooltip = 13
 }

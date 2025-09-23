@@ -41,17 +41,62 @@ public class Manager_Tooltip : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        Tile.OnTooltipCalled += OnTooltipCalled;
-    }
-
-    private void OnTooltipCalled(Tile tile)
-    {
-        Debug.Log($"Tile: {tile.gameObject.name}, Character: {tile.World_Entity.Entity.Name}.");
+        ClearTooltip();
     }
 
     public void SetToolTip(Tile tile)
     {
+        tooltipContainer.SetActive(true);
 
+        tooltipContainer.transform.position = Input.mousePosition;
+
+        Character_World character = null;
+
+        if (tile.World_Entity != null)
+        {
+            if (tile.World_Entity is Character_World)
+                character = tile.World_Entity as Character_World;
+        }
+
+        if (character == null)
+        {
+            character_Container.SetActive(false);
+            return;
+        }
+
+        character_Container.SetActive(true);
+
+        character_Name.text = character.Character.Name;
+
+        character_Health_Value.text = character.Health.StatValue.ToString();
+
+        character_Armor.SetActive(character.Armor.StatActive);
+        character_Armor_Value.text = character.Armor.StatValue.ToString();
+
+        character_Barrier.SetActive(character.Barrier.StatActive);
+        character_Barrier_Value.text = character.Barrier.StatValue.ToString();
+
+        character_Burning.SetActive(character.Burning.StatActive);
+        character_Burning_Value.text = character.Burning.StatValue.ToString();
+
+        character_Poisoned.SetActive(character.Poisoned.StatActive);
+        character_Poisoned_Value.text = character.Poisoned.StatValue.ToString();
+
+        character_Bleeding.SetActive(character.Bleeding.StatActive);
+        character_Bleeding_Value.text = character.Bleeding.StatValue.ToString();
+
+        character_Slowed.SetActive(character.Slowed.StatActive);
+        character_Slowed_Value.text = character.Slowed.StatValue.ToString();
+
+        character_Stunned.SetActive(character.Stunned.StatActive);
+        character_Stunned_Value.text = character.Stunned.StatValue.ToString();
+
+        character_Blinded.SetActive(character.Blinded.StatActive);
+        character_Blinded_Value.text = character.Blinded.StatValue.ToString();
+    }
+
+    public void ClearTooltip()
+    {
+        tooltipContainer.SetActive(false);
     }
 }

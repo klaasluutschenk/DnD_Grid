@@ -3,8 +3,6 @@ using System;
 
 public class Tile : MonoBehaviour
 {
-    public static Action<Tile> OnTooltipCalled;
-
     public World_Entity World_Entity => worldEntity;
     public bool IsSelected => isSelected;
     public bool IsHiglighted => isHighlighted;
@@ -34,24 +32,6 @@ public class Tile : MonoBehaviour
     private int roomIndex;
 
     private Vector2 gridPosition;
-
-    private float tooltip;
-
-    private void OnMouseOver()
-    {
-        tooltip += Time.deltaTime;
-
-        if (tooltip >= Manager_Tooltip.TooltipTimer)
-        {
-            OnTooltipCalled?.Invoke(this);
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        tooltip = 0;
-        Debug.Log("exit");
-    }
 
     public void Setup(Vector2 gridPosition)
     {
