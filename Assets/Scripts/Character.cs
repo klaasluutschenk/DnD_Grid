@@ -6,6 +6,7 @@ public class Character : Entity
 {
     public bool IsPlayer;
     public bool CustomInitiative;
+    public bool IsMinion;
 
     public bool IsPlayerTeam;
 

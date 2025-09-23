@@ -7,6 +7,7 @@ public class Manager_Characters : MonoBehaviour
     public static Manager_Characters Instance;
 
     [SerializeField] private Character_World character_World_Prefab = default;
+    [SerializeField] private Character_World character_World_Minion_Prefab = default;
     [SerializeField] private Transform characterContainer = default;
 
     private List<Character> activeCharacters = new List<Character>();
@@ -42,7 +43,12 @@ public class Manager_Characters : MonoBehaviour
 
     public void SpawnCharacter(Character character, Vector3 position)
     {
-        Character_World newWorldCharacter = Instantiate(character_World_Prefab, characterContainer);
+        Character_World newWorldCharacter = null;
+
+        if (character.IsMinion)
+            newWorldCharacter = Instantiate(character_World_Minion_Prefab, characterContainer);
+        else
+            newWorldCharacter = Instantiate(character_World_Prefab, characterContainer);
 
         newWorldCharacter.gameObject.name = character.Name;
 

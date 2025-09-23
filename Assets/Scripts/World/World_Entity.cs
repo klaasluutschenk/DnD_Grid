@@ -37,7 +37,8 @@ public class World_Entity : MonoBehaviour
     {
         this.entity = entity;
 
-        image_Sprite.enabled = entity.Sprite;
+        image_Sprite.enabled = entity.Sprite != null;
+        image_Sprite.sprite = entity.Sprite;
 
         tile = Manager_Grid.Instance.GetTileByWorldPosition(transform.position);
         tile.SetWorldEntity(this);

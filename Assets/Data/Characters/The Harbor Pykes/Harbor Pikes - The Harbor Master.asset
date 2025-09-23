@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: The Harbor Master
   Description: Mercenary of the Harbor Pikes
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 21869fcc5482e8b42983a7d0aff5fe83, type: 3}
   IsPlayer: 0
   CustomInitiative: 0
+  IsMinion: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 1}
   initiative: 13
