@@ -22,7 +22,7 @@ MonoBehaviour:
   InitativeColor: {r: 0.043137256, g: 0.4841241, b: 0.8509804, a: 1}
   initiative: 0
   AdditionalInitiatives: 
-  HealthPoints: 24
+  HealthPoints: 30
   Armor: 4
   Barier: 0
   Movement: 9
