@@ -345,11 +345,13 @@ public class Character_World : World_Entity
     public void ApplyArmor(bool apply = true)
     {
         Armor.SetValue(apply ? Armor.StatValue + 1 : Armor.StatValue - 1);
+        SetBars();
     }
 
     public void ApplyBarrier(bool apply = true)
     {
         Barrier.SetValue(apply ? Barrier.StatValue + 1 : Barrier.StatValue - 1);
+        SetBars();
     }
 
     public void ApplyBleed(bool apply = true)
