@@ -8,31 +8,65 @@ public class InitativeContainer : MonoBehaviour
     [SerializeField] private Transform container = default;
 
     private List<Initiative_UI> activeUIs = new List<Initiative_UI>();
-    private List<Character_Initative> activeCharacters = new List<Character_Initative>();
+    private List<Character_Initiative> activeCharacters = new List<Character_Initiative>();
 
     private void Awake()
     {
         Manager_Initative.OnInitiativeUpdated += OnInitiativeUpdated;
+        Manager_Initative.OnCharacterTurnStart += OnCharacterTurnStart;
+        Manager_Initative.OnCharacterTurnEnd += OnCharacterTurnEnd;
+
         //Manager_Initative.OnInitiativeOrderUpdated += OnInitiativeOrderUpdated;
         //Manager_Initative.OnInitiativeSelectionUpdated += OnInitiativeSelectionUpdated;
     }
 
-    private void OnInitiativeUpdated(List<Character_Initative> initiativeOrder)
+    private void OnInitiativeUpdated(List<Character_Initiative> initiativeOrder)
     {
         Setup(initiativeOrder);
         OrderUI();
     }
 
-    private void OnInitiativeSelectionUpdated(Character_Initative character_Initative)
+    private void OnCharacterTurnStart(Character_Initiative character_Initative)
+    {
+        Initiative_UI ui = GetUIByCharacter(character_Initative);
+
+        if (ui == null)
+            return;
+
+        ui.SetInitative(true);
+    }
+
+    private void OnCharacterTurnEnd(Character_Initiative character_Initative)
+    {
+        Initiative_UI ui = GetUIByCharacter(character_Initative);
+
+        if (ui == null)
+            return;
+
+        ui.SetInitative(false);
+    }
+
+    private Initiative_UI GetUIByCharacter(Character_Initiative character_Initativer)
+    {
+        foreach (Initiative_UI ui in activeUIs)
+        {
+            if (ui.Character == character_Initativer)
+                return ui;
+        }
+
+        return null;
+    }
+
+    private void OnInitiativeSelectionUpdated(Character_Initiative character_Initative)
     {
         activeUIs.ForEach(a => a.SetInitative(a.Character == character_Initative));
     }
 
-    private void Setup(List<Character_Initative> initiativeOrder)
+    private void Setup(List<Character_Initiative> initiativeOrder)
     {
-        List<Character_Initative> charactersToAdd = new List<Character_Initative>();
+        List<Character_Initiative> charactersToAdd = new List<Character_Initiative>();
         
-        foreach (Character_Initative character_Initative in initiativeOrder)
+        foreach (Character_Initiative character_Initative in initiativeOrder)
         {
             if (!activeCharacters.Contains(character_Initative))
             {
@@ -40,9 +74,9 @@ public class InitativeContainer : MonoBehaviour
             }
         }
 
-        List<Character_Initative> charactersToRemove = new List<Character_Initative>();
+        List<Character_Initiative> charactersToRemove = new List<Character_Initiative>();
 
-        foreach (Character_Initative characterToRemove in activeCharacters)
+        foreach (Character_Initiative characterToRemove in activeCharacters)
         {
             if (!initiativeOrder.Contains(characterToRemove))
             {
@@ -50,18 +84,18 @@ public class InitativeContainer : MonoBehaviour
             }
         }
 
-        foreach (Character_Initative character in charactersToAdd)
+        foreach (Character_Initiative character in charactersToAdd)
         {
             SpawnInitativeUI(character);
         }
 
-        foreach (Character_Initative character in charactersToRemove)
+        foreach (Character_Initiative character in charactersToRemove)
         {
             DestroyInitiativeUI(character);
         }
     }
 
-    private void SpawnInitativeUI(Character_Initative character_Initative)
+    private void SpawnInitativeUI(Character_Initiative character_Initative)
     {
         Initiative_UI newUI = Instantiate(Initiative_UI_Prefab, container);
 
@@ -71,7 +105,7 @@ public class InitativeContainer : MonoBehaviour
         activeCharacters.Add(character_Initative);
     }
 
-    private void DestroyInitiativeUI(Character_Initative character_Initative)
+    private void DestroyInitiativeUI(Character_Initiative character_Initative)
     {
         Initiative_UI targetUI = null;
 

@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Initiative_UI : MonoBehaviour
 {
-    public Character_Initative Character => character;
+    public Character_Initiative Character => character;
 
     [SerializeField] private bool useCurve = default;
     [SerializeField] private GameObject gameobject_Initative = default;
@@ -18,11 +19,12 @@ public class Initiative_UI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI text_CharacterName;
     [SerializeField] private TextMeshProUGUI text_Initative;
+    [SerializeField] private TextMeshProUGUI text_UnitCount;
 
-    private Character_Initative character;
+    private Character_Initiative character;
     private bool hasInitative = false;
 
-    public void Setup(Character_Initative character_Initative)
+    public void Setup(Character_Initiative character_Initative)
     {
         character = character_Initative;
 
@@ -33,6 +35,22 @@ public class Initiative_UI : MonoBehaviour
 
         if (text_Initative != null)
             text_Initative.text = character_Initative.Initiative.ToString();
+
+        if (text_UnitCount != null)
+            text_UnitCount.text = character_Initative.unitCount.ToString();
+
+        Manager_Initative.OnInitiativeUpdated += OnInitiativeUpdated;
+    }
+
+    private void OnDestroy()
+    {
+        Manager_Initative.OnInitiativeUpdated -= OnInitiativeUpdated;
+    }
+
+    private void OnInitiativeUpdated(List<Character_Initiative> activeCharacters)
+    {
+        if (text_UnitCount != null)
+            text_UnitCount.text = character.unitCount.ToString();
     }
 
     public void SetInitative(bool isActive)

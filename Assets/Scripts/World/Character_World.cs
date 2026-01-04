@@ -45,12 +45,16 @@ public class Character_World : World_Entity
 
         Manager_Initative.OnInitiativeUpdated += OnInitiativeUpdated;
 
-        Manager_Initative.OnInitiativeSelectionUpdated += OnInitiativeSelectionUpdated;
+        Manager_Initative.OnCharacterTurnStart += OnTurnStarted;
+        Manager_Initative.OnCharacterTurnEnd += OnTurnEnd;
     }
 
     protected override void OnDestroy()
     {
-        Manager_Initative.OnInitiativeSelectionUpdated -= OnInitiativeSelectionUpdated;
+        Manager_Initative.OnInitiativeUpdated -= OnInitiativeUpdated;
+
+        Manager_Initative.OnCharacterTurnStart -= OnTurnStarted;
+        Manager_Initative.OnCharacterTurnEnd -= OnTurnEnd;
 
         base.OnDestroy();
     }
@@ -65,9 +69,14 @@ public class Character_World : World_Entity
         Manager_Initative.Instance.AddToInitiative(character);
     }
 
-    private void OnInitiativeUpdated(List<Character_Initative> initiativeOrder)
+    public void SetInitiative(bool active)
     {
-        Character_Initative myCharacter = initiativeOrder.Where(c => c.Character.Name == character.Name).FirstOrDefault();
+        gameObject_InitiativeSelection.SetActive(active);
+    }
+
+    private void OnInitiativeUpdated(List<Character_Initiative> initiativeOrder)
+    {
+        Character_Initiative myCharacter = initiativeOrder.Where(c => c.Character.Name == character.Name).FirstOrDefault();
 
         if (myCharacter == null)
             return;
@@ -75,9 +84,24 @@ public class Character_World : World_Entity
         SetInitativeColor(myCharacter);
     }
 
-    private void OnInitiativeSelectionUpdated(Character_Initative character_Initative)
+    private void OnTurnStarted(Character_Initiative character_Initiative)
     {
-        SetInitativeSelection(character_Initative.Character.Name == character.Name);
+        if (character == character_Initiative.Character)
+        {
+            SetInitiative(true);
+        }
+
+        StartTurn();
+    }
+
+    private void OnTurnEnd(Character_Initiative character_Initiative)
+    {
+        if (character == character_Initiative.Character)
+        {
+            SetInitiative(false);
+        }
+
+        EndTurn();
     }
 
     public override void Setup(Entity entity)
@@ -112,8 +136,6 @@ public class Character_World : World_Entity
 
         this.character = character;
 
-        SetInitativeSelection(false);
-
         SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.Name));
 
         SetupStats();
@@ -124,21 +146,20 @@ public class Character_World : World_Entity
         text_CharacterHP.enabled = character.IsPlayer;
     }
 
-    private void SetInitativeSelection(bool isActive)
-    {
-        gameObject_InitiativeSelection.SetActive(isActive);
-
-        if (isActive)
-        {
-            StartTurn();
-        }
-    }
-
     private void StartTurn()
     {
         HandleBurn();
         HandleVenom();
         HandleBleed();
+    }
+
+    private void EndTurn()
+    {
+        CleanseBlinded();
+        CleanseRoot();
+        CleanseSlowed();
+        CleanseStunned();
+        CleanseReload();
     }
 
     private void HandleBurn()
@@ -166,7 +187,7 @@ public class Character_World : World_Entity
         ApplyBleed(false);
     }
 
-    private void SetInitativeColor(Character_Initative character_Initative)
+    private void SetInitativeColor(Character_Initiative character_Initative)
     {
         if (character_Initative == null)
             return;
@@ -250,6 +271,7 @@ public class Character_World : World_Entity
             if (Health.StatValue > 0)
             {
                 SetLifeStatus(true);
+                Manager_Initative.Instance.AddToInitiative(character);
             }
         }
 
@@ -328,10 +350,10 @@ public class Character_World : World_Entity
         if (isAlive)
         {
             SetLifeStatus(false);
+            Manager_Initative.Instance.RemoveCharacter(character);
             return;
         }
 
-        Manager_Initative.Instance.RemoveCharacter(character);
         Remove();
     }
 

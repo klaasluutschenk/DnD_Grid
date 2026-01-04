@@ -6,14 +6,16 @@ using System.Collections.Generic;
 
 public class Manager_Initative : MonoBehaviour
 {
-    public static Action<List<Character_Initative>> OnInitiativeUpdated;
-    public static Action<Character> OnCharacterTurnStart;
-    public static Action<Character> OnCharacterTurnEnd;
+    public static Action<List<Character_Initiative>> OnInitiativeUpdated;
+    public static Action<Character_Initiative> OnCharacterTurnStart;
+    public static Action<Character_Initiative> OnCharacterTurnEnd;
+
+    public static Action<List<Character>> OnCustomInitiativeRequest;
 
     public static Manager_Initative Instance;
 
-    private List<Character_Initative> activeCharacters = new List<Character_Initative>();
-    private List<Inactive_Character_Initative> inactiveCharacters = new List<Inactive_Character_Initative>();
+    private List<Character_Initiative> activeCharacters = new List<Character_Initiative>();
+    private List<Inactive_Character_Initiative> inactiveCharacters = new List<Inactive_Character_Initiative>();
     private List<Character> customInitiativesToSetup = new List<Character>();
 
 
@@ -23,7 +25,6 @@ public class Manager_Initative : MonoBehaviour
 
         Manager_Combat.OnCombatEncounterEnded += OnCombatEncounterEnded;
         Manager_Combat.OnCombatEncounterLoaded += OnCombatEncounterLoaded;
-        Manager_Combat.OnCombatEncounterStarted += OnCombatEncounterStarted;
 
         CustomInitiativeUI.OnCharacterSet += OnCharacterSet;
     }
@@ -32,6 +33,9 @@ public class Manager_Initative : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
             NextCharacter();
+
+        if (Input.GetKeyDown(KeyCode.Return))
+            StartEncounter();
     }
 
     private void OnCombatEncounterEnded()
@@ -39,7 +43,7 @@ public class Manager_Initative : MonoBehaviour
         characters.Clear();
     }
 
-    public void AddToInitiative(Character character)
+    public void AddToInitiative(Character character, int customInitative = -1)
     {
         if (IsCharacterInPlay(character))
         {
@@ -53,26 +57,25 @@ public class Manager_Initative : MonoBehaviour
             return;
         }
 
-        AddNewCharacter(character);
+        AddNewCharacter(character, customInitative);
     }
 
-    private void AddNewCharacter(Character character)
+    private void AddNewCharacter(Character character, int customInitative = -1)
     {
-        if (character.CustomInitiative)
+        if (character.CustomInitiative && customInitative == -1)
         {
             customInitiativesToSetup.Add(character);
-            CheckCustomInitiative();
-
+            OnCustomInitiativeRequest?.Invoke(customInitiativesToSetup);
             return;
         }
 
         Color asignedColor = GetRandomAvailableColor();
         LockColor(asignedColor);
 
-        Character_Initative newCharacter =
-                new Character_Initative(
+        Character_Initiative newCharacter =
+                new Character_Initiative(
                     character,
-                    character.initiative,
+                    customInitative == -1 ? character.initiative : customInitative,
                     asignedColor);
 
         newCharacter.unitCount = 1;
@@ -82,7 +85,7 @@ public class Manager_Initative : MonoBehaviour
         {
             foreach (int initiative in character.AdditionalInitiatives)
             {
-                Character_Initative clone = new Character_Initative(
+                Character_Initiative clone = new Character_Initiative(
                     newCharacter.Character,
                     initiative,
                     asignedColor);
@@ -98,14 +101,14 @@ public class Manager_Initative : MonoBehaviour
 
     private void ReaddCharacter(Character character)
     {
-        Inactive_Character_Initative characterToReadd = GetInactiveCharacter(character);
+        Inactive_Character_Initiative characterToReadd = GetInactiveCharacter(character);
 
         inactiveCharacters.Remove(characterToReadd);
 
-        Character_Initative newCharacter =
-                new Character_Initative(
+        Character_Initiative newCharacter =
+                new Character_Initiative(
                     character,
-                    character.initiative,
+                    characterToReadd.Initiative,
                     characterToReadd.InitativeColor);
 
         newCharacter.unitCount = 1;
@@ -115,7 +118,7 @@ public class Manager_Initative : MonoBehaviour
         {
             foreach (int initiative in character.AdditionalInitiatives)
             {
-                Character_Initative clone = new Character_Initative(
+                Character_Initiative clone = new Character_Initiative(
                     newCharacter.Character,
                     initiative,
                     characterToReadd.InitativeColor);
@@ -131,7 +134,7 @@ public class Manager_Initative : MonoBehaviour
 
     private void IncreaseCharacter(Character character)
     {
-        List<Character_Initative> characterAndClones = GetCharactersInInitiative(character);
+        List<Character_Initiative> characterAndClones = GetCharactersInInitiative(character);
 
         characterAndClones.ForEach(chs => chs.unitCount += 1);
 
@@ -140,11 +143,11 @@ public class Manager_Initative : MonoBehaviour
 
     public void RemoveCharacter(Character character)
     {
-        List<Character_Initative> characterAndClones = GetCharactersInInitiative(character);
+        List<Character_Initiative> characterAndClones = GetCharactersInInitiative(character);
 
         bool hasBeenAddedToInactiveList = false;
 
-        foreach (Character_Initative character_Initative in characterAndClones)
+        foreach (Character_Initiative character_Initative in characterAndClones)
         {
             character_Initative.unitCount -= 1;
 
@@ -153,7 +156,7 @@ public class Manager_Initative : MonoBehaviour
                 if (!hasBeenAddedToInactiveList)
                 {
                     hasBeenAddedToInactiveList = true;
-                    inactiveCharacters.Add(new Inactive_Character_Initative(character_Initative.Character, character_Initative.InitativeColor));
+                    inactiveCharacters.Add(new Inactive_Character_Initiative(character_Initative.Character, character_Initative.InitativeColor, character_Initative.Initiative));
                 }
 
                 activeCharacters.Remove(character_Initative);
@@ -166,15 +169,15 @@ public class Manager_Initative : MonoBehaviour
 
     private void UpdateInitiativeOrder()
     {
-        characters = characters.OrderByDescending(c => c.Initiative).ToList();
+        activeCharacters = activeCharacters.OrderByDescending(c => c.Initiative).ToList();
 
         OnInitiativeOrderUpdated?.Invoke(activeCharacters);
     }
 
     // Single Character
-    public Character_Initative GetCharacterInInitative(Character character)
+    public Character_Initiative GetCharacterInInitative(Character character)
     {
-        foreach (Character_Initative character_Initative in activeCharacters)
+        foreach (Character_Initiative character_Initative in activeCharacters)
         {
             if (character_Initative.Character.Name == character.Name)
                 return character_Initative;
@@ -184,11 +187,11 @@ public class Manager_Initative : MonoBehaviour
     }
 
     // Character and their clones
-    public List<Character_Initative> GetCharactersInInitiative(Character character)
+    public List<Character_Initiative> GetCharactersInInitiative(Character character)
     {
-        List<Character_Initative> characterAndClones = new List<Character_Initative>();
+        List<Character_Initiative> characterAndClones = new List<Character_Initiative>();
 
-        foreach (Character_Initative character_Initative in activeCharacters)
+        foreach (Character_Initiative character_Initative in activeCharacters)
         {
             if (character_Initative.Character.Name == character.Name)
                 characterAndClones.Add(character_Initative);
@@ -199,7 +202,7 @@ public class Manager_Initative : MonoBehaviour
 
     public bool IsCharacterInPlay(Character character)
     {
-        foreach (Character_Initative character_Initative in activeCharacters)
+        foreach (Character_Initiative character_Initative in activeCharacters)
         {
             if (character_Initative.Character.Name == character.Name)
                 return true;
@@ -210,7 +213,7 @@ public class Manager_Initative : MonoBehaviour
 
     public bool IsCharacterInactive(Character character)
     {
-        foreach (Inactive_Character_Initative character_Initative in inactiveCharacters)
+        foreach (Inactive_Character_Initiative character_Initative in inactiveCharacters)
         {
             if (character_Initative.Character.Name == character.Name)
                 return true;
@@ -219,9 +222,9 @@ public class Manager_Initative : MonoBehaviour
         return false;
     }
 
-    public Inactive_Character_Initative GetInactiveCharacter(Character character)
+    public Inactive_Character_Initiative GetInactiveCharacter(Character character)
     {
-        foreach (Inactive_Character_Initative character_Initative in inactiveCharacters)
+        foreach (Inactive_Character_Initiative character_Initative in inactiveCharacters)
         {
             if (character_Initative.Character.Name == character.Name)
                 return character_Initative;
@@ -256,37 +259,64 @@ public class Manager_Initative : MonoBehaviour
 
     #endregion
 
+    private void StartEncounter()
+    {
+        if (activeCharacters.Count == 0)
+        {
+            Debug.LogWarning("Please add at least one character to the initiative!");
+        }
 
+        SelectCharacter(activeCharacters.FirstOrDefault());
+    }
+
+    private void SelectCharacter(Character_Initiative character_Initative)
+    {
+        if (activeCharacter != null)
+            OnCharacterTurnEnd?.Invoke(activeCharacter);
+
+        activeCharacter = character_Initative;
+        OnCharacterTurnStart?.Invoke(activeCharacter);
+    }
+
+    private void NextCharacter()
+    {
+        int index = 0;
+
+        for (int i = 0; i < activeCharacters.Count; i++)
+        {
+            if (activeCharacters[i] == activeCharacter)
+                index = i;
+        }
+
+        if (index == activeCharacters.Count - 1)
+            index = 0;
+        else
+            index++;
+
+        SelectCharacter(activeCharacters[index]);
+    }
 
     public static Action OnInitativeSetup;
-    public static Action<Character_Initative> OnInitiativeSelectionUpdated;
-    public static Action<List<Character_Initative>> OnInitiativeOrderUpdated;
-
-    public static Action<List<Character_Initative>> OnCustomInitiativeRequest;
+    public static Action<Character_Initiative> OnInitiativeSelectionUpdated;
+    public static Action<List<Character_Initiative>> OnInitiativeOrderUpdated;
 
     [SerializeField] private List<Color> initiativeColors = new List<Color>();
 
-    private List<Character_Initative> characters = new List<Character_Initative>();
+    private List<Character_Initiative> characters = new List<Character_Initiative>();
     private List<Color> availableColors = new List<Color>();
 
-    private List<Character_Initative> customInitatives = new List<Character_Initative>();
+    private List<Character_Initiative> customInitatives = new List<Character_Initiative>();
 
-    private Character_Initative activeCharacter;
+    private Character_Initiative activeCharacter;
 
-    public void InjectNewCharacter(Character character)
-    {
-        
-        UpdateInitiativeOrder();
-    }
-
-    private void InjectCharcter(Character_Initative character_Initative)
+    private void InjectCharcter(Character_Initiative character_Initative)
     {
         characters.Add(character_Initative);
         UpdateInitiativeOrder();
 
         if (character_Initative.Character.IsPlayer)
         {
-            OnCombatEncounterStarted();
+            //OnCombatEncounterStarted();
         }
     }
 
@@ -294,84 +324,34 @@ public class Manager_Initative : MonoBehaviour
     {
         LoadColors();
 
-        CheckCustomInitiative();
         UpdateInitiativeOrder();
     }
 
-    private void OnCombatEncounterStarted()
-    {
-        //activeCharacter = characters[0];
-        //UpdateInitiativeSelection();
-    }
-
-    public Character_Initative GetInitiativeCharacter(string characterName)
+    public Character_Initiative GetInitiativeCharacter(string characterName)
     {
         return characters.Where(c => c.Character.Name == characterName).FirstOrDefault();
     }
 
-    private void UpdateInitiativeSelection()
+    //private void UpdateCustomInitiatives(Character_Initiative character_Initative)
+    //{
+    //    if (!customInitatives.Contains(character_Initative))
+    //        return;
+
+    //    customInitatives.Remove(character_Initative);
+
+    //    CheckCustomInitiative();
+    //}
+
+    private void OnCharacterSet(Character_Initiative_Custom character_Initiative_Custom)
     {
-        OnInitiativeSelectionUpdated?.Invoke(activeCharacter);
-    }
+        AddToInitiative(character_Initiative_Custom.Character, character_Initiative_Custom.Initiative);
 
-    private void NextCharacter()
-    {
-        int index = 0;
-
-        for (int i = 0; i < characters.Count; i++)
-        {
-            if (characters[i] == activeCharacter)
-                index = i;
-        }
-
-        if (index == characters.Count - 1)
-            index = 0;
-        else
-            index++;
-
-        SelectCharacter(characters[index]);
-    }
-
-    private void SelectCharacter(Character_Initative character_Initative)
-    {
-        activeCharacter = character_Initative;
-        UpdateInitiativeSelection();
-    }
-
-    private void CheckCustomInitiative()
-    {
-        if (customInitatives.Count == 0)
-        {
-            OnInitativeSetup?.Invoke();
-            return;
-        }
-
-        OnCustomInitiativeRequest?.Invoke(customInitatives);
-    }
-
-    private void UpdateCustomInitiatives(Character_Initative character_Initative)
-    {
-        if (!customInitatives.Contains(character_Initative))
-            return;
-
-        customInitatives.Remove(character_Initative);
-
-        CheckCustomInitiative();
-    }
-
-    private void OnCharacterSet(Character_Initative character_Initative)
-    {
-        if (!customInitatives.Contains(character_Initative))
-            return;
-
-        InjectCharcter(character_Initative);
-        customInitatives.Remove(character_Initative);
-        CheckCustomInitiative();
+        customInitiativesToSetup.Remove(character_Initiative_Custom.Character);
     }
 }
 
 [Serializable]
-public class Character_Initative
+public class Character_Initiative
 {
     public Character Character;
 
@@ -380,7 +360,7 @@ public class Character_Initative
 
     public int unitCount;
 
-    public Character_Initative(Character character, int initiative, Color initiativeColor)
+    public Character_Initiative(Character character, int initiative, Color initiativeColor)
     {
         Character = character;
         Initiative = initiative;
@@ -389,14 +369,29 @@ public class Character_Initative
 }
 
 [Serializable]
-public class Inactive_Character_Initative
+public class Inactive_Character_Initiative
 {
     public Character Character;
     public Color InitativeColor;
+    public int Initiative;
 
-    public Inactive_Character_Initative(Character character, Color initiativeColor)
+    public Inactive_Character_Initiative(Character character, Color initiativeColor, int initiative)
     {
         Character = character;
         InitativeColor = initiativeColor;
+        Initiative = initiative;
+    }
+}
+
+[Serializable]
+public class Character_Initiative_Custom
+{
+    public Character Character;
+    public int Initiative;
+
+    public Character_Initiative_Custom(Character character, int initiative)
+    {
+        Character = character;
+        Initiative = initiative;
     }
 }

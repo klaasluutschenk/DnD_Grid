@@ -143,6 +143,21 @@ public class Manager_Input : MonoBehaviour
         else
             ClearFogtiles();
 
+        // Initiative
+
+        if (Input.GetKey(KeyCode.LeftAlt))
+        {
+            Initiative();
+            inputState = InputState.Initiative;
+            return;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftAlt))
+        {
+            inputState = InputState.Default;
+            return;
+        }
+
         // Movement
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -605,6 +620,19 @@ public class Manager_Input : MonoBehaviour
 
     #endregion
 
+    private void Initiative()
+    {
+        Character_World character_World = mainTile.World_Entity as Character_World;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            character_World.SetInitiative(false);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+            character_World.SetInitiative(true);
+    }
+
     #region Movement
 
     private void Movement()
@@ -835,19 +863,6 @@ public enum InputState
     Root = 7,
     Slowed = 8,
     Stun = 9,
-    Venom = 10
+    Venom = 10,
+    Initiative = 11
 }
-
-//Selection = 1,
-//Damage = 2,
-//Heal = 3,
-//Movement = 4,
-//Spawn = 5,
-//Fog = 6,
-//Impact = 7,
-//Burn = 8,
-//Venom = 9,
-//Bleed = 10,
-//CleanseBurn = 11,
-//CleanseVenom = 12,
-//Tooltip = 13

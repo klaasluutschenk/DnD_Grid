@@ -21,10 +21,10 @@ public class CharacterInformationPanel : MonoBehaviour
 
     private void Awake()
     {
-        Manager_Initative.OnInitiativeSelectionUpdated += OnInitiativeSelectionUpdated;
+        Manager_Initative.OnCharacterTurnStart += OnCharacterTurnStart;
     }
 
-    private void OnInitiativeSelectionUpdated(Character_Initative character_Initative)
+    private void OnCharacterTurnStart(Character_Initiative character_Initative)
     {
         SetupCharacter(character_Initative.Character);
     }

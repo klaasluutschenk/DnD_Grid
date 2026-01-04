@@ -5,7 +5,7 @@ using System;
 
 public class CustomInitiativeUI : MonoBehaviour
 {
-    public static Action<Character_Initative> OnCharacterSet;
+    public static Action<Character_Initiative_Custom> OnCharacterSet;
     
     public Action<CustomInitiativeUI> OnRemove;
 
@@ -15,14 +15,14 @@ public class CustomInitiativeUI : MonoBehaviour
     [SerializeField] private InitiativeButton buttonPrefab = default;
     [SerializeField] private Transform buttonContainer = default;
 
-    private Character_Initative character;
+    private Character character;
 
-    public void Setup(Character_Initative character_Initative)
+    public void Setup(Character character)
     {
-        character = character_Initative;
+        this.character = character;
 
-        characterName.text = character.Character.Name;
-        characterSprite.sprite = character.Character.Sprite;
+        characterName.text = character.Name;
+        characterSprite.sprite = character.Sprite;
 
         SetupButtons();
     }
@@ -40,8 +40,8 @@ public class CustomInitiativeUI : MonoBehaviour
 
     private void OnButtonClicked(int index)
     {
-        character.Initiative = index;
-        OnCharacterSet?.Invoke(character);
+        Character_Initiative_Custom customInitative = new Character_Initiative_Custom(character, index);
+        OnCharacterSet?.Invoke(customInitative);
         OnRemove?.Invoke(this);
     }
 }

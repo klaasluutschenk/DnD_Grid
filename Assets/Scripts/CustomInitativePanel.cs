@@ -11,17 +11,16 @@ public class CustomInitativePanel : MonoBehaviour
     private void Awake()
     {
         Manager_Initative.OnCustomInitiativeRequest += OnCustomInitiativeRequest;
-        Manager_Initative.OnInitativeSetup += OnInitativeSetup;
     }
 
-    private void OnCustomInitiativeRequest(List<Character_Initative> characters)
+    private void OnCustomInitiativeRequest(List<Character> characters)
     {
         activePanels.ForEach(ap => Destroy(ap.gameObject));
         activePanels.Clear();
 
         container.gameObject.SetActive(true);
 
-        foreach (Character_Initative character in characters)
+        foreach (Character character in characters)
         {
             CustomInitiativeUI newUi = Instantiate(CustomInitiativeUI_Prefab, container);
 
@@ -33,16 +32,16 @@ public class CustomInitativePanel : MonoBehaviour
         }
     }
 
-    private void OnInitativeSetup()
-    {
-        container.gameObject.SetActive(false);
-    }
-
     private void Remove(CustomInitiativeUI customInitiativeUI)
     {
         customInitiativeUI.OnRemove -= Remove;
 
         activePanels.Remove(customInitiativeUI);
         Destroy(customInitiativeUI.gameObject);
+
+        if (activePanels.Count == 0)
+        {
+            container.gameObject.SetActive(false);
+        }
     }
 }
