@@ -14,14 +14,14 @@ public class CustomInitativePanel : MonoBehaviour
         Manager_Initative.OnInitativeSetup += OnInitativeSetup;
     }
 
-    private void OnCustomInitiativeRequest(List<character_Initative> characters)
+    private void OnCustomInitiativeRequest(List<Character_Initative> characters)
     {
         activePanels.ForEach(ap => Destroy(ap.gameObject));
         activePanels.Clear();
 
         container.gameObject.SetActive(true);
 
-        foreach (character_Initative character in characters)
+        foreach (Character_Initative character in characters)
         {
             CustomInitiativeUI newUi = Instantiate(CustomInitiativeUI_Prefab, container);
 

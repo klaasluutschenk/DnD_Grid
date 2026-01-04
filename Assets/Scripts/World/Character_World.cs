@@ -43,13 +43,13 @@ public class Character_World : World_Entity
     {
         base.Awake();
 
-        Manager_Initative.OnInitiativeOrderUpdated += OnInitiativeOrderUpdated;
+        Manager_Initative.OnInitiativeUpdated += OnInitiativeUpdated;
+
         Manager_Initative.OnInitiativeSelectionUpdated += OnInitiativeSelectionUpdated;
     }
 
     protected override void OnDestroy()
     {
-        Manager_Initative.OnInitiativeOrderUpdated -= OnInitiativeOrderUpdated;
         Manager_Initative.OnInitiativeSelectionUpdated -= OnInitiativeSelectionUpdated;
 
         base.OnDestroy();
@@ -62,12 +62,12 @@ public class Character_World : World_Entity
         if (!isRevealed)
             return;
 
-        Manager_Initative.Instance.InjectNewCharacter(character);
+        Manager_Initative.Instance.AddToInitiative(character);
     }
 
-    private void OnInitiativeOrderUpdated(List<character_Initative> initiativeOrder)
+    private void OnInitiativeUpdated(List<Character_Initative> initiativeOrder)
     {
-        character_Initative myCharacter = initiativeOrder.Where(c => c.Character.Name == character.Name).FirstOrDefault();
+        Character_Initative myCharacter = initiativeOrder.Where(c => c.Character.Name == character.Name).FirstOrDefault();
 
         if (myCharacter == null)
             return;
@@ -75,7 +75,7 @@ public class Character_World : World_Entity
         SetInitativeColor(myCharacter);
     }
 
-    private void OnInitiativeSelectionUpdated(character_Initative character_Initative)
+    private void OnInitiativeSelectionUpdated(Character_Initative character_Initative)
     {
         SetInitativeSelection(character_Initative.Character.Name == character.Name);
     }
@@ -166,7 +166,7 @@ public class Character_World : World_Entity
         ApplyBleed(false);
     }
 
-    private void SetInitativeColor(character_Initative character_Initative)
+    private void SetInitativeColor(Character_Initative character_Initative)
     {
         if (character_Initative == null)
             return;
@@ -331,6 +331,7 @@ public class Character_World : World_Entity
             return;
         }
 
+        Manager_Initative.Instance.RemoveCharacter(character);
         Remove();
     }
 

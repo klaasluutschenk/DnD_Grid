@@ -5,7 +5,7 @@ using System.Collections;
 
 public class Initiative_UI : MonoBehaviour
 {
-    public character_Initative Character => character;
+    public Character_Initative Character => character;
 
     [SerializeField] private bool useCurve = default;
     [SerializeField] private GameObject gameobject_Initative = default;
@@ -19,10 +19,10 @@ public class Initiative_UI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text_CharacterName;
     [SerializeField] private TextMeshProUGUI text_Initative;
 
-    private character_Initative character;
+    private Character_Initative character;
     private bool hasInitative = false;
 
-    public void Setup(character_Initative character_Initative)
+    public void Setup(Character_Initative character_Initative)
     {
         character = character_Initative;
 

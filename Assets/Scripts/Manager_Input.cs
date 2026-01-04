@@ -685,7 +685,7 @@ public class Manager_Input : MonoBehaviour
 
                 Manager_Characters.Instance.SpawnCharacter(characterToSpawn, tile.transform.position);
 
-                if (!Manager_Initative.Instance.IsCharacterInPlay(characterToSpawn.Name) && characterToSpawn.CustomInitiative)
+                if (!Manager_Initative.Instance.IsCharacterInPlay(characterToSpawn) && characterToSpawn.CustomInitiative)
                 {
                     StopSpawn();
                     return;

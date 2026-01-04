@@ -24,7 +24,7 @@ public class CharacterInformationPanel : MonoBehaviour
         Manager_Initative.OnInitiativeSelectionUpdated += OnInitiativeSelectionUpdated;
     }
 
-    private void OnInitiativeSelectionUpdated(character_Initative character_Initative)
+    private void OnInitiativeSelectionUpdated(Character_Initative character_Initative)
     {
         SetupCharacter(character_Initative.Character);
     }

@@ -5,7 +5,7 @@ using System;
 
 public class CustomInitiativeUI : MonoBehaviour
 {
-    public static Action<character_Initative> OnCharacterSet;
+    public static Action<Character_Initative> OnCharacterSet;
     
     public Action<CustomInitiativeUI> OnRemove;
 
@@ -15,9 +15,9 @@ public class CustomInitiativeUI : MonoBehaviour
     [SerializeField] private InitiativeButton buttonPrefab = default;
     [SerializeField] private Transform buttonContainer = default;
 
-    private character_Initative character;
+    private Character_Initative character;
 
-    public void Setup(character_Initative character_Initative)
+    public void Setup(Character_Initative character_Initative)
     {
         character = character_Initative;
 
