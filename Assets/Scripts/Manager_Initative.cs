@@ -14,16 +14,19 @@ public class Manager_Initative : MonoBehaviour
 
     public static Manager_Initative Instance;
 
+    [SerializeField] private List<Color> initiativeColors = new List<Color>();
+
     private List<Character_Initiative> activeCharacters = new List<Character_Initiative>();
     private List<Inactive_Character_Initiative> inactiveCharacters = new List<Inactive_Character_Initiative>();
     private List<Character> customInitiativesToSetup = new List<Character>();
+    private List<Color> availableColors = new List<Color>();
 
+    private Character_Initiative activeCharacter;
 
     private void Awake()
     {
         Instance = this;
 
-        Manager_Combat.OnCombatEncounterEnded += OnCombatEncounterEnded;
         Manager_Combat.OnCombatEncounterLoaded += OnCombatEncounterLoaded;
 
         CustomInitiativeUI.OnCharacterSet += OnCharacterSet;
@@ -36,11 +39,6 @@ public class Manager_Initative : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
             StartEncounter();
-    }
-
-    private void OnCombatEncounterEnded()
-    {
-        characters.Clear();
     }
 
     public void AddToInitiative(Character character, int customInitative = -1)
@@ -170,8 +168,7 @@ public class Manager_Initative : MonoBehaviour
     private void UpdateInitiativeOrder()
     {
         activeCharacters = activeCharacters.OrderByDescending(c => c.Initiative).ToList();
-
-        OnInitiativeOrderUpdated?.Invoke(activeCharacters);
+        OnInitiativeUpdated?.Invoke(activeCharacters);
     }
 
     // Single Character
@@ -257,6 +254,11 @@ public class Manager_Initative : MonoBehaviour
         return randomColor;
     }
 
+    public Character_Initiative GetInitiativeCharacter(string characterName)
+    {
+        return activeCharacters.Where(c => c.Character.Name == characterName).FirstOrDefault();
+    }
+
     #endregion
 
     private void StartEncounter()
@@ -296,51 +298,12 @@ public class Manager_Initative : MonoBehaviour
         SelectCharacter(activeCharacters[index]);
     }
 
-    public static Action OnInitativeSetup;
-    public static Action<Character_Initiative> OnInitiativeSelectionUpdated;
-    public static Action<List<Character_Initiative>> OnInitiativeOrderUpdated;
-
-    [SerializeField] private List<Color> initiativeColors = new List<Color>();
-
-    private List<Character_Initiative> characters = new List<Character_Initiative>();
-    private List<Color> availableColors = new List<Color>();
-
-    private List<Character_Initiative> customInitatives = new List<Character_Initiative>();
-
-    private Character_Initiative activeCharacter;
-
-    private void InjectCharcter(Character_Initiative character_Initative)
-    {
-        characters.Add(character_Initative);
-        UpdateInitiativeOrder();
-
-        if (character_Initative.Character.IsPlayer)
-        {
-            //OnCombatEncounterStarted();
-        }
-    }
-
     private void OnCombatEncounterLoaded(CombatEncounter combatEncounter)
     {
         LoadColors();
 
         UpdateInitiativeOrder();
     }
-
-    public Character_Initiative GetInitiativeCharacter(string characterName)
-    {
-        return characters.Where(c => c.Character.Name == characterName).FirstOrDefault();
-    }
-
-    //private void UpdateCustomInitiatives(Character_Initiative character_Initative)
-    //{
-    //    if (!customInitatives.Contains(character_Initative))
-    //        return;
-
-    //    customInitatives.Remove(character_Initative);
-
-    //    CheckCustomInitiative();
-    //}
 
     private void OnCharacterSet(Character_Initiative_Custom character_Initiative_Custom)
     {
