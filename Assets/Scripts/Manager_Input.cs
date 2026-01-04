@@ -208,84 +208,13 @@ public class Manager_Input : MonoBehaviour
             ToggleInputState(InputState.Venom);
         }
 
-        // Negative Effect
-
         if (Input.GetMouseButtonDown(0))
         {
-            switch (InputState)
-            {
-                case InputState.Default:
-                    Damage();
-                    break;
-                case InputState.Movement:
-                    break;
-                case InputState.Armor:
-                    break;
-                case InputState.Barrier:
-                    break;
-                case InputState.Bleed:
-                    ApplyBleed();
-                    break;
-                case InputState.Blinded:
-                    break;
-                case InputState.Burn:
-                    ApplyBurn();
-                    break;
-                case InputState.Reload:
-                    break;
-                case InputState.Root:
-                    break;
-                case InputState.Slowed:
-                    break;
-                case InputState.Stun:
-                    break;
-                case InputState.Venom:
-                    ApplyVenom();
-                    break;
-                default:
-                    break;
-            }
-            return;
+            ApplyEffect(inputState);
         }
-
-        // Positive Effect
-
-        if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButtonDown(1))
         {
-            switch (InputState)
-            {
-                case InputState.Default:
-                    Heal();
-                    break;
-                case InputState.Movement:
-                    break;
-                case InputState.Armor:
-                    break;
-                case InputState.Barrier:
-                    break;
-                case InputState.Bleed:
-                    ApplyBleed();
-                    break;
-                case InputState.Blinded:
-                    break;
-                case InputState.Burn:
-                    CleanseBurn();
-                    break;
-                case InputState.Reload:
-                    break;
-                case InputState.Root:
-                    break;
-                case InputState.Slowed:
-                    break;
-                case InputState.Stun:
-                    break;
-                case InputState.Venom:
-                    CleanseVenom();
-                    break;
-                default:
-                    break;
-            }
-            return;
+            CleanseEffect(inputState);
         }
     }
 
@@ -584,80 +513,94 @@ public class Manager_Input : MonoBehaviour
 
     #region Effects
 
-    private void Damage()
+    private void ApplyEffect(InputState newInputState)
     {
         Character_World character_World = mainTile.World_Entity as Character_World;
 
         if (character_World == null)
             return;
 
-        if (Input.GetKey(KeyCode.LeftControl))
-            character_World.Damage(5);
-        else
-            character_World.Damage(1);
+        switch (newInputState)
+        {
+            case InputState.Default:
+                int damageValue = Input.GetKey(KeyCode.LeftControl) ? 5 : 1;
+                character_World.Damage(damageValue);
+                break;
+            case InputState.Armor:
+                character_World.ApplyArmor();
+                break;
+            case InputState.Barrier:
+                character_World.ApplyBarrier();
+                break;
+            case InputState.Bleed:
+                character_World.ApplyBleed();
+                break;
+            case InputState.Blinded:
+                character_World.ApplyBlinded();
+                break;
+            case InputState.Burn:
+                character_World.ApplyBurn();
+                break;
+            case InputState.Reload:
+                character_World.ApplyReloading();
+                break;
+            case InputState.Root:
+                character_World.ApplyRooted();
+                break;
+            case InputState.Slowed:
+                character_World.ApplySlowed();
+                break;
+            case InputState.Stun:
+                character_World.ApplyStunned();
+                break;
+            case InputState.Venom:
+                character_World.ApplyVenom();
+                break;
+            default:
+                break;
+        }
     }
 
-    private void Heal(int healValue = 1)
+    private void CleanseEffect(InputState newInputState)
     {
         Character_World character_World = mainTile.World_Entity as Character_World;
 
         if (character_World == null)
             return;
 
-        if (Input.GetKey(KeyCode.LeftControl))
-            character_World.Heal(5);
-        else
-            character_World.Heal(1);
-    }
-
-    private void ApplyBurn()
-    {
-        Character_World character_World = mainTile.World_Entity as Character_World;
-
-        if (character_World == null)
-            return;
-
-        character_World.ApplyBurn();
-    }
-
-    private void CleanseBurn()
-    {
-        Character_World character_World = mainTile.World_Entity as Character_World;
-
-        if (character_World == null)
-            return;
-
-        character_World.CleanseBurn();
-    }
-
-    private void ApplyVenom()
-    {
-        Character_World character_World = mainTile.World_Entity as Character_World;
-
-        if (character_World == null)
-            return;
-
-        character_World.ApplyVenom();
-    }
-
-    private void CleanseVenom()
-    {
-        Character_World character_World = mainTile.World_Entity as Character_World;
-
-        if (character_World == null)
-            return;
-
-        character_World.CleanseVenom();
-    }
-
-    private void ApplyBleed()
-    {
-        Character_World character_World = mainTile.World_Entity as Character_World;
-
-        if (character_World == null)
-            return;
-
-        character_World.ApplyBleed();
+        switch (newInputState)
+        {
+            case InputState.Default:
+                int healingValue = Input.GetKey(KeyCode.LeftControl) ? 5 : 1;
+                character_World.Heal(healingValue);
+                break;
+            case InputState.Bleed:
+                character_World.CleanseBleed();
+                break;
+            case InputState.Blinded:
+                character_World.CleanseBlinded();
+                break;
+            case InputState.Burn:
+                character_World.CleanseBurn();
+                break;
+            case InputState.Reload:
+                character_World.CleanseReload();
+                break;
+            case InputState.Root:
+                character_World.CleanseRoot();
+                break;
+            case InputState.Slowed:
+                character_World.CleanseSlowed();
+                break;
+            case InputState.Stun:
+                character_World.CleanseStunned();
+                break;
+            case InputState.Venom:
+                character_World.CleanseVenom();
+                break;
+            default:
+                break;
+        }
     }
 
     #endregion

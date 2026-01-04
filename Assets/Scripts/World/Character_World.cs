@@ -340,9 +340,51 @@ public class Character_World : World_Entity
         gameObject_Dead.SetActive(!alive);
     }
 
+    #region Apply Effects
+
+    public void ApplyArmor(bool apply = true)
+    {
+        Armor.SetValue(apply ? Armor.StatValue + 1 : Armor.StatValue - 1);
+    }
+
+    public void ApplyBarrier(bool apply = true)
+    {
+        Barrier.SetValue(apply ? Barrier.StatValue + 1 : Barrier.StatValue - 1);
+    }
+
+    public void ApplyBleed(bool apply = true)
+    {
+        Bleeding.SetValue(apply ? Bleeding.StatValue + 1 : Bleeding.StatValue - 1);
+    }
+
+    public void ApplyBlinded(bool apply = true)
+    {
+        Blinded.SetValue(apply ? Blinded.StatValue + 1 : Blinded.StatValue - 1);
+    }
+
     public void ApplyBurn(bool apply = true)
     {
         Burning.SetValue(apply ? Burning.StatValue + 1 : Burning.StatValue - 1);
+    }
+
+    public void ApplyReloading(bool apply = true)
+    {
+        Reloading.SetValue(apply ? Reloading.StatValue + 1 : Reloading.StatValue - 1);
+    }
+
+    public void ApplyRooted(bool apply = true)
+    {
+        Rooted.SetValue(apply ? Rooted.StatValue + 1 : Rooted.StatValue - 1);
+    }
+
+    public void ApplySlowed(bool apply = true)
+    {
+        Slowed.SetValue(apply ? Slowed.StatValue + 1 : Slowed.StatValue - 1);
+    }
+
+    public void ApplyStunned(bool apply = true)
+    {
+        Stunned.SetValue(apply ? Stunned.StatValue + 1 : Stunned.StatValue - 1);
     }
 
     public void ApplyVenom(bool apply = true)
@@ -350,9 +392,24 @@ public class Character_World : World_Entity
         Poisoned.SetValue(apply ? Poisoned.StatValue + 1 : Poisoned.StatValue - 1);
     }
 
-    public void ApplyBleed(bool apply = true)
+    #endregion
+
+    #region Cleanse Effects
+
+    public void CleanseBleed()
     {
-        Bleeding.SetValue(apply ? Bleeding.StatValue + 1 : Bleeding.StatValue - 1);
+        if (!Bleeding.StatActive)
+            return;
+
+        ApplyBleed(false);
+    }
+
+    public void CleanseBlinded()
+    {
+        if (!Blinded.StatActive)
+            return;
+
+        ApplyBlinded(false);
     }
 
     public void CleanseBurn()
@@ -362,7 +419,39 @@ public class Character_World : World_Entity
 
         ApplyBurn(false);
     }
-    
+
+    public void CleanseReload()
+    {
+        if (!Reloading.StatActive)
+            return;
+
+        ApplyReloading(false);
+    }
+
+    public void CleanseRoot()
+    {
+        if (!Rooted.StatActive)
+            return;
+
+        ApplyRooted(false);
+    }
+
+    public void CleanseSlowed()
+    {
+        if (!Slowed.StatActive)
+            return;
+
+        ApplySlowed(false);
+    }
+
+    public void CleanseStunned()
+    {
+        if (!Stunned.StatActive)
+            return;
+
+        ApplyStunned(false);
+    }
+
     public void CleanseVenom()
     {
         if (!Poisoned.StatActive)
@@ -370,6 +459,8 @@ public class Character_World : World_Entity
 
         ApplyVenom(false);
     }
+
+    #endregion
 }
 
 [Serializable]
