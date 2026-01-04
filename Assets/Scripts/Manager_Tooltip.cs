@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Manager_Tooltip : MonoBehaviour
@@ -11,6 +12,7 @@ public class Manager_Tooltip : MonoBehaviour
     [SerializeField] private GameObject tooltipContainer = default;
 
     [Header("Tile")]
+    [SerializeField] private GameObject tile_Container = default;
     [SerializeField] private GameObject tile_Burning = default;
     [SerializeField] private GameObject tile_Freezing = default;
 
@@ -38,6 +40,10 @@ public class Manager_Tooltip : MonoBehaviour
     [SerializeField] private GameObject character_Blinded = default;
     [SerializeField] private TextMeshProUGUI character_Blinded_Value = default;
 
+    [Header("Fog")]
+    [SerializeField] private GameObject fog_Container = default;
+    [SerializeField] private Image fog_LoadBar = default;
+
     private void Awake()
     {
         Instance = this;
@@ -46,9 +52,33 @@ public class Manager_Tooltip : MonoBehaviour
 
     public void SetToolTip(Tile tile)
     {
+        ClearTooltip();
+
         tooltipContainer.SetActive(true);
 
         tooltipContainer.transform.position = Input.mousePosition;
+
+        if (tile.IsRevealed)
+        {
+            SetTileTooltip(tile);
+        }
+        else
+        {
+            SetFogTooltip(tile);
+        }        
+    }
+
+    public void ClearTooltip()
+    {
+        tooltipContainer.SetActive(false);
+        tile_Container.SetActive(false);
+        character_Container.SetActive(false);
+        fog_Container.SetActive(false);
+    }
+
+    private void SetTileTooltip(Tile tile)
+    {
+        tile_Container.SetActive(true);
 
         Character_World character = null;
 
@@ -59,11 +89,13 @@ public class Manager_Tooltip : MonoBehaviour
         }
 
         if (character == null)
-        {
             character_Container.SetActive(false);
-            return;
-        }
+        else
+            SetCharacterTooltip(character);
+    }
 
+    private void SetCharacterTooltip(Character_World character)
+    {
         character_Container.SetActive(true);
 
         character_Name.text = character.Character.Name;
@@ -95,8 +127,9 @@ public class Manager_Tooltip : MonoBehaviour
         character_Blinded_Value.text = character.Blinded.StatValue.ToString();
     }
 
-    public void ClearTooltip()
+    private void SetFogTooltip(Tile tile)
     {
-        tooltipContainer.SetActive(false);
+        fog_Container.SetActive(true);
+        fog_LoadBar.fillAmount = Manager_Input.Instance.FogTimer;
     }
 }

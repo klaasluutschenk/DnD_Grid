@@ -138,27 +138,27 @@ public class Manager_Grid : MonoBehaviour
 
     public List<Tile> GetTilesByRoomIndex(int roomIndex)
     {
-        return tiles.Where(t => t.RoomIndex == roomIndex).ToList();
+        return tiles.Where(t => t.RoomIndex == roomIndex).ToList().ToList();
     }
 
     public Tile GetTileByWorldPosition(Vector3 position)
     {
-        return tiles.Where(w => w.transform.position == position).FirstOrDefault();
+        return tiles.Where(w => w.transform.position == position).ToList().FirstOrDefault();
     }
 
     public Tile GetTileByGridPosition(Vector2 gridPosition)
     {
-        return tiles.Where(w => w.GridPosition == gridPosition).FirstOrDefault();
+        return tiles.Where(w => w.GridPosition == gridPosition).ToList().FirstOrDefault();
     }
 
     public Tile GetSelectedTiles()
     {
-        return tiles.Where(w => w.IsSelected).FirstOrDefault();
+        return tiles.Where(w => w.IsSelected).ToList().FirstOrDefault();
     }
 
     public Tile GetHighlightedTiles()
     {
-        return tiles.Where(w => w.IsHiglighted).FirstOrDefault();
+        return tiles.Where(w => w.IsHiglighted).ToList().FirstOrDefault();
     }
 
     public List<Tile> GetSurroundingAlliedTile(Tile tile, bool lineOfSight, bool IsPlayerTeam)

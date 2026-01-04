@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd122d5571122a449e233422e04d423, type: 3}
+  m_Name: Combat Encounter Manor the Fourth
+  m_EditorClassIdentifier: 
+  Background: {fileID: -6495764387086002316, guid: dafe29ba7dc94eb49981246723284fae, type: 3}
+  PhysicsObject: {fileID: 3826081070071633804, guid: b9db5cd2615a01c4d8d689001962720e, type: 3}
+  FogObject: {fileID: 6097160243529988637, guid: 427c393c036f3864681c1d6c82997e2e, type: 3}
+  Characters:
+  - Character: {fileID: 11400000, guid: 7f1282deede7bb844aeda4c13af2150f, type: 2}
+    Position: {x: -26.5, y: -12.5, z: -1}
+  - Character: {fileID: 11400000, guid: ccb828b5c19354748ad7acfa3e435615, type: 2}
+    Position: {x: -24.5, y: -12.5, z: -1}
+  - Character: {fileID: 11400000, guid: d81766ffba14fb64bb4323df09688e69, type: 2}
+    Position: {x: -22.5, y: -12.5, z: -1}
+  - Character: {fileID: 11400000, guid: b04147e2834c07440aecd057009c1402, type: 2}
+    Position: {x: -20.5, y: -12.5, z: -1}
+  - Character: {fileID: 11400000, guid: 674837a55e9bc6348aad754aba4ef452, type: 2}
+    Position: {x: 14.5, y: 0.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0b037f143222a744eab6054e6b627f2f, type: 2}
+    Position: {x: 4.5, y: 0.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: -24.5, y: 2.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: -24.5, y: -2.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: -8.5, y: -6.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: -8.5, y: 6.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: 2.5, y: 6.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: 2.5, y: -6.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: 2.5, y: 6.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: 10.5, y: 2.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: 10.5, y: 0.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: 10.5, y: -0.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: 10.5, y: -2.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: 19.5, y: 2.5, z: -1}
+  - Character: {fileID: 11400000, guid: 0e091edf763618c4185c41ed1030eed1, type: 2}
+    Position: {x: 19.5, y: -2.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -19.5, y: -3.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -19.5, y: -0.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -19.5, y: 0.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -19.5, y: 3.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -16.5, y: -10.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -17.5, y: -11.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -16.5, y: 11.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -17.5, y: 10.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -8.5, y: -10.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: 0.5, y: 11.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: 8.5, y: 11.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: 8.5, y: 10.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: 3.5, y: -10.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: 2.5, y: -10.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -12.5, y: 1.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -11.5, y: -2.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -4.5, y: 3.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -4.5, y: -4.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -2.5, y: 1.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: -1.5, y: -3.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: 2.5, y: 1.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: 2.5, y: -1.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: 5.5, y: 3.5, z: -1}
+  - Character: {fileID: 11400000, guid: a9eea03a1fc5e5941a61cab87dc8cd69, type: 2}
+    Position: {x: 5.5, y: -2.5, z: -1}
+  - Character: {fileID: 11400000, guid: dd71f255b8d118b46b145d939666d862, type: 2}
+    Position: {x: -9.5, y: 10.5, z: -1}
+  - Character: {fileID: 11400000, guid: dd71f255b8d118b46b145d939666d862, type: 2}
+    Position: {x: -0.5, y: 11.5, z: -1}
+  - Character: {fileID: 11400000, guid: dd71f255b8d118b46b145d939666d862, type: 2}
+    Position: {x: -1.5, y: 3.5, z: -1}
+  - Character: {fileID: 11400000, guid: dd71f255b8d118b46b145d939666d862, type: 2}
+    Position: {x: 4.5, y: -3.5, z: -1}
+  - Character: {fileID: 11400000, guid: dd71f255b8d118b46b145d939666d862, type: 2}
+    Position: {x: -8.5, y: -2.5, z: -1}
+  - Character: {fileID: 11400000, guid: dd71f255b8d118b46b145d939666d862, type: 2}
+    Position: {x: -7.5, y: -2.5, z: -1}
+  - Character: {fileID: 11400000, guid: dd71f255b8d118b46b145d939666d862, type: 2}
+    Position: {x: -1.5, y: -11.5, z: -1}
+  - Character: {fileID: 11400000, guid: dd71f255b8d118b46b145d939666d862, type: 2}
+    Position: {x: -2.5, y: -12.5, z: -1}
+  - Character: {fileID: 11400000, guid: dd71f255b8d118b46b145d939666d862, type: 2}
+    Position: {x: 2.5, y: -11.5, z: -1}
+  - Character: {fileID: 11400000, guid: c01c27fcab0d1bd4dbfb9f2971485ffd, type: 2}
+    Position: {x: -15.5, y: 11.5, z: -1}
+  - Character: {fileID: 11400000, guid: c01c27fcab0d1bd4dbfb9f2971485ffd, type: 2}
+    Position: {x: 9.5, y: 11.5, z: -1}
+  - Character: {fileID: 11400000, guid: c01c27fcab0d1bd4dbfb9f2971485ffd, type: 2}
+    Position: {x: 4.5, y: -0.5, z: -1}
+  - Character: {fileID: 11400000, guid: c01c27fcab0d1bd4dbfb9f2971485ffd, type: 2}
+    Position: {x: -10.5, y: -12.5, z: -1}
+  - Character: {fileID: 11400000, guid: c01c27fcab0d1bd4dbfb9f2971485ffd, type: 2}
+    Position: {x: 3.5, y: -11.5, z: -1}
+  - Character: {fileID: 11400000, guid: c01c27fcab0d1bd4dbfb9f2971485ffd, type: 2}
+    Position: {x: 15.5, y: -9.5, z: -1}
+  - Character: {fileID: 11400000, guid: 440447ce4e4861443ae820f3a66edad6, type: 2}
+    Position: {x: 15.5, y: 9.5, z: -1}
+  - Character: {fileID: 11400000, guid: 440447ce4e4861443ae820f3a66edad6, type: 2}
+    Position: {x: 17.5, y: 9.5, z: -1}
+  - Character: {fileID: 11400000, guid: 440447ce4e4861443ae820f3a66edad6, type: 2}
+    Position: {x: 16.5, y: 7.5, z: -1}
+  - Character: {fileID: 11400000, guid: 440447ce4e4861443ae820f3a66edad6, type: 2}
+    Position: {x: 14.5, y: 5.5, z: -1}
+  - Character: {fileID: 11400000, guid: 440447ce4e4861443ae820f3a66edad6, type: 2}
+    Position: {x: 17.5, y: 5.5, z: -1}
+  - Character: {fileID: 11400000, guid: 2a7d940342f298c488078f46f0bdbe2e, type: 2}
+    Position: {x: 16.5, y: -9.5, z: -1}
+  - Character: {fileID: 11400000, guid: e8c74467ad959c244953512947245eb6, type: 2}
+    Position: {x: -14.5, y: 3.5, z: -1}
+  - Character: {fileID: 11400000, guid: e8c74467ad959c244953512947245eb6, type: 2}
+    Position: {x: -14.5, y: -3.5, z: -1}
+  - Character: {fileID: 11400000, guid: e8c74467ad959c244953512947245eb6, type: 2}
+    Position: {x: -7.5, y: 1.5, z: -1}
+  - Character: {fileID: 11400000, guid: e8c74467ad959c244953512947245eb6, type: 2}
+    Position: {x: -3.5, y: -1.5, z: -1}
+  - Character: {fileID: 11400000, guid: e8c74467ad959c244953512947245eb6, type: 2}
+    Position: {x: 3.5, y: 1.5, z: -1}
+  - Character: {fileID: 11400000, guid: e8c74467ad959c244953512947245eb6, type: 2}
+    Position: {x: 7.5, y: -4.5, z: -1}
+  - Character: {fileID: 11400000, guid: e8c74467ad959c244953512947245eb6, type: 2}
+    Position: {x: 16.5, y: 1.5, z: -1}
+  - Character: {fileID: 11400000, guid: e8c74467ad959c244953512947245eb6, type: 2}
+    Position: {x: 16.5, y: -1.5, z: -1}
+  - Character: {fileID: 11400000, guid: e8c74467ad959c244953512947245eb6, type: 2}
+    Position: {x: -6.5, y: -11.5, z: -1}
+  SpawnableCharacters:
+  - {fileID: 11400000, guid: 5eaf7a77c0fc1284f98c059a56a3c511, type: 2}
+  - {fileID: 11400000, guid: e8908f8e1389c284c9309f79743dd59a, type: 2}
+  - {fileID: 11400000, guid: db16fa1a9fb29164bb273c3df9c23978, type: 2}
+  - {fileID: 11400000, guid: febca0f2244f9d045999a753e5f654f0, type: 2}
+  - {fileID: 11400000, guid: ef0cef20046cb394a91ea0bfce0c7ef4, type: 2}
+  - {fileID: 11400000, guid: 8583f9065839dca49bbf447b98ec02b4, type: 2}
+  - {fileID: 11400000, guid: f0d24f83ac641f44c8aea0afa5070d28, type: 2}

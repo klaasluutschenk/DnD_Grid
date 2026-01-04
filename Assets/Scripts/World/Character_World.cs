@@ -10,6 +10,7 @@ public class Character_World : World_Entity
     public Character Character => character;
 
     [SerializeField] private GameObject gameObject_InitiativeSelection;
+    [SerializeField] private GameObject gameObject_Dead;
     [SerializeField] private Image image_HP;
     [SerializeField] private Image image_Armor;
     [SerializeField] private Image image_Barrier;
@@ -33,6 +34,8 @@ public class Character_World : World_Entity
     public Stat Slowed;
     public Stat Stunned;
     public Stat Blinded;
+
+    private bool isAlive;
 
     protected override void Awake()
     {
@@ -86,6 +89,8 @@ public class Character_World : World_Entity
 
     private void SetupStats()
     {
+        isAlive = true;
+
         Armor.SetValue(0);
         Barrier.SetValue(0);
         Burning.SetValue(0);
@@ -234,15 +239,14 @@ public class Character_World : World_Entity
         if (value > character.HealthPoints)
             value = character.HealthPoints;
 
-        if (value == Health.StatValue)
-            return;
-
         Health.SetValue(value);
-
-        if (Health.StatValue == 0)
+        
+        if (!isAlive)
         {
-            Kill();
-            return;
+            if (Health.StatValue > 0)
+            {
+                SetLifeStatus(true);
+            }
         }
 
         float healthPercentage = (float)Health.StatValue / (float)character.HealthPoints;
@@ -251,30 +255,10 @@ public class Character_World : World_Entity
         SetHealthColor(healthPercentage);
 
         text_CharacterHP.text = Health.StatValue.ToString();
-    }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Health.StatValue == 0)
         {
-            Armor.SetValue(Armor.StatValue + 5);
-            SetBars();
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            Armor.SetValue(Armor.StatValue - 5);
-            SetBars();
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            Barrier.SetValue(Barrier.StatValue + 5);
-            SetBars();
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Barrier.SetValue(Barrier.StatValue - 5);
-            SetBars();
+            Kill();
         }
     }
 
@@ -337,7 +321,19 @@ public class Character_World : World_Entity
 
     public void Kill()
     {
+        if (isAlive)
+        {
+            SetLifeStatus(false);
+            return;
+        }
+
         Remove();
+    }
+
+    private void SetLifeStatus(bool alive)
+    {
+        isAlive = alive;
+        gameObject_Dead.SetActive(!alive);
     }
 
     public void ApplyBurn(bool apply = true)

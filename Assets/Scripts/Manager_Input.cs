@@ -4,6 +4,8 @@ using TMPro;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using F10.StreamDeckIntegration;
+using F10.StreamDeckIntegration.Attributes;
 
 public class Manager_Input : MonoBehaviour
 {
@@ -13,280 +15,292 @@ public class Manager_Input : MonoBehaviour
     public static Action OnStopSpawnRequest;
 
     public InputState InputState => inputState;
-    public int DamageValue => damageValue;
+    public float FogTimer => fogTimer;
 
     [SerializeField] private Button button_Selection = default;
     [SerializeField] private TMP_InputField inputField_Selection = default;
 
-    [SerializeField] private Button button_Damage = default;
-    [SerializeField] private TMP_InputField inputField_Damage = default;
-
-    [SerializeField] private Button button_Heal= default;
-    [SerializeField] private TMP_InputField inputField_Heal = default;
-
-    [SerializeField] private Button button_Movement = default;
-
     [SerializeField] private Button button_Spawn = default;
-
-    [SerializeField] private Button button_Fog = default;
-
-    [SerializeField] private Button button_Burn = default;
-    [SerializeField] private Button button_Venom = default;
-    [SerializeField] private Button button_Bleed = default;
-
-    [SerializeField] private Button button_CleanseBurn = default;
-    [SerializeField] private Button button_CleanseVenom = default;
 
     [SerializeField] private Button button_Impact = default;
 
     [SerializeField] private Camera playerCamera;
 
-    private InputState inputState = InputState.None;
-    private InputState storedInputState = InputState.None;
-    private bool isLocked = false;
+    [SerializeField] private Texture2D cursor_Movement = default;
+    [SerializeField] private Texture2D cursor_Burn = default;
+    [SerializeField] private Texture2D cursor_Venom = default;
+    [SerializeField] private Texture2D cursor_Bleed = default;
+
+    private InputState inputState = InputState.Default;
 
     private int selectionRadius = 1;
     private int damageValue = 1;
-    private int healValue = 1;
 
     public Vector3 mouseGridPosition;
     public Vector3 oldMouseGridPosition;
-    private int display;
 
     private List<Tile> highlightedTiles = new List<Tile>();
     private List<Tile> selectedtiles = new List<Tile>();
     private List<Tile> movementTiles = new List<Tile>();
     private List<Tile> fogTiles = new List<Tile>();
 
+    private Tile mainTile;
+
     private int currentRoomSelection;
+    private int display;
 
     private Character_World movementSelection;
 
     private Character characterToSpawn;
 
+    private float fogTimer;
+
     private void Awake()
     {
         Instance = this;
+    }
 
-        button_Selection.onClick.AddListener(OnSelectionClicked);
-        inputField_Selection.onValueChanged.AddListener(OnSelectionChanged);
+    private void OnEnable()
+    {
+        StreamDeck.Add(this);
+    }
 
-        button_Damage.onClick.AddListener(OnDamageClicked);
-        inputField_Damage.onValueChanged.AddListener(OnDamageChanged);
-
-        button_Heal.onClick.AddListener(OnHealClicked);
-        inputField_Heal.onValueChanged.AddListener(OnHealChanged);
-
-        button_Movement.onClick.AddListener(OnMovementClicked);
-
-        button_Spawn.onClick.AddListener(OnSpawnedClicked);
-
-        button_Fog.onClick.AddListener(OnFogClicked);
-
-        button_Burn.onClick.AddListener(OnBurnClicked);
-        button_Venom.onClick.AddListener(OnVenomClicked);
-        button_Bleed.onClick.AddListener(OnBleedClicked);
-
-        button_CleanseBurn.onClick.AddListener(OnCleanseBurnClicked);
-        button_CleanseVenom.onClick.AddListener(OnCleanseVenomClicked);
-
-        button_Impact.onClick.AddListener(OnImpactClicked);
+    private void OnDisable()
+    {
+        StreamDeck.Remove(this);
     }
 
     #region UI Interaction
 
-    private void OnSelectionClicked()
-    {
-        if (isLocked)
-            return;
+    //private void OnSelectionClicked()
+    //{
+    //    if (isLocked)
+    //        return;
 
-        inputState = InputState.Selection;
-        isLocked = true;
-    }
+    //    inputState = InputState.Selection;
+    //    isLocked = true;
+    //}
 
-    private void OnSelectionChanged(string value)
-    {
-        selectionRadius = int.Parse(value);
-    }
+    //private void OnSelectionChanged(string value)
+    //{
+    //    selectionRadius = int.Parse(value);
+    //}
 
-    private void OnDamageClicked()
-    {
-        if (isLocked)
-            return;
 
-        selectionRadius = 1;
-        inputState = InputState.Damage;
-        isLocked = true;
-    }
+    //private void OnSpawnedClicked()
+    //{
+    //    if (isLocked)
+    //        return;
 
-    private void OnDamageChanged(string value)
-    {
-        damageValue = int.Parse(value);
-    }
+    //    selectionRadius = 1;
+    //    inputState = InputState.Spawn;
+    //    isLocked = true;
 
-    private void OnHealClicked()
-    {
-        if (isLocked)
-            return;
+    //    OnSpawnRequest?.Invoke();
+    //}
 
-        selectionRadius = 1;
-        inputState = InputState.Heal;
-        isLocked = true;
-    }
-
-    private void OnHealChanged(string value)
-    {
-        healValue = int.Parse(value);
-    }
-
-    private void OnMovementClicked()
-    {
-        if (isLocked)
-            return;
-
-        selectionRadius = 1;
-        inputState = InputState.Movement;
-        isLocked = true;
-    }
-
-    private void OnSpawnedClicked()
-    {
-        if (isLocked)
-            return;
-
-        selectionRadius = 1;
-        inputState = InputState.Spawn;
-        isLocked = true;
-
-        OnSpawnRequest?.Invoke();
-    }
-
-    private void OnFogClicked()
-    {
-        if (isLocked)
-            return;
-
-        inputState = InputState.Fog;
-        isLocked = true;
-    }
-
-    private void OnBurnClicked()
-    {
-        if (isLocked)
-            return;
-
-        selectionRadius = 1;
-        inputState = InputState.Burn;
-        isLocked = true;
-    }
-
-    private void OnVenomClicked()
-    {
-        if (isLocked)
-            return;
-
-        selectionRadius = 1;
-        inputState = InputState.Venom;
-        isLocked = true;
-    }
-
-    private void OnBleedClicked()
-    {
-        if (isLocked)
-            return;
-
-        selectionRadius = 1;
-        inputState = InputState.Bleed;
-        isLocked = true;
-    }
-
-    private void OnCleanseBurnClicked()
-    {
-        if (isLocked)
-            return;
-
-        selectionRadius = 1;
-        inputState = InputState.CleanseBurn;
-        isLocked = true;
-    }
-
-    private void OnCleanseVenomClicked()
-    {
-        if (isLocked)
-            return;
-
-        selectionRadius = 1;
-        inputState = InputState.CleanseVenom;
-        isLocked = true;
-    }
-
-    private void OnImpactClicked()
-    {
-        PhysicsObject_Destructable.OnHighlighted += HighLightDestructable;
-        PhysicsObject_Destructable.OnStopHighlighted += StopHighLightDestructable;
-        inputState = InputState.Impact;
-        isLocked = true;
-    }
+    //private void OnImpactClicked()
+    //{
+    //    PhysicsObject_Destructable.OnHighlighted += HighLightDestructable;
+    //    PhysicsObject_Destructable.OnStopHighlighted += StopHighLightDestructable;
+    //    inputState = InputState.Impact;
+    //    isLocked = true;
+    //}
 
     #endregion
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            storedInputState = inputState;
-            inputState = InputState.Tooltip;
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            inputState = storedInputState;
-            storedInputState = InputState.None;
+        SetCursor();
 
+        SetMousePosition();
+
+        if (HasMouseChanged())
+        {
+            HighlightTile(true, false);
+        }
+
+        if (highlightedTiles.Count == 0)
+        {
             Manager_Tooltip.Instance.ClearTooltip();
+            return;
         }
 
-        switch (inputState)
+        mainTile = highlightedTiles[0];
+
+        if (mainTile == null)
+            return;
+
+        // Tooltip
+
+        if (Input.GetKey(KeyCode.Space))
+            Manager_Tooltip.Instance.SetToolTip(mainTile);
+        else
+            Manager_Tooltip.Instance.ClearTooltip();
+
+        // Fog
+
+        if (!mainTile.IsRevealed)
         {
-            case InputState.None:
-                break;
-            case InputState.Selection:
-                Selection();
-                break;
-            case InputState.Damage:
-                ApplyEffect(InputState.Damage);
-                break;
-            case InputState.Heal:
-                ApplyEffect(InputState.Heal);
+            Fog();
+            return;
+        }
+        else
+            ClearFogtiles();
+
+        // Movement
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Movement();
+            inputState = InputState.Movement;
+            return;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            ClearMovement(true);
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+            ToggleBurn();
+
+        if (Input.GetKeyDown(KeyCode.V))
+            ToggleVenom();
+
+        if (Input.GetKeyDown(KeyCode.B))
+            ToggleBleed();
+
+        // Negative Effect
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            switch (InputState)
+            {
+                case InputState.Default:
+                    Damage();
+                    break;
+                case InputState.Burn:
+                    ApplyBurn();
+                    break;
+                case InputState.Venom:
+                    ApplyVenom();
+                    break;
+                case InputState.Bleed:
+                    ApplyBleed();
+                    break;
+                case InputState.Slow:
+                    break;
+                case InputState.Stun:
+                    break;
+                case InputState.Blind:
+                    break;
+            }
+            return;
+        }
+
+        // Positive Effect
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            switch (InputState)
+            {
+                case InputState.Default:
+                    Heal();
+                    break;
+                case InputState.Burn:
+                    CleanseBurn();
+                    break;
+                case InputState.Venom:
+                    CleanseVenom();
+                    break;
+                case InputState.Bleed:
+                    break;
+                case InputState.Slow:
+                    break;
+                case InputState.Stun:
+                    break;
+                case InputState.Blind:
+                    break;
+            }
+            return;
+        }
+    }
+
+    #region StreamDeck Commands
+
+    [StreamDeckButton("ToggleBurn")]
+    public void ToggleBurn()
+    {
+        if (inputState != InputState.Burn)
+            inputState = InputState.Burn;
+        else
+            inputState = InputState.Default;
+    }
+
+    [StreamDeckButton("ToggleVenom")]
+    public void ToggleVenom()
+    {
+        if (inputState != InputState.Venom)
+            inputState = InputState.Venom;
+        else
+            inputState = InputState.Default;
+    }
+
+    [StreamDeckButton("ToggleBleed")]
+    public void ToggleBleed()
+    {
+        if (inputState != InputState.Bleed)
+            inputState = InputState.Bleed;
+        else
+            inputState = InputState.Default;
+    }
+
+    #endregion
+
+    private void SetCursor()
+    {
+        // cursor
+        switch (InputState)
+        {
+            case InputState.Default:
+                Cursor.SetCursor(
+                    null, Vector2.zero, CursorMode.Auto);
                 break;
             case InputState.Movement:
-                Movement();
-                break;
-            case InputState.Spawn:
-                Spawn();
-                break;
-            case InputState.Fog:
-                Fog();
-                break;
-            case InputState.Impact:
-                Impact();
+                Cursor.SetCursor(
+                    cursor_Movement,
+                    new Vector2(cursor_Movement.width / 2, cursor_Movement.height / 2),
+                    CursorMode.Auto);
                 break;
             case InputState.Burn:
-                ApplyEffect(InputState.Burn);
+                Cursor.SetCursor(
+                    cursor_Burn,
+                    new Vector2(cursor_Burn.width / 2, cursor_Burn.height / 2),
+                    CursorMode.Auto);
                 break;
             case InputState.Venom:
-                ApplyEffect(InputState.Venom);
+                Cursor.SetCursor(
+                    cursor_Venom,
+                    new Vector2(cursor_Venom.width / 2, cursor_Venom.height / 2),
+                    CursorMode.Auto);
                 break;
             case InputState.Bleed:
-                ApplyEffect(InputState.Bleed);
+                Cursor.SetCursor(
+                    cursor_Bleed,
+                    new Vector2(cursor_Bleed.width / 2, cursor_Bleed.height / 2),
+                    CursorMode.Auto);
                 break;
-            case InputState.CleanseBurn:
-                ApplyEffect(InputState.CleanseBurn);
+            case InputState.Slow:
                 break;
-            case InputState.CleanseVenom:
-                ApplyEffect(InputState.CleanseVenom);
+            case InputState.Stun:
                 break;
-            case InputState.Tooltip:
-                Tooltip();
+            case InputState.Blind:
+                break;
+            case InputState.Armor:
+                break;
+            case InputState.Barrier:
                 break;
             default:
                 break;
@@ -457,65 +471,6 @@ public class Manager_Input : MonoBehaviour
 
     #endregion
 
-    #region Apply Effect
-
-    private void ApplyEffect(InputState effect)
-    {
-        SetMousePosition();
-
-        if (HasMouseChanged())
-        {
-            HighlightTile(true, false);
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            foreach (Tile tile in highlightedTiles)
-            {
-                Character_World character_World = tile.World_Entity as Character_World;
-
-                if (character_World == null)
-                    continue;
-
-                switch (effect)
-                {
-                    case InputState.Damage:
-                        character_World.Damage(damageValue);
-                        break;
-                    case InputState.Heal:
-                        character_World.Heal(healValue);
-                        break;
-                    case InputState.Burn:
-                        character_World.ApplyBurn();
-                        break;
-                    case InputState.Venom:
-                        character_World.ApplyVenom();
-                        break;
-                    case InputState.Bleed:
-                        character_World.ApplyBleed();
-                        break;
-                    case InputState.CleanseBurn:
-                        character_World.CleanseBurn();
-                        break;
-                    case InputState.CleanseVenom:
-                        character_World.CleanseVenom();
-                        break;
-                }
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            ClearHighlights();
-            ClearSelection();
-
-            inputState = InputState.None;
-            isLocked = false;
-        }
-    }
-
-    #endregion
-
     #region Selection
 
     private void Selection()
@@ -552,45 +507,88 @@ public class Manager_Input : MonoBehaviour
             ClearHighlights();
             ClearSelection();
 
-            inputState = InputState.None;
-            isLocked = false;
+            inputState = InputState.Default;
         }
     }
 
     #endregion
 
-    #region Damage
+    #region Effects
 
     private void Damage()
     {
-        SetMousePosition();
+        Character_World character_World = mainTile.World_Entity as Character_World;
 
-        if (HasMouseChanged())
-        {
-            HighlightTile(true, false);
-        }
+        if (character_World == null)
+            return;
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            foreach (Tile tile in highlightedTiles)
-            {
-                Character_World character_World = tile.World_Entity as Character_World;
+        if (Input.GetKey(KeyCode.LeftControl))
+            character_World.Damage(5);
+        else
+            character_World.Damage(1);
+    }
 
-                if (character_World == null)
-                    continue;
+    private void Heal(int healValue = 1)
+    {
+        Character_World character_World = mainTile.World_Entity as Character_World;
 
-                character_World.Damage(damageValue);
-            }
-        }
+        if (character_World == null)
+            return;
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            ClearHighlights();
-            ClearSelection();
+        if (Input.GetKey(KeyCode.LeftControl))
+            character_World.Heal(5);
+        else
+            character_World.Heal(1);
+    }
 
-            inputState = InputState.None;
-            isLocked = false;
-        }
+    private void ApplyBurn()
+    {
+        Character_World character_World = mainTile.World_Entity as Character_World;
+
+        if (character_World == null)
+            return;
+
+        character_World.ApplyBurn();
+    }
+
+    private void CleanseBurn()
+    {
+        Character_World character_World = mainTile.World_Entity as Character_World;
+
+        if (character_World == null)
+            return;
+
+        character_World.CleanseBurn();
+    }
+
+    private void ApplyVenom()
+    {
+        Character_World character_World = mainTile.World_Entity as Character_World;
+
+        if (character_World == null)
+            return;
+
+        character_World.ApplyVenom();
+    }
+
+    private void CleanseVenom()
+    {
+        Character_World character_World = mainTile.World_Entity as Character_World;
+
+        if (character_World == null)
+            return;
+
+        character_World.CleanseVenom();
+    }
+
+    private void ApplyBleed()
+    {
+        Character_World character_World = mainTile.World_Entity as Character_World;
+
+        if (character_World == null)
+            return;
+
+        character_World.ApplyBleed();
     }
 
     #endregion
@@ -599,13 +597,6 @@ public class Manager_Input : MonoBehaviour
 
     private void Movement()
     {
-        SetMousePosition();
-
-        if (HasMouseChanged())
-        {
-            HighlightTile(false, false);
-        }
-
         if (Input.GetMouseButtonDown(0))
         {
             if (movementSelection == null)
@@ -634,58 +625,25 @@ public class Manager_Input : MonoBehaviour
         }
 
         if (Input.GetMouseButtonDown(1))
-        {
-            if (movementSelection != null)
-            {
-                movementSelection = null;
-                ClearSelection();
-                ClearMovementTiles();
-                return;
-            }
+            ClearMovement();
+    }
 
-            ClearHighlights();
+    private void ClearMovement(bool forceClear = false)
+    {
+        if (movementSelection != null)
+        {
+            movementSelection = null;
             ClearSelection();
             ClearMovementTiles();
 
-            inputState = InputState.None;
-            isLocked = false;
-        }
-    }
-
-    #endregion
-
-    #region Heal
-
-    private void Heal()
-    {
-        SetMousePosition();
-
-        if (HasMouseChanged())
-        {
-            HighlightTile(true, false);
+            if (!forceClear)
+                return;
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            foreach (Tile tile in highlightedTiles)
-            {
-                Character_World character_World = tile.World_Entity as Character_World;
+        ClearSelection();
+        ClearMovementTiles();
 
-                if (character_World == null)
-                    continue;
-
-                character_World.Heal(healValue);
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            ClearHighlights();
-            ClearSelection();
-
-            inputState = InputState.None;
-            isLocked = false;
-        }
+        inputState = InputState.Default;
     }
 
     #endregion
@@ -737,8 +695,7 @@ public class Manager_Input : MonoBehaviour
         ClearHighlights();
         ClearSelection();
 
-        inputState = InputState.None;
-        isLocked = false;
+        inputState = InputState.Default;
     }
 
     #endregion
@@ -747,27 +704,26 @@ public class Manager_Input : MonoBehaviour
 
     private void Fog()
     {
-        SetMousePosition();
+        HighLightFogTiles();
 
-        if (HasMouseChanged())
+        if (Input.GetMouseButton(0))
         {
-            HighLightFogTiles();
+            fogTimer += Time.deltaTime;
+
+            if (fogTimer >= 1)
+            {
+                fogTiles.ForEach(ft => ft.Reveal(true));
+                Manager_Fog.Instance.RevealRoom(currentRoomSelection);
+
+                ClearFogtiles();
+
+                fogTimer = 0;
+            }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
-            fogTiles.ForEach(ft => ft.Reveal(true));
-            Manager_Fog.Instance.RevealRoom(currentRoomSelection);
-
-            ClearFogtiles();
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            ClearFogtiles();
-
-            inputState = InputState.None;
-            isLocked = false;
+            fogTimer = 0;
         }
     }
 
@@ -824,8 +780,7 @@ public class Manager_Input : MonoBehaviour
             PhysicsObject_Destructable.OnHighlighted -= HighLightDestructable;
             PhysicsObject_Destructable.OnStopHighlighted -= StopHighLightDestructable;
 
-            inputState = InputState.None;
-            isLocked = false;
+            inputState = InputState.Default;
         }
     }
 
@@ -853,46 +808,32 @@ public class Manager_Input : MonoBehaviour
     }
 
     #endregion
-
-    #region Tooltip
-
-    private void Tooltip()
-    {
-        SetMousePosition();
-
-        if (HasMouseChanged())
-        {
-            HighlightTile(true, false);
-        }
-
-        if (highlightedTiles.Count == 0)
-        {
-            Manager_Tooltip.Instance.ClearTooltip();
-            return;
-        }
-
-        Tile highlightedTile = highlightedTiles[0];
-
-        Manager_Tooltip.Instance.SetToolTip(highlightedTile);
-    }
-
-    #endregion
 }
 
 public enum InputState
 {
-    None = 0,
-    Selection = 1,
-    Damage = 2,
-    Heal = 3,
-    Movement = 4,
-    Spawn = 5,
-    Fog = 6,
-    Impact = 7,
-    Burn = 8,
-    Venom = 9,
-    Bleed = 10,
-    CleanseBurn = 11,
-    CleanseVenom = 12,
-    Tooltip = 13
+    Default = 0,
+    Movement = 1,
+    Burn = 2,
+    Venom = 3,
+    Bleed = 4,
+    Slow = 5,
+    Stun = 6,
+    Blind = 7,
+    Armor = 8,
+    Barrier = 9
 }
+
+//Selection = 1,
+//Damage = 2,
+//Heal = 3,
+//Movement = 4,
+//Spawn = 5,
+//Fog = 6,
+//Impact = 7,
+//Burn = 8,
+//Venom = 9,
+//Bleed = 10,
+//CleanseBurn = 11,
+//CleanseVenom = 12,
+//Tooltip = 13

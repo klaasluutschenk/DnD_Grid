@@ -43,7 +43,7 @@ public class PhysicsObject_Destructable : PhysicsObject
 
     public bool Damage(int damage)
     {
-        healthPoints -= Manager_Input.Instance.DamageValue;
+        healthPoints -= damage;
 
         if (healthPoints <= 0)
         {
