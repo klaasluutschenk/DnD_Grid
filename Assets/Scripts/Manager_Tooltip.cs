@@ -39,6 +39,10 @@ public class Manager_Tooltip : MonoBehaviour
     [SerializeField] private TextMeshProUGUI character_Stunned_Value = default;
     [SerializeField] private GameObject character_Blinded = default;
     [SerializeField] private TextMeshProUGUI character_Blinded_Value = default;
+    [SerializeField] private GameObject character_Reload = default;
+    [SerializeField] private TextMeshProUGUI character_Reload_Value = default;
+    [SerializeField] private GameObject character_Rooted = default;
+    [SerializeField] private TextMeshProUGUI character_Rooted_Value = default;
 
     [Header("Fog")]
     [SerializeField] private GameObject fog_Container = default;
@@ -125,6 +129,12 @@ public class Manager_Tooltip : MonoBehaviour
 
         character_Blinded.SetActive(character.Blinded.StatActive);
         character_Blinded_Value.text = character.Blinded.StatValue.ToString();
+
+        character_Reload.SetActive(character.Reloading.StatActive);
+        character_Reload_Value.text = character.Reloading.StatValue.ToString();
+
+        character_Rooted.SetActive(character.Rooted.StatActive);
+        character_Rooted_Value.text = character.Rooted.StatValue.ToString();
     }
 
     private void SetFogTooltip(Tile tile)

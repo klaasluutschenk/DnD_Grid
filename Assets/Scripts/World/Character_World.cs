@@ -34,6 +34,8 @@ public class Character_World : World_Entity
     public Stat Slowed;
     public Stat Stunned;
     public Stat Blinded;
+    public Stat Reloading;
+    public Stat Rooted;
 
     private bool isAlive;
 
@@ -99,6 +101,8 @@ public class Character_World : World_Entity
         Slowed.SetValue(0);
         Stunned.SetValue(0);
         Blinded.SetValue(0);
+        Reloading.SetValue(0);
+        Rooted.SetValue(0);
     }
 
     private void SetupCharacter(Character character)
