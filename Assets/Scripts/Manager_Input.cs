@@ -4,8 +4,6 @@ using TMPro;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using F10.StreamDeckIntegration;
-using F10.StreamDeckIntegration.Attributes;
 
 public class Manager_Input : MonoBehaviour
 {
@@ -26,10 +24,17 @@ public class Manager_Input : MonoBehaviour
 
     [SerializeField] private Camera playerCamera;
 
-    [SerializeField] private Texture2D cursor_Movement = default;
-    [SerializeField] private Texture2D cursor_Burn = default;
-    [SerializeField] private Texture2D cursor_Venom = default;
+    [SerializeField] private Texture2D cursor_Armor = default;
+    [SerializeField] private Texture2D cursor_Barrier = default;
     [SerializeField] private Texture2D cursor_Bleed = default;
+    [SerializeField] private Texture2D cursor_Blinded = default;
+    [SerializeField] private Texture2D cursor_Burn = default;
+    [SerializeField] private Texture2D cursor_Movement = default;
+    [SerializeField] private Texture2D cursor_Reload = default;
+    [SerializeField] private Texture2D cursor_Root = default;
+    [SerializeField] private Texture2D cursor_Slowed = default;
+    [SerializeField] private Texture2D cursor_Stun = default;
+    [SerializeField] private Texture2D cursor_Venom = default;
 
     private InputState inputState = InputState.Default;
 
@@ -58,16 +63,6 @@ public class Manager_Input : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    private void OnEnable()
-    {
-        StreamDeck.Add(this);
-    }
-
-    private void OnDisable()
-    {
-        StreamDeck.Remove(this);
     }
 
     #region UI Interaction
@@ -163,14 +158,55 @@ public class Manager_Input : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
-            ToggleBurn();
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ToggleInputState(InputState.Armor);
+        }
 
-        if (Input.GetKeyDown(KeyCode.V))
-            ToggleVenom();
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ToggleInputState(InputState.Barrier);
+        }
 
-        if (Input.GetKeyDown(KeyCode.B))
-            ToggleBleed();
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ToggleInputState(InputState.Bleed);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            ToggleInputState(InputState.Blinded);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            ToggleInputState(InputState.Burn);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            ToggleInputState(InputState.Reload);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            ToggleInputState(InputState.Root);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            ToggleInputState(InputState.Slowed);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            ToggleInputState(InputState.Stun);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            ToggleInputState(InputState.Venom);
+        }
 
         // Negative Effect
 
@@ -181,20 +217,32 @@ public class Manager_Input : MonoBehaviour
                 case InputState.Default:
                     Damage();
                     break;
-                case InputState.Burn:
-                    ApplyBurn();
+                case InputState.Movement:
                     break;
-                case InputState.Venom:
-                    ApplyVenom();
+                case InputState.Armor:
+                    break;
+                case InputState.Barrier:
                     break;
                 case InputState.Bleed:
                     ApplyBleed();
                     break;
-                case InputState.Slow:
+                case InputState.Blinded:
+                    break;
+                case InputState.Burn:
+                    ApplyBurn();
+                    break;
+                case InputState.Reload:
+                    break;
+                case InputState.Root:
+                    break;
+                case InputState.Slowed:
                     break;
                 case InputState.Stun:
                     break;
-                case InputState.Blind:
+                case InputState.Venom:
+                    ApplyVenom();
+                    break;
+                default:
                     break;
             }
             return;
@@ -209,59 +257,48 @@ public class Manager_Input : MonoBehaviour
                 case InputState.Default:
                     Heal();
                     break;
+                case InputState.Movement:
+                    break;
+                case InputState.Armor:
+                    break;
+                case InputState.Barrier:
+                    break;
+                case InputState.Bleed:
+                    ApplyBleed();
+                    break;
+                case InputState.Blinded:
+                    break;
                 case InputState.Burn:
                     CleanseBurn();
+                    break;
+                case InputState.Reload:
+                    break;
+                case InputState.Root:
+                    break;
+                case InputState.Slowed:
+                    break;
+                case InputState.Stun:
                     break;
                 case InputState.Venom:
                     CleanseVenom();
                     break;
-                case InputState.Bleed:
-                    break;
-                case InputState.Slow:
-                    break;
-                case InputState.Stun:
-                    break;
-                case InputState.Blind:
+                default:
                     break;
             }
             return;
         }
     }
 
-    #region StreamDeck Commands
-
-    [StreamDeckButton("ToggleBurn")]
-    public void ToggleBurn()
+    public void ToggleInputState(InputState newInputState)
     {
-        if (inputState != InputState.Burn)
-            inputState = InputState.Burn;
+        if (inputState != newInputState)
+            inputState = newInputState;
         else
             inputState = InputState.Default;
     }
-
-    [StreamDeckButton("ToggleVenom")]
-    public void ToggleVenom()
-    {
-        if (inputState != InputState.Venom)
-            inputState = InputState.Venom;
-        else
-            inputState = InputState.Default;
-    }
-
-    [StreamDeckButton("ToggleBleed")]
-    public void ToggleBleed()
-    {
-        if (inputState != InputState.Bleed)
-            inputState = InputState.Bleed;
-        else
-            inputState = InputState.Default;
-    }
-
-    #endregion
 
     private void SetCursor()
     {
-        // cursor
         switch (InputState)
         {
             case InputState.Default:
@@ -274,16 +311,16 @@ public class Manager_Input : MonoBehaviour
                     new Vector2(cursor_Movement.width / 2, cursor_Movement.height / 2),
                     CursorMode.Auto);
                 break;
-            case InputState.Burn:
+            case InputState.Armor:
                 Cursor.SetCursor(
-                    cursor_Burn,
-                    new Vector2(cursor_Burn.width / 2, cursor_Burn.height / 2),
+                    cursor_Armor,
+                    new Vector2(cursor_Armor.width / 2, cursor_Armor.height / 2),
                     CursorMode.Auto);
                 break;
-            case InputState.Venom:
+            case InputState.Barrier:
                 Cursor.SetCursor(
-                    cursor_Venom,
-                    new Vector2(cursor_Venom.width / 2, cursor_Venom.height / 2),
+                    cursor_Barrier,
+                    new Vector2(cursor_Barrier.width / 2, cursor_Barrier.height / 2),
                     CursorMode.Auto);
                 break;
             case InputState.Bleed:
@@ -292,15 +329,47 @@ public class Manager_Input : MonoBehaviour
                     new Vector2(cursor_Bleed.width / 2, cursor_Bleed.height / 2),
                     CursorMode.Auto);
                 break;
-            case InputState.Slow:
+            case InputState.Blinded:
+                Cursor.SetCursor(
+                    cursor_Blinded,
+                    new Vector2(cursor_Blinded.width / 2, cursor_Blinded.height / 2),
+                    CursorMode.Auto);
+                break;
+            case InputState.Burn:
+                Cursor.SetCursor(
+                    cursor_Burn,
+                    new Vector2(cursor_Burn.width / 2, cursor_Burn.height / 2),
+                    CursorMode.Auto);
+                break;
+            case InputState.Reload:
+                Cursor.SetCursor(
+                    cursor_Reload,
+                    new Vector2(cursor_Reload.width / 2, cursor_Reload.height / 2),
+                    CursorMode.Auto);
+                break;
+            case InputState.Root:
+                Cursor.SetCursor(
+                    cursor_Root,
+                    new Vector2(cursor_Root.width / 2, cursor_Root.height / 2),
+                    CursorMode.Auto);
+                break;
+            case InputState.Slowed:
+                Cursor.SetCursor(
+                    cursor_Slowed,
+                    new Vector2(cursor_Slowed.width / 2, cursor_Slowed.height / 2),
+                    CursorMode.Auto);
                 break;
             case InputState.Stun:
+                Cursor.SetCursor(
+                    cursor_Stun,
+                    new Vector2(cursor_Stun.width / 2, cursor_Stun.height / 2),
+                    CursorMode.Auto);
                 break;
-            case InputState.Blind:
-                break;
-            case InputState.Armor:
-                break;
-            case InputState.Barrier:
+            case InputState.Venom:
+                Cursor.SetCursor(
+                    cursor_Venom,
+                    new Vector2(cursor_Venom.width / 2, cursor_Venom.height / 2),
+                    CursorMode.Auto);
                 break;
             default:
                 break;
@@ -812,16 +881,18 @@ public class Manager_Input : MonoBehaviour
 
 public enum InputState
 {
-    Default = 0,
-    Movement = 1,
-    Burn = 2,
-    Venom = 3,
-    Bleed = 4,
-    Slow = 5,
-    Stun = 6,
-    Blind = 7,
-    Armor = 8,
-    Barrier = 9
+    Default = -1,
+    Movement = 0,
+    Armor = 1,
+    Barrier = 2,
+    Bleed = 3,
+    Blinded = 4,
+    Burn = 5,
+    Reload = 6,
+    Root = 7,
+    Slowed = 8,
+    Stun = 9,
+    Venom = 10
 }
 
 //Selection = 1,

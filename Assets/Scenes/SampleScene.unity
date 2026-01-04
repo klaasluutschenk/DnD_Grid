@@ -5268,10 +5268,17 @@ MonoBehaviour:
   button_Spawn: {fileID: 505451072}
   button_Impact: {fileID: 1674095846}
   playerCamera: {fileID: 519420031}
-  cursor_Movement: {fileID: 2800000, guid: 7666cffb3817c6044b3f62445cf578ad, type: 3}
-  cursor_Burn: {fileID: 2800000, guid: 9113a00a32d397e4ba0decab00c41cad, type: 3}
-  cursor_Venom: {fileID: 2800000, guid: be0fba21fcad84b4ca0ceeb70f7226b6, type: 3}
+  cursor_Armor: {fileID: 2800000, guid: 41c18b13f314ffe409c72887aa75ad0c, type: 3}
+  cursor_Barrier: {fileID: 2800000, guid: 76e9635590857dd47b371d5b283089d0, type: 3}
   cursor_Bleed: {fileID: 2800000, guid: 279a245004980bc42929e454022e5c93, type: 3}
+  cursor_Blinded: {fileID: 2800000, guid: 3991e7b2a8298da468228755de4b1b20, type: 3}
+  cursor_Burn: {fileID: 2800000, guid: 9113a00a32d397e4ba0decab00c41cad, type: 3}
+  cursor_Movement: {fileID: 2800000, guid: 7666cffb3817c6044b3f62445cf578ad, type: 3}
+  cursor_Reload: {fileID: 2800000, guid: f7047b3b177704c4782400659fae1cbf, type: 3}
+  cursor_Root: {fileID: 2800000, guid: fa603c052f9af5044a1c4c09f507dd7c, type: 3}
+  cursor_Slowed: {fileID: 2800000, guid: b9449c1f8fd1b1d489ecf4267f02ca0d, type: 3}
+  cursor_Stun: {fileID: 2800000, guid: 9f9e8e0fdcdf5274f816c08d189ace77, type: 3}
+  cursor_Venom: {fileID: 2800000, guid: be0fba21fcad84b4ca0ceeb70f7226b6, type: 3}
   mouseGridPosition: {x: 0, y: 0, z: 0}
   oldMouseGridPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &1068726223
