@@ -42,6 +42,9 @@ public class Tile : MonoBehaviour
     {
         this.worldEntity = worldEntity;
 
+        if (IsRevealed)
+            return;
+
         RevealWorldEntity(isRevealed);
     }
 

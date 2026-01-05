@@ -86,21 +86,19 @@ public class Character_World : World_Entity
 
     private void OnTurnStarted(Character_Initiative character_Initiative)
     {
-        if (character == character_Initiative.Character)
-        {
-            SetInitiative(true);
-        }
+        if (character != character_Initiative.Character)
+            return;
 
+        SetInitiative(true);
         StartTurn();
     }
 
     private void OnTurnEnd(Character_Initiative character_Initiative)
     {
-        if (character == character_Initiative.Character)
-        {
-            SetInitiative(false);
-        }
+        if (character != character_Initiative.Character)
+            return;
 
+        SetInitiative(false);
         EndTurn();
     }
 
