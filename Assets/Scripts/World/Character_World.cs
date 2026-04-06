@@ -66,7 +66,7 @@ public class Character_World : World_Entity
         if (!isRevealed)
             return;
 
-        Manager_Initative.Instance.AddToInitiative(character);
+        Manager_Characters.Instance.RevealCharacter(this);
     }
 
     public void SetInitiative(bool active)

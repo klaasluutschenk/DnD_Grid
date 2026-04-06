@@ -43,17 +43,6 @@ public class Tile : MonoBehaviour
     {
         this.worldEntity = worldEntity;
 
-        if (IsRevealed)
-        {
-            Character_World myCharacter = (Character_World)worldEntity;
-
-            if (myCharacter == null)
-                return;
-
-            Manager_Initative.Instance.AddToInitiative(myCharacter.Character);
-            return;
-        }
-
         RevealWorldEntity(isRevealed);
     }
 

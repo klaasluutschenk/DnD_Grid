@@ -13,6 +13,7 @@ public class Manager_Characters : MonoBehaviour
 
     private List<Character> activeCharacters = new List<Character>();
     private List<Character_World> activeWorldCharacters = new List<Character_World>();
+    private List<Character_World> hiddenWorldCharacters = new List<Character_World>();
     private List<World_Entity> worldEntities = new List<World_Entity>();
 
     private void Awake()
@@ -65,12 +66,24 @@ public class Manager_Characters : MonoBehaviour
 
         newWorldCharacter.Setup(character);
 
-        activeWorldCharacters.Add(newWorldCharacter);
+        if (newWorldCharacter.Tile.IsRevealed)
+        {
+            activeWorldCharacters.Add(newWorldCharacter);
+            Manager_Initative.Instance.AddToInitiative(character);
+        }
+        else
+            hiddenWorldCharacters.Add(newWorldCharacter);
+    }
 
-        //if (newWorldCharacter.Tile.IsRevealed)
-        //    Manager_Initative.Instance.AddToInitiative(character);
+    public void RevealCharacter(Character_World character)
+    {
+        if (!hiddenWorldCharacters.Contains(character))
+            return;
 
-        // Adding the character to the initiative is handled by the tiles.
+        hiddenWorldCharacters.Remove(character);
+        activeWorldCharacters.Add(character);
+
+        Manager_Initative.Instance.AddToInitiative(character.Character);
     }
 
     public void SpawnEntity(Entity entity, Vector3 position)
