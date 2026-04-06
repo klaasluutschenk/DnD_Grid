@@ -12,15 +12,28 @@ public class Character : Entity
 
     public Color InitativeColor;
 
+    public bool HasNoInitiative;
     public int initiative;
     public List<int> AdditionalInitiatives;
 
+
+    [Header("Base Stats")]
     public int HealthPoints;
     public int Armor;
     public int Barier;
     public int Movement;
     public int Perception;
     public int Dodge;
+
+    [Header("Base Effects")]
+    public int Bleed;
+    public int Blinded;
+    public int Burn;
+    public int Reload;
+    public int Root;
+    public int Slowed;
+    public int Stun;
+    public int Venom;
 
     public List<Ability> Abilities;
 }

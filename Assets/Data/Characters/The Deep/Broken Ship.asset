@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
+  m_Name: Broken Ship
+  m_EditorClassIdentifier: 
+  Name: Broken Ship
+  Description: The back of the ship come alive.
+  Sprite: {fileID: 21300000, guid: e87d13f673d549649be3dc6e0e311c60, type: 3}
+  IsPlayer: 0
+  CustomInitiative: 0
+  IsMinion: 0
+  IsPlayerTeam: 0
+  InitativeColor: {r: 0, g: 0, b: 0, a: 0}
+  initiative: 16
+  AdditionalInitiatives: 08000000
+  HealthPoints: 35
+  Armor: 0
+  Barier: 0
+  Movement: 0
+  Perception: 0
+  Dodge: 0
+  Abilities:
+  - {fileID: 11400000, guid: eb01d53ae49667d47b00841a5c2d6a91, type: 2}
+  - {fileID: 11400000, guid: 17efa0e8301f5ff439f4c3653618051c, type: 2}
+  - {fileID: 11400000, guid: 9418fd5349bb1574c8d31da1d838729d, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Combat Encounter Manor the Fourth
   m_EditorClassIdentifier: 
   Background: {fileID: -6495764387086002316, guid: dafe29ba7dc94eb49981246723284fae, type: 3}
+  BackgroundSizeModifier: 1
   PhysicsObject: {fileID: 3826081070071633804, guid: b9db5cd2615a01c4d8d689001962720e, type: 3}
   FogObject: {fileID: 6097160243529988637, guid: 427c393c036f3864681c1d6c82997e2e, type: 3}
   Characters:

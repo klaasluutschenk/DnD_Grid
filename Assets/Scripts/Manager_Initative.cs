@@ -60,6 +60,9 @@ public class Manager_Initative : MonoBehaviour
 
     private void AddNewCharacter(Character character, int customInitative = -1)
     {
+        if (character.HasNoInitiative)
+            return;
+
         if (character.CustomInitiative && customInitative == -1)
         {
             customInitiativesToSetup.Add(character);
@@ -141,6 +144,9 @@ public class Manager_Initative : MonoBehaviour
 
     public void RemoveCharacter(Character character)
     {
+        if (character.HasNoInitiative)
+            return;
+
         List<Character_Initiative> characterAndClones = GetCharactersInInitiative(character);
 
         bool hasBeenAddedToInactiveList = false;

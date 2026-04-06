@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd122d5571122a449e233422e04d423, type: 3}
+  m_Name: Combat Encounter Manor Kastorm
+  m_EditorClassIdentifier: 
+  Background: {fileID: 21300000, guid: afad0d3b5606b1e43a8c6e64f268eca0, type: 3}
+  BackgroundSizeModifier: 2
+  PhysicsObject: {fileID: 3826081070071633804, guid: 876d7cb0e605e4549b879aebf52d7b54, type: 3}
+  FogObject: {fileID: 6097160243529988637, guid: 73e10adba32db6b46a2a674157385d9a, type: 3}
+  Characters:
+  - Character: {fileID: 11400000, guid: 7f1282deede7bb844aeda4c13af2150f, type: 2}
+    Position: {x: -13.5, y: 1.5, z: -1}
+  - Character: {fileID: 11400000, guid: ccb828b5c19354748ad7acfa3e435615, type: 2}
+    Position: {x: -13.5, y: 0.5, z: -1}
+  - Character: {fileID: 11400000, guid: d81766ffba14fb64bb4323df09688e69, type: 2}
+    Position: {x: -13.5, y: -0.5, z: -1}
+  - Character: {fileID: 11400000, guid: b04147e2834c07440aecd057009c1402, type: 2}
+    Position: {x: -13.5, y: -1.5, z: -1}
+  SpawnableCharacters:
+  - {fileID: 11400000, guid: 5eaf7a77c0fc1284f98c059a56a3c511, type: 2}
+  - {fileID: 11400000, guid: e8908f8e1389c284c9309f79743dd59a, type: 2}
+  - {fileID: 11400000, guid: db16fa1a9fb29164bb273c3df9c23978, type: 2}
+  - {fileID: 11400000, guid: febca0f2244f9d045999a753e5f654f0, type: 2}
+  - {fileID: 11400000, guid: ef0cef20046cb394a91ea0bfce0c7ef4, type: 2}
+  - {fileID: 11400000, guid: 8583f9065839dca49bbf447b98ec02b4, type: 2}
+  - {fileID: 11400000, guid: f0d24f83ac641f44c8aea0afa5070d28, type: 2}

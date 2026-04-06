@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee61d1f82d0e2224a93d4576de9fa4bb, type: 3}
+  m_Name: Shroom Punch
+  m_EditorClassIdentifier: 
+  Name: Shroom Punch
+  Description: A mushy fist punching very hard.
+  HasOutcomes: 1
+  Outcome1: '2 Damage
+
+    1 Poison Damage'
+  Outcome2: '4 Damage
+
+    2 Poison Damage'
+  Outcome3: '6 Damage
+
+    3 Poison Damage'

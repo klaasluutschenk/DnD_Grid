@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
+  m_Name: Errosive Coral
+  m_EditorClassIdentifier: 
+  Name: Errosive Coral
+  Description: Corrupts everything it touches, turning it to coral reef.
+  Sprite: {fileID: 21300000, guid: 7d80cd888ea64f34790e9b868942ed33, type: 3}
+  IsPlayer: 0
+  CustomInitiative: 0
+  IsMinion: 1
+  IsPlayerTeam: 0
+  InitativeColor: {r: 0, g: 0, b: 0, a: 0}
+  initiative: 12
+  AdditionalInitiatives: 
+  HealthPoints: 4
+  Armor: 0
+  Barier: 0
+  Movement: 9
+  Perception: 0
+  Dodge: 0
+  Abilities:
+  - {fileID: 11400000, guid: 95c93d29d5b83954da03bf25776e810d, type: 2}
+  - {fileID: 11400000, guid: ffdcd767f98468b41b6d121e9f182900, type: 2}

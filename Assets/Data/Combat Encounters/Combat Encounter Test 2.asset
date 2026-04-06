@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Combat Encounter Test 2
   m_EditorClassIdentifier: 
   Background: {fileID: -3403997929110446498, guid: dae2f62e1f9c76b4ea16ffe9f21a1f96, type: 3}
+  BackgroundSizeModifier: 1
   PhysicsObject: {fileID: 5496054743207719919, guid: 8bdbe65ecf3d54f42a3f8bd89f0e27a2, type: 3}
   FogObject: {fileID: 6097160243529988637, guid: 1712e9af687e44941b57011fa14dfd55, type: 3}
   Characters:

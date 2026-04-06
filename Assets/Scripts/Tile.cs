@@ -11,6 +11,7 @@ public class Tile : MonoBehaviour
     public Transform DetectionCube => transform_detectionCube;
     public int RoomIndex => roomIndex;
     public bool IsRevealed => isRevealed;
+    public bool HasWorldEntity => worldEntity != null;
 
     [SerializeField] private GameObject gameObject_Selected = default;
     [SerializeField] private GameObject gameObject_Highlighted = default;
@@ -43,7 +44,15 @@ public class Tile : MonoBehaviour
         this.worldEntity = worldEntity;
 
         if (IsRevealed)
+        {
+            Character_World myCharacter = (Character_World)worldEntity;
+
+            if (myCharacter == null)
+                return;
+
+            Manager_Initative.Instance.AddToInitiative(myCharacter.Character);
             return;
+        }
 
         RevealWorldEntity(isRevealed);
     }

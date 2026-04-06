@@ -158,6 +158,23 @@ public class Manager_Input : MonoBehaviour
             return;
         }
 
+        // Spawning
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (inputState == InputState.Default)
+            {
+                ActivateSpawning();
+                return;
+            }
+
+            if (inputState == InputState.Spawning)
+            {
+                DeactivateSpawing();
+                return;
+            }
+        }
+
         // Movement
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -221,6 +238,12 @@ public class Manager_Input : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             ToggleInputState(InputState.Venom);
+        }
+
+        if (inputState == InputState.Spawning)
+        {
+            Spawning();
+            return;
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -633,6 +656,48 @@ public class Manager_Input : MonoBehaviour
             character_World.SetInitiative(true);
     }
 
+    #region Spawning
+
+    private void ActivateSpawning()
+    {
+        ToggleInputState(InputState.Spawning);
+
+        OnSpawnRequest?.Invoke();
+    }
+
+    private void DeactivateSpawing()
+    {
+        ToggleInputState(InputState.Default);
+        characterToSpawn = null;
+
+        OnStopSpawnRequest?.Invoke();
+    }
+
+    public void SetCharacterToSpawn(Character character)
+    {
+        characterToSpawn = character;
+    }
+
+    private void Spawning()
+    {
+        if (characterToSpawn == null)
+            return;
+
+        if (mainTile.HasWorldEntity)
+            return;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Manager_Characters.Instance.SpawnCharacter(characterToSpawn, mainTile.transform.position);
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            DeactivateSpawing();
+        }
+    }
+
+    #endregion
+
     #region Movement
 
     private void Movement()
@@ -682,58 +747,6 @@ public class Manager_Input : MonoBehaviour
 
         ClearSelection();
         ClearMovementTiles();
-
-        inputState = InputState.Default;
-    }
-
-    #endregion
-
-    #region Spawning
-
-    public void SetCharacterToSpawn(Character character)
-    {
-        characterToSpawn = character;
-    }
-
-    private void Spawn()
-    {
-        SetMousePosition();
-
-        if (HasMouseChanged())
-        {
-            HighlightTile(false, false);
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            foreach (Tile tile in highlightedTiles)
-            {
-                if (tile.World_Entity != null)
-                    continue;
-
-                Manager_Characters.Instance.SpawnCharacter(characterToSpawn, tile.transform.position);
-
-                if (!Manager_Initative.Instance.IsCharacterInPlay(characterToSpawn) && characterToSpawn.CustomInitiative)
-                {
-                    StopSpawn();
-                    return;
-                }
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            StopSpawn();
-        }
-    }
-
-    private void StopSpawn()
-    {
-        OnStopSpawnRequest?.Invoke();
-        characterToSpawn = null;
-
-        ClearHighlights();
-        ClearSelection();
 
         inputState = InputState.Default;
     }
@@ -864,5 +877,6 @@ public enum InputState
     Slowed = 8,
     Stun = 9,
     Venom = 10,
-    Initiative = 11
+    Initiative = 11,
+    Spawning = 12
 }

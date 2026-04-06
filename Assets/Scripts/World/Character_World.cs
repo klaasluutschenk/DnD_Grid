@@ -141,7 +141,53 @@ public class Character_World : World_Entity
         SetHP(character.HealthPoints);
         SetArmor(character.Armor);
         SetBarrier(character.Barier);
+
+        ApplyBaseEffects();
+
         text_CharacterHP.enabled = character.IsPlayer;
+    }
+
+    private void ApplyBaseEffects()
+    {
+        for (int bleedValue = 0; bleedValue < character.Bleed; bleedValue++)
+        {
+            ApplyBleed();
+        }
+
+        for (int BlindedValue = 0; BlindedValue < character.Blinded; BlindedValue++)
+        {
+            ApplyBlinded();
+        }
+
+        for (int BurnValue = 0; BurnValue < character.Burn; BurnValue++)
+        {
+            ApplyBurn();
+        }
+
+        for (int ReloadValue = 0; ReloadValue < character.Reload; ReloadValue++)
+        {
+            ApplyReloading();
+        }
+
+        for (int RootValue = 0; RootValue < character.Root; RootValue++)
+        {
+            ApplyRooted();
+        }
+
+        for (int SlowedValue = 0; SlowedValue < character.Slowed; SlowedValue++)
+        {
+            ApplySlowed();
+        }
+
+        for (int StunValue = 0; StunValue < character.Stun; StunValue++)
+        {
+            ApplyStunned();
+        }
+
+        for (int VenomValue = 0; VenomValue < character.Venom; VenomValue++)
+        {
+            ApplyVenom();
+        }
     }
 
     private void StartTurn()

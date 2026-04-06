@@ -8,10 +8,12 @@ public class Manager_Characters : MonoBehaviour
 
     [SerializeField] private Character_World character_World_Prefab = default;
     [SerializeField] private Character_World character_World_Minion_Prefab = default;
+    [SerializeField] private World_Entity worldEntity_Prefab = default;
     [SerializeField] private Transform characterContainer = default;
 
     private List<Character> activeCharacters = new List<Character>();
     private List<Character_World> activeWorldCharacters = new List<Character_World>();
+    private List<World_Entity> worldEntities = new List<World_Entity>();
 
     private void Awake()
     {
@@ -39,6 +41,13 @@ public class Manager_Characters : MonoBehaviour
         {
             SpawnCharacter(cc.Character, cc.Position);
         }
+
+        List<CombatEncounter_Entity> combatEncounter_Entities = combatEncounter.WorldEntities;
+
+        foreach (CombatEncounter_Entity entity in combatEncounter_Entities)
+        {
+            SpawnEntity(entity.Entity, entity.Position);
+        }
     }
 
     public void SpawnCharacter(Character character, Vector3 position)
@@ -58,7 +67,23 @@ public class Manager_Characters : MonoBehaviour
 
         activeWorldCharacters.Add(newWorldCharacter);
 
+        //if (newWorldCharacter.Tile.IsRevealed)
+        //    Manager_Initative.Instance.AddToInitiative(character);
+
         // Adding the character to the initiative is handled by the tiles.
+    }
+
+    public void SpawnEntity(Entity entity, Vector3 position)
+    {
+        World_Entity newEntity = Instantiate(worldEntity_Prefab, characterContainer);
+
+        newEntity.gameObject.name = entity.Name;
+
+        newEntity.transform.position = position;
+
+        newEntity.Setup(entity);
+
+        worldEntities.Add(newEntity);
     }
 
     private void OnDeSpawned(World_Entity world_Entity)

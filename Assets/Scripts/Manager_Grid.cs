@@ -44,8 +44,13 @@ public class Manager_Grid : MonoBehaviour
     private void OnGridRequest(CombatEncounter combatEncounter)
     {
         SpawnPhysics(combatEncounter.PhysicsObject);
-        SpawnFog(combatEncounter.FogObject);
-        GenerateGrid(combatEncounter.Background);
+
+        if (combatEncounter.FogObject != null)
+        {
+            SpawnFog(combatEncounter.FogObject);
+        }
+
+        GenerateGrid(combatEncounter);
     }
 
     #region Grid
@@ -58,10 +63,12 @@ public class Manager_Grid : MonoBehaviour
         isGridGenerated = false;
     }
 
-    private void GenerateGrid(Sprite sprite)
+    private void GenerateGrid(CombatEncounter combatEncounter)
     {
-        int gridWidth = (int)sprite.rect.width / 100;
-        int gridHeight = (int)sprite.rect.height / 100;
+        Sprite sprite = combatEncounter.Background;
+
+        int gridWidth = (int)sprite.rect.width * combatEncounter.BackgroundSizeModifier / 100;
+        int gridHeight = (int)sprite.rect.height * combatEncounter.BackgroundSizeModifier / 100;
 
         for (int x = 0; x < gridWidth; x++)
         {
