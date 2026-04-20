@@ -23,6 +23,8 @@ public class Manager_Combat : MonoBehaviour
 
     [Header("Combat Prep")]
     [SerializeField] private Transform CharacterContainer;
+    [SerializeField] private Transform EntityContainer;
+    [SerializeField] private CombatPrepCharacter CombatPrepCharacterPrefab;
     [SerializeField] private CombatPrepEntity CombatPrepEntityPrefab;
     [SerializeField] private SpriteRenderer background;
 
@@ -69,15 +71,27 @@ public class Manager_Combat : MonoBehaviour
 
     public void SaveCombatEncounter()
     {
+        // Characters
         List<CombatEncounter_Character> combatEncounterCharacters = new List<CombatEncounter_Character>();
 
-        List<CombatPrepEntity> availableCharacters = CharacterContainer.GetComponentsInChildren<CombatPrepEntity>().ToList();
-        foreach (CombatPrepEntity entity in availableCharacters)
+        List<CombatPrepCharacter> availableCharacters = CharacterContainer.GetComponentsInChildren<CombatPrepCharacter>().ToList();
+        foreach (CombatPrepCharacter character in availableCharacters)
         {
-            combatEncounterCharacters.Add(entity.GetCombatPrepEntityData());
+            combatEncounterCharacters.Add(character.GetCombatPrepCharacterData());
         }
 
         defaultCombatEncounter.Characters = combatEncounterCharacters;
+
+        // Entities
+        List<CombatEncounter_Entity> combatEncounterEntities = new List<CombatEncounter_Entity>();
+
+        List<CombatPrepEntity> availableEntities = EntityContainer.GetComponentsInChildren<CombatPrepEntity>().ToList();
+        foreach (CombatPrepEntity entity in availableEntities)
+        {
+            combatEncounterEntities.Add(entity.GetCombatPrepEntityData());
+        }
+
+        defaultCombatEncounter.WorldEntities = combatEncounterEntities;
     }
 
     public void LoadCombatPrep()
@@ -88,11 +102,20 @@ public class Manager_Combat : MonoBehaviour
 
         foreach (CombatEncounter_Character character in defaultCombatEncounter.Characters)
         {
-            CombatPrepEntity newCharacter = Instantiate(CombatPrepEntityPrefab, CharacterContainer);
+            CombatPrepCharacter newCharacter = Instantiate(CombatPrepCharacterPrefab, CharacterContainer);
 
             newCharacter.transform.position = character.Position;
 
             newCharacter.SetCharacter(character.Character);
+        }
+
+        foreach (CombatEncounter_Entity entity in defaultCombatEncounter.WorldEntities)
+        {
+            CombatPrepEntity newEntity = Instantiate(CombatPrepEntityPrefab, EntityContainer);
+
+            newEntity.transform.position = entity.Position;
+
+            newEntity.SetEntity(entity.Entity);
         }
     }
 
@@ -101,6 +124,11 @@ public class Manager_Combat : MonoBehaviour
         for (int i = CharacterContainer.childCount - 1; i >= 0; i--)
         {
             DestroyImmediate(CharacterContainer.GetChild(i).gameObject);
+        }
+
+        for (int i = EntityContainer.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(EntityContainer.GetChild(i).gameObject);
         }
     }
 }

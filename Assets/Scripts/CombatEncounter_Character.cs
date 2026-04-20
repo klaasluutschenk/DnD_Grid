@@ -18,4 +18,10 @@ public class CombatEncounter_Entity
 {
     public Entity Entity;
     public Vector3 Position;
+
+    public CombatEncounter_Entity(Entity entity, Vector3 position)
+    {
+        Entity = entity;
+        Position = position;
+    }
 }

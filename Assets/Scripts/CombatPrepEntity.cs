@@ -2,41 +2,32 @@ using UnityEngine;
 
 public class CombatPrepEntity : MonoBehaviour
 {
-    [SerializeField] private Character character;
+    [SerializeField] private Entity entity;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private GameObject playerObject;
 
     private void OnValidate()
     {
-        if (character == null)
+        if (entity == null)
             return;
 
-        SetCharacter(character);
+        SetEntity(entity);
     }
 
-    public void SetCharacter(Character character)
+    public void SetEntity(Entity entity)
     {
-        this.character = character;
+        this.entity = entity;
 
-        string displayName = character.IsPlayer ? $"Player - {character.Name}" : character.Name;
+        name = entity.Name;
 
-        name = displayName;
-
-        spriteRenderer.gameObject.SetActive(!character.IsPlayer);
-        playerObject.SetActive(character.IsPlayer);
-
-        if (character.Sprite != null)
-            spriteRenderer.sprite = character.Sprite;
-
-        float size = character.IsMinion ? 0.6f : 0.8f;
-        transform.localScale = new Vector3(size, size, size);
+        if (entity.Sprite != null)
+            spriteRenderer.sprite = entity.Sprite;
     }
 
-    public CombatEncounter_Character GetCombatPrepEntityData()
+    public CombatEncounter_Entity GetCombatPrepEntityData()
     {
-        if (character == null)
+        if (entity == null)
             return null;
 
-        return new CombatEncounter_Character(character, new Vector3(transform.position.x, transform.position.y, -1));
+        return new CombatEncounter_Entity(entity, new Vector3(transform.position.x, transform.position.y, -1));
     }
 }
