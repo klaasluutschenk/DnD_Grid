@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: Reef Dwarves
+  m_Name: The Deep - Reef Dwarves
   m_EditorClassIdentifier: 
   Name: Reef Dwarf
   Description: Half Reef, half squid.
@@ -20,6 +20,8 @@ MonoBehaviour:
   IsMinion: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 0}
+  CombatPrepColor: {r: 0.5512282, g: 0.7921569, b: 0.32549024, a: 1}
+  HasNoInitiative: 0
   initiative: 5
   AdditionalInitiatives: 
   HealthPoints: 12
@@ -28,6 +30,14 @@ MonoBehaviour:
   Movement: 6
   Perception: 0
   Dodge: 0
+  Bleed: 0
+  Blinded: 0
+  Burn: 0
+  Reload: 0
+  Root: 0
+  Slowed: 0
+  Stun: 0
+  Venom: 0
   Abilities:
   - {fileID: 11400000, guid: 8443ab51e4a626642896948363429a98, type: 2}
   - {fileID: 11400000, guid: 9bca78ed9d8033c4f80a302f95a70057, type: 2}

@@ -16,6 +16,7 @@ public class Manager_Grid : MonoBehaviour
     [SerializeField] private Transform physicsContainer = default;
     [SerializeField] private Transform gridContainer = default;
     [SerializeField] private Transform fogContainer = default;
+    [SerializeField] private GameObject tempGrid = default;
 
     [SerializeField] private LayerMask layerMask = default;
 
@@ -51,6 +52,8 @@ public class Manager_Grid : MonoBehaviour
         }
 
         GenerateGrid(combatEncounter);
+
+        tempGrid.SetActive(false);
     }
 
     #region Grid

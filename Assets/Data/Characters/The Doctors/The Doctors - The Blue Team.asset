@@ -10,24 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: Errosive Coral
+  m_Name: The Doctors - The Blue Team
   m_EditorClassIdentifier: 
-  Name: Errosive Coral
-  Description: Corrupts everything it touches, turning it to coral reef.
-  Sprite: {fileID: 21300000, guid: 7d80cd888ea64f34790e9b868942ed33, type: 3}
+  Name: The blue Team
+  Description: A Doctor in training wearing full blue, signifying their preference
+    for healing.
+  Sprite: {fileID: 21300000, guid: e87d13f673d549649be3dc6e0e311c60, type: 3}
   IsPlayer: 0
   CustomInitiative: 0
   IsMinion: 1
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 0}
-  initiative: 12
+  CombatPrepColor: {r: 0.043137256, g: 0.4841241, b: 0.8509804, a: 1}
+  HasNoInitiative: 0
+  initiative: 2
   AdditionalInitiatives: 
-  HealthPoints: 4
+  HealthPoints: 10
   Armor: 0
   Barier: 0
-  Movement: 9
+  Movement: 4
   Perception: 0
   Dodge: 0
+  Bleed: 0
+  Blinded: 0
+  Burn: 0
+  Reload: 0
+  Root: 0
+  Slowed: 0
+  Stun: 0
+  Venom: 0
   Abilities:
-  - {fileID: 11400000, guid: 95c93d29d5b83954da03bf25776e810d, type: 2}
-  - {fileID: 11400000, guid: ffdcd767f98468b41b6d121e9f182900, type: 2}
+  - {fileID: 11400000, guid: 7fe0cc3501b36da47b476031b7aa6a05, type: 2}

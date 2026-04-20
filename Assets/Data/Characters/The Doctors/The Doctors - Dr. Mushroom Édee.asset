@@ -10,24 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: The Blue Team
+  m_Name: "The Doctors - Dr. Mushroom \xC9dee"
   m_EditorClassIdentifier: 
-  Name: The blue Team
-  Description: A Doctor in training wearing full blue, signifying their preference
-    for healing.
+  Name: "Dr. Mushroom \xC9dee"
+  Description: Consumed by Shroom SIckness, the doctor is enraged by his own creation
   Sprite: {fileID: 21300000, guid: e87d13f673d549649be3dc6e0e311c60, type: 3}
   IsPlayer: 0
   CustomInitiative: 0
-  IsMinion: 1
+  IsMinion: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 0}
-  initiative: 2
-  AdditionalInitiatives: 
-  HealthPoints: 10
+  CombatPrepColor: {r: 0.5512282, g: 0.7921569, b: 0.32549024, a: 1}
+  HasNoInitiative: 0
+  initiative: 18
+  AdditionalInitiatives: 0d0000000800000003000000
+  HealthPoints: 40
   Armor: 0
   Barier: 0
-  Movement: 4
-  Perception: 0
+  Movement: 12
+  Perception: 20
   Dodge: 0
   Bleed: 0
   Blinded: 0
@@ -38,4 +39,6 @@ MonoBehaviour:
   Stun: 0
   Venom: 0
   Abilities:
-  - {fileID: 11400000, guid: 7fe0cc3501b36da47b476031b7aa6a05, type: 2}
+  - {fileID: 11400000, guid: 04055f5386e3ffc42aa3cfb4ddc28cd1, type: 2}
+  - {fileID: 11400000, guid: 7ea4c15b475c0b442823805ffb0d2db6, type: 2}
+  - {fileID: 11400000, guid: 2fca315bf90c2874aad2dddba50be9fa, type: 2}

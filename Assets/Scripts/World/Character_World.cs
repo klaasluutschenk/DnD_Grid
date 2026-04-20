@@ -239,9 +239,9 @@ public class Character_World : World_Entity
         image_Initiative.color = character_Initative.InitativeColor;
     }
 
-    public void Damage(float damage)
+    public void Damage(float damage, bool ignoreBarrier = false, bool ignoreArmor = false)
     {
-        if (Barrier.StatActive)
+        if (Barrier.StatActive && !ignoreBarrier)
         {
             float barrierDamage = damage;
             damage -= Barrier.StatValue;
@@ -252,7 +252,7 @@ public class Character_World : World_Entity
                 return;
         }
 
-        if (Armor.StatActive)
+        if (Armor.StatActive && !ignoreArmor)
         {
             float armorDamage = damage;
             damage -= Armor.StatValue;

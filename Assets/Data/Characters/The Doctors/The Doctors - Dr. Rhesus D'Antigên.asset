@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: "Dr. Rhesus D'Antig\xEAn"
+  m_Name: "The Doctors - Dr. Rhesus D'Antig\xEAn"
   m_EditorClassIdentifier: 
   Name: "Dr. Rhesus D'Antig\xEAn"
   Description: 'The Examinator of the Domsbug Medical Council.
@@ -24,6 +24,8 @@ MonoBehaviour:
   IsMinion: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 0}
+  CombatPrepColor: {r: 0.118265904, g: 0.3490566, b: 0.018111428, a: 1}
+  HasNoInitiative: 0
   initiative: 16
   AdditionalInitiatives: 08000000
   HealthPoints: 75

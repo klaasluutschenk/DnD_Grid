@@ -10,25 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: The Red Team
+  m_Name: The Deep - Deep Prowler
   m_EditorClassIdentifier: 
-  Name: The Red Team
-  Description: A Doctor in training wearing full red, signifying their preference
-    for operating.
+  Name: Deep Prowler
+  Description: Only a crooked fin visable above water.
   Sprite: {fileID: 21300000, guid: e862f5f63129c0c42b616e9dec82b930, type: 3}
   IsPlayer: 0
   CustomInitiative: 0
-  IsMinion: 1
+  IsMinion: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 0}
-  initiative: 10
+  CombatPrepColor: {r: 0.043253824, g: 0.24401973, b: 0.33962262, a: 1}
+  HasNoInitiative: 0
+  initiative: 0
   AdditionalInitiatives: 
   HealthPoints: 8
   Armor: 0
   Barier: 0
-  Movement: 5
+  Movement: 8
   Perception: 0
-  Dodge: 0
+  Dodge: 3
   Bleed: 0
   Blinded: 0
   Burn: 0
@@ -38,4 +39,5 @@ MonoBehaviour:
   Stun: 0
   Venom: 0
   Abilities:
-  - {fileID: 11400000, guid: d7145fe13089085419853c9d8488c5b0, type: 2}
+  - {fileID: 11400000, guid: 0470ee89adb2a0b4bb40241a2bbe8771, type: 2}
+  - {fileID: 11400000, guid: 7b04eb2919fffd845b2537f836d74c4f, type: 2}

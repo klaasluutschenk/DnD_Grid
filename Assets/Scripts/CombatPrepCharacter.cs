@@ -4,6 +4,7 @@ public class CombatPrepCharacter : MonoBehaviour
 {
     [SerializeField] private Character character;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer colorSpriteRenderer;
     [SerializeField] private GameObject playerObject;
 
     private void OnValidate()
@@ -21,6 +22,8 @@ public class CombatPrepCharacter : MonoBehaviour
         string displayName = character.IsPlayer ? $"Player - {character.Name}" : character.Name;
 
         name = displayName;
+
+        colorSpriteRenderer.color = character.CombatPrepColor;
 
         spriteRenderer.gameObject.SetActive(!character.IsPlayer);
         playerObject.SetActive(character.IsPlayer);

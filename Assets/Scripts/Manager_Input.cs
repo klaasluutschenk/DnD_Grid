@@ -35,6 +35,7 @@ public class Manager_Input : MonoBehaviour
     [SerializeField] private Texture2D cursor_Slowed = default;
     [SerializeField] private Texture2D cursor_Stun = default;
     [SerializeField] private Texture2D cursor_Venom = default;
+    [SerializeField] private Texture2D cursor_TrueDamage = default;
 
     private InputState inputState = InputState.Default;
 
@@ -64,45 +65,6 @@ public class Manager_Input : MonoBehaviour
     {
         Instance = this;
     }
-
-    #region UI Interaction
-
-    //private void OnSelectionClicked()
-    //{
-    //    if (isLocked)
-    //        return;
-
-    //    inputState = InputState.Selection;
-    //    isLocked = true;
-    //}
-
-    //private void OnSelectionChanged(string value)
-    //{
-    //    selectionRadius = int.Parse(value);
-    //}
-
-
-    //private void OnSpawnedClicked()
-    //{
-    //    if (isLocked)
-    //        return;
-
-    //    selectionRadius = 1;
-    //    inputState = InputState.Spawn;
-    //    isLocked = true;
-
-    //    OnSpawnRequest?.Invoke();
-    //}
-
-    //private void OnImpactClicked()
-    //{
-    //    PhysicsObject_Destructable.OnHighlighted += HighLightDestructable;
-    //    PhysicsObject_Destructable.OnStopHighlighted += StopHighLightDestructable;
-    //    inputState = InputState.Impact;
-    //    isLocked = true;
-    //}
-
-    #endregion
 
     private void Update()
     {
@@ -240,6 +202,11 @@ public class Manager_Input : MonoBehaviour
             ToggleInputState(InputState.Venom);
         }
 
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ToggleInputState(InputState.TrueDamage);
+        }
+
         if (inputState == InputState.Spawning)
         {
             Spawning();
@@ -336,6 +303,12 @@ public class Manager_Input : MonoBehaviour
                 Cursor.SetCursor(
                     cursor_Venom,
                     new Vector2(cursor_Venom.width / 2, cursor_Venom.height / 2),
+                    CursorMode.Auto);
+                break;
+            case InputState.TrueDamage:
+                Cursor.SetCursor(
+                    cursor_TrueDamage,
+                    new Vector2(cursor_TrueDamage.width / 2, cursor_TrueDamage.height / 2),
                     CursorMode.Auto);
                 break;
             default:
@@ -593,6 +566,10 @@ public class Manager_Input : MonoBehaviour
                 break;
             case InputState.Venom:
                 character_World.ApplyVenom();
+                break;
+            case InputState.TrueDamage:
+                int trueDamageValue = Input.GetKey(KeyCode.LeftControl) ? 5 : 1;
+                character_World.Damage(trueDamageValue, true, true);
                 break;
             default:
                 break;
@@ -878,5 +855,6 @@ public enum InputState
     Stun = 9,
     Venom = 10,
     Initiative = 11,
-    Spawning = 12
+    Spawning = 12,
+    TrueDamage = 13
 }

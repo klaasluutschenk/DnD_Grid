@@ -11,6 +11,7 @@ public class Character : Entity
     public bool IsPlayerTeam;
 
     public Color InitativeColor;
+    public Color CombatPrepColor;
 
     public bool HasNoInitiative;
     public int initiative;

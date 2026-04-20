@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: Broken Ship
+  m_Name: The Deep - Broken Ship
   m_EditorClassIdentifier: 
   Name: Broken Ship
   Description: The back of the ship come alive.
@@ -20,6 +20,8 @@ MonoBehaviour:
   IsMinion: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 0}
+  CombatPrepColor: {r: 0.41509432, g: 0.33146483, b: 0.20950516, a: 1}
+  HasNoInitiative: 0
   initiative: 16
   AdditionalInitiatives: 08000000
   HealthPoints: 35
@@ -28,6 +30,14 @@ MonoBehaviour:
   Movement: 0
   Perception: 0
   Dodge: 0
+  Bleed: 0
+  Blinded: 0
+  Burn: 0
+  Reload: 0
+  Root: 0
+  Slowed: 0
+  Stun: 0
+  Venom: 0
   Abilities:
   - {fileID: 11400000, guid: eb01d53ae49667d47b00841a5c2d6a91, type: 2}
   - {fileID: 11400000, guid: 17efa0e8301f5ff439f4c3653618051c, type: 2}
