@@ -60,7 +60,7 @@ public class Manager_Tooltip : MonoBehaviour
 
         tooltipContainer.SetActive(true);
 
-        tooltipContainer.transform.position = Input.mousePosition;
+        //tooltipContainer.transform.position = Input.mousePosition;
 
         if (tile.IsRevealed)
         {

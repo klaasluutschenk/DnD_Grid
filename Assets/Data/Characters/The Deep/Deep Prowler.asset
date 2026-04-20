@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: Captain Edrick Moonstone
+  m_Name: Deep Prowler
   m_EditorClassIdentifier: 
-  Name: Captain Brand Moonstone
-  Description: Brother to Lord Ivar Moonstone
-  Sprite: {fileID: 21300000, guid: c1d0f02e726982a4092fe4bace1e1b13, type: 3}
+  Name: Deep Prowler
+  Description: Only a crooked fin visable above water.
+  Sprite: {fileID: 21300000, guid: e862f5f63129c0c42b616e9dec82b930, type: 3}
   IsPlayer: 0
   CustomInitiative: 0
-  IsMinion: 1
-  IsPlayerTeam: 1
+  IsMinion: 0
+  IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 0}
   HasNoInitiative: 0
-  initiative: 1
+  initiative: 0
   AdditionalInitiatives: 
-  HealthPoints: 20
-  Armor: 5
+  HealthPoints: 8
+  Armor: 0
   Barier: 0
-  Movement: 6
+  Movement: 8
   Perception: 0
-  Dodge: 0
+  Dodge: 3
   Bleed: 0
   Blinded: 0
   Burn: 0
@@ -38,5 +38,5 @@ MonoBehaviour:
   Stun: 0
   Venom: 0
   Abilities:
-  - {fileID: 11400000, guid: 250ea2f37ae6cb441b8bf841e5d6cc2e, type: 2}
-  - {fileID: 11400000, guid: 3f0279839a3c38d4284b80e0a8e8d0e3, type: 2}
+  - {fileID: 11400000, guid: 0470ee89adb2a0b4bb40241a2bbe8771, type: 2}
+  - {fileID: 11400000, guid: 7b04eb2919fffd845b2537f836d74c4f, type: 2}

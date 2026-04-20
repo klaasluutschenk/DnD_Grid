@@ -5,6 +5,12 @@ public class CombatEncounter_Character
 {
     public Character Character;
     public Vector3 Position;
+
+    public CombatEncounter_Character(Character character, Vector3 position)
+    {
+        Character = character;
+        Position = position;
+    }
 }
 
 [System.Serializable]
