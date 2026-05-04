@@ -37,4 +37,7 @@ public class Character : Entity
     public int Venom;
 
     public List<Ability> Abilities;
+
+    [Header("Testing")]
+    public bool HasShip;
 }

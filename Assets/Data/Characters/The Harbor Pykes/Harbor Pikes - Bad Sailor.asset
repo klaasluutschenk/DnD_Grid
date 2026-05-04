@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: Harbor Pikes - Blow Whistle
+  m_Name: Harbor Pikes - Bad Sailor
   m_EditorClassIdentifier: 
-  Name: Blow Whistle
-  Description: Mercenary of the Harbor Pikes
-  Sprite: {fileID: 21300000, guid: 617cf1d4c841c174aaf34136f82ded1a, type: 3}
+  Name: Bad Sailor
+  Description: They're not coming over land!
+  Sprite: {fileID: 21300000, guid: dd5fe43c84c35e74a805d80b946e0976, type: 3}
   IsPlayer: 0
   CustomInitiative: 0
   IsMinion: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 1}
-  CombatPrepColor: {r: 0.5512282, g: 0.7921569, b: 0.32549024, a: 1}
+  CombatPrepColor: {r: 0.8490566, g: 0.5486828, b: 0.8038676, a: 1}
   HasNoInitiative: 0
-  initiative: 5
+  initiative: 1
   AdditionalInitiatives: 
-  HealthPoints: 1
-  Armor: 0
+  HealthPoints: 50
+  Armor: 15
   Barier: 0
-  Movement: 0
+  Movement: 4
   Perception: 0
   Dodge: 0
   Bleed: 0
@@ -39,4 +39,6 @@ MonoBehaviour:
   Stun: 0
   Venom: 0
   Abilities:
-  - {fileID: 11400000, guid: 3de7408f3aa28f74c965d1a6defb2e4d, type: 2}
+  - {fileID: 11400000, guid: 54a1ead028e54cc40911186505fac1be, type: 2}
+  - {fileID: 11400000, guid: e92b50f96e253f942bbbf77f2683200f, type: 2}
+  HasShip: 1

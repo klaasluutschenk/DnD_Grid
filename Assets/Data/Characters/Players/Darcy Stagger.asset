@@ -20,10 +20,11 @@ MonoBehaviour:
   IsMinion: 0
   IsPlayerTeam: 1
   InitativeColor: {r: 0, g: 0, b: 0, a: 0}
+  CombatPrepColor: {r: 0, g: 0, b: 0, a: 0}
   HasNoInitiative: 0
   initiative: 0
   AdditionalInitiatives: 
-  HealthPoints: 14
+  HealthPoints: 15
   Armor: 12
   Barier: 0
   Movement: 6
@@ -38,3 +39,4 @@ MonoBehaviour:
   Stun: 0
   Venom: 0
   Abilities: []
+  HasShip: 0

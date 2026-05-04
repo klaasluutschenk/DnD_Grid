@@ -102,6 +102,8 @@ public class Character_World : World_Entity
         EndTurn();
     }
 
+    // Testing
+    public GameObject Ship;
     public override void Setup(Entity entity)
     {
         Character character = entity as Character;
@@ -109,6 +111,10 @@ public class Character_World : World_Entity
         SetupCharacter(character);
 
         base.Setup(entity);
+
+        // Testing
+        if (Ship != null)
+            Ship.SetActive(character.HasShip);
     }
 
     private void SetupStats()
@@ -530,6 +536,19 @@ public class Character_World : World_Entity
     }
 
     #endregion
+
+    public int GetMovement()
+    {
+        int movement = character.Movement;
+
+        if (Rooted.StatActive)
+            return 0;
+
+        if (Slowed.StatActive)
+            return (int)(character.IsPlayerTeam ? Mathf.Ceil(movement / 2f) : Mathf.Floor(movement / 2f));
+
+        return movement;
+    }
 }
 
 [Serializable]

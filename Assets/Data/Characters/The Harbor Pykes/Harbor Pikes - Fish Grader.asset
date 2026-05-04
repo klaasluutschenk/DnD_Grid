@@ -20,6 +20,8 @@ MonoBehaviour:
   IsMinion: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 1}
+  CombatPrepColor: {r: 0.118265904, g: 0.3490566, b: 0.018111428, a: 1}
+  HasNoInitiative: 0
   initiative: 15
   AdditionalInitiatives: 
   HealthPoints: 20
@@ -28,6 +30,14 @@ MonoBehaviour:
   Movement: 10
   Perception: 14
   Dodge: 0
+  Bleed: 0
+  Blinded: 0
+  Burn: 0
+  Reload: 0
+  Root: 0
+  Slowed: 0
+  Stun: 0
+  Venom: 0
   Abilities:
   - {fileID: 11400000, guid: d42d8f722ac75c14696b93646ba1daab, type: 2}
   - {fileID: 11400000, guid: 289edf02375d9db4fa8befefeb542a92, type: 2}

@@ -422,7 +422,7 @@ public class Manager_Input : MonoBehaviour
 
         tiles.Add(tile);
 
-        int movement = character_World.Character.Movement;
+        int movement = character_World.GetMovement();
 
         int currentRadiusCheck = 0;
         while (currentRadiusCheck < movement && currentRadiusCheck < 50)

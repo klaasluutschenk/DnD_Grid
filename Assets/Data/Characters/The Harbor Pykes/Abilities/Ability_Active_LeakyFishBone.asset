@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee61d1f82d0e2224a93d4576de9fa4bb, type: 3}
-  m_Name: Kelp Grapple
+  m_Name: Ability_Active_LeakyFishBone
   m_EditorClassIdentifier: 
-  Name: Kelp Grapple
-  Description: 'Latches on to a Target, applying Root 1, Dealing 2 Damage.
+  Name: Leaky Fish Bone
+  Description: Don't touch the pointy end.
+  HasOutcomes: 1
+  Outcome1: Miss
+  Outcome2: '1 Damage
 
-    The
-    root is Cleansed when the Kelp Grappler takes damage.'
-  HasOutcomes: 0
-  Outcome1: 
-  Outcome2: 
-  Outcome3: 
+    1 Poison Damage'
+  Outcome3: '1 Damage
+
+    1 Venom'
