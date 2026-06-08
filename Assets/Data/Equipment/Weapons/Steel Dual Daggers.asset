@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee61d1f82d0e2224a93d4576de9fa4bb, type: 3}
+  m_Name: Steel Dual Daggers
+  m_EditorClassIdentifier: 
+  Name: Steel Dual Daggers
+  HasDescription: 1
+  Description: '<b>Passive: Light Weapons</b>
+
+    Increase your Movement and Step
+    by 2 while wielding Daggers.
+
+
+    <b>Passive: Dual Weapons</b>
+
+    You can
+    split your attacks, using an Action for the first, and a Bonus Action for the
+    second.'
+  HasOutcomes: 0
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: 2 2 Damage
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: 3 3 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: 4 4 Damage

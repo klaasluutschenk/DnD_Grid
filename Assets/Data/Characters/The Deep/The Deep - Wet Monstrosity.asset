@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
+  m_Name: The Deep - Wet Monstrosity
+  m_EditorClassIdentifier: 
+  Name: Wet Monstrosity
+  Description: A misterious wet creature risen from the depths
+  Sprite: {fileID: 21300000, guid: e87d13f673d549649be3dc6e0e311c60, type: 3}
+  IsPlayer: 0
+  CustomInitiative: 0
+  IsMinion: 0
+  IsBig: 1
+  IsGiant: 0
+  IsPlayerTeam: 0
+  InitativeColor: {r: 0, g: 0, b: 0, a: 0}
+  CombatPrepColor: {r: 0.118265904, g: 0.3490566, b: 0.018111428, a: 1}
+  HasNoInitiative: 0
+  initiative: 15
+  AdditionalInitiatives: 05000000
+  HealthPoints: 80
+  Armor: 0
+  Barier: 20
+  Movement: 6
+  Perception: 0
+  Dodge: 0
+  Bleed: 0
+  Blinded: 0
+  Burn: 0
+  Reload: 0
+  Root: 0
+  Slowed: 0
+  Stun: 0
+  Venom: 0
+  Abilities:
+  - {fileID: 11400000, guid: 292d677a1456fbd49b08455d9ab7f889, type: 2}
+  - {fileID: 11400000, guid: 4d36902a5511eb248b0912f0e166e162, type: 2}
+  HasShip: 0

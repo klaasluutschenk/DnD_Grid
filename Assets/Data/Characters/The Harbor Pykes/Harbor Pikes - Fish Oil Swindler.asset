@@ -18,6 +18,8 @@ MonoBehaviour:
   IsPlayer: 0
   CustomInitiative: 0
   IsMinion: 1
+  IsBig: 0
+  IsGiant: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 1}
   CombatPrepColor: {r: 0.38792422, g: 0, b: 0.6886792, a: 1}

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd122d5571122a449e233422e04d423, type: 3}
+  m_Name: Water Fight
+  m_EditorClassIdentifier: 
+  Background: {fileID: 21300000, guid: 1694c2b143ecf7e48868b4c03f1c998a, type: 3}
+  DynamicBackground: {fileID: 2800000, guid: 52372741748977f418f4ab52a1ea3c7f, type: 3}
+  defaultDynamicBackgroundSpeed: {x: 0, y: 0}
+  BackgroundSizeModifier: 1
+  PhysicsObject: {fileID: 3826081070071633804, guid: 9b3369b5570f13343ab02a71e237cbad, type: 3}
+  FogObject: {fileID: 6097160243529988637, guid: dabc3787905d82641bf258cb7fe29705, type: 3}
+  Characters:
+  - Character: {fileID: 11400000, guid: 6c2fc1158bcedee48a5628e90cc30ce7, type: 2}
+    Position: {x: -9.5, y: 4.5, z: -1}
+  - Character: {fileID: 11400000, guid: d8f6cbf62666967438a24728419f40e3, type: 2}
+    Position: {x: -10.5, y: 3.5, z: -1}
+  - Character: {fileID: 11400000, guid: 769aaabf426fd034b9d95cd5221c889f, type: 2}
+    Position: {x: -11.5, y: -4.5, z: -1}
+  - Character: {fileID: 11400000, guid: 5112be58e98fb1049b26199bc05ac2bb, type: 2}
+    Position: {x: -14.5, y: -3.5, z: -1}
+  - Character: {fileID: 11400000, guid: db16fa1a9fb29164bb273c3df9c23978, type: 2}
+    Position: {x: 7.5, y: 0.5, z: -1}
+  - Character: {fileID: 11400000, guid: 5eaf7a77c0fc1284f98c059a56a3c511, type: 2}
+    Position: {x: 23.5, y: 1.5, z: -1}
+  SpawnableCharacters:
+  - {fileID: 11400000, guid: 1bc8ef3514bf3194fa9809904cdcea60, type: 2}
+  - {fileID: 11400000, guid: ef0cef20046cb394a91ea0bfce0c7ef4, type: 2}
+  - {fileID: 11400000, guid: 5eaf7a77c0fc1284f98c059a56a3c511, type: 2}
+  - {fileID: 11400000, guid: e8908f8e1389c284c9309f79743dd59a, type: 2}
+  - {fileID: 11400000, guid: 6a7e1a52c36e6a1419a91c180218505d, type: 2}
+  - {fileID: 11400000, guid: 8583f9065839dca49bbf447b98ec02b4, type: 2}
+  - {fileID: 11400000, guid: febca0f2244f9d045999a753e5f654f0, type: 2}
+  - {fileID: 11400000, guid: f0d24f83ac641f44c8aea0afa5070d28, type: 2}
+  - {fileID: 11400000, guid: db16fa1a9fb29164bb273c3df9c23978, type: 2}
+  WorldEntities: []

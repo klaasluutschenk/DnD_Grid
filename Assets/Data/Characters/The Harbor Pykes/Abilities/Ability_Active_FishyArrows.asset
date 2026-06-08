@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Ability_Active_FishyArrows
   m_EditorClassIdentifier: 
   Name: Fishy Arrows
-  Description: Launch a Barrage of Fishy Arrows at your target
+  Description: 'Launch a Barrage of Fishy Arrows at your target
+
+    Range 6'
   HasOutcomes: 1
   Outcome1: Miss Miss Miss
   Outcome2: 1 1 1 Damage

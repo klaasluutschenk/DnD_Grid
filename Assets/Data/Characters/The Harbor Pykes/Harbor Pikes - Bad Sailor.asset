@@ -18,16 +18,18 @@ MonoBehaviour:
   IsPlayer: 0
   CustomInitiative: 0
   IsMinion: 0
+  IsBig: 0
+  IsGiant: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 1}
   CombatPrepColor: {r: 0.8490566, g: 0.5486828, b: 0.8038676, a: 1}
   HasNoInitiative: 0
   initiative: 1
   AdditionalInitiatives: 
-  HealthPoints: 50
-  Armor: 15
+  HealthPoints: 40
+  Armor: 10
   Barier: 0
-  Movement: 4
+  Movement: 6
   Perception: 0
   Dodge: 0
   Bleed: 0

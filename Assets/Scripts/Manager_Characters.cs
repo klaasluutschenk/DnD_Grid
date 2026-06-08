@@ -8,6 +8,8 @@ public class Manager_Characters : MonoBehaviour
 
     [SerializeField] private Character_World character_World_Prefab = default;
     [SerializeField] private Character_World character_World_Minion_Prefab = default;
+    [SerializeField] private Character_World character_World_Big_Prefab = default;
+    [SerializeField] private Character_World character_World_Giant_Prefab = default;
     [SerializeField] private World_Entity worldEntity_Prefab = default;
     [SerializeField] private Transform characterContainer = default;
 
@@ -57,6 +59,10 @@ public class Manager_Characters : MonoBehaviour
 
         if (character.IsMinion)
             newWorldCharacter = Instantiate(character_World_Minion_Prefab, characterContainer);
+        else if(character.IsBig)
+            newWorldCharacter = Instantiate(character_World_Big_Prefab, characterContainer);
+        else if(character.IsGiant)
+            newWorldCharacter = Instantiate(character_World_Giant_Prefab, characterContainer);
         else
             newWorldCharacter = Instantiate(character_World_Prefab, characterContainer);
 

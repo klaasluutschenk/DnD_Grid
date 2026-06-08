@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class CombatEncounter : ScriptableObject
 {
     public Sprite Background;
+    public Texture DynamicBackground;
+    public Vector2 defaultDynamicBackgroundSpeed;
     public int BackgroundSizeModifier = 1;
     public GameObject PhysicsObject;
     public GameObject FogObject;
