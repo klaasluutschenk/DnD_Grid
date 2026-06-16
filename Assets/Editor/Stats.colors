@@ -13,21 +13,25 @@ MonoBehaviour:
   m_Name: Stats
   m_EditorClassIdentifier: 
   m_Presets:
-  - m_Name: 
+  - m_Name: Health
     m_Color: {r: 1, g: 0, b: 0, a: 1}
-  - m_Name: 
+  - m_Name: Armor
     m_Color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
-  - m_Name: 
+  - m_Name: Barrier
     m_Color: {r: 0.956295, g: 1, b: 0, a: 1}
-  - m_Name: 
+  - m_Name: Burn
     m_Color: {r: 1, g: 0.27450982, b: 0, a: 1}
-  - m_Name: 
+  - m_Name: Poison
     m_Color: {r: 0.21535873, g: 1, b: 0, a: 1}
-  - m_Name: 
+  - m_Name: Bleeding
     m_Color: {r: 1, g: 0, b: 0, a: 1}
-  - m_Name: 
+  - m_Name: Slow
     m_Color: {r: 0.4862745, g: 0.8745098, b: 1, a: 1}
-  - m_Name: 
+  - m_Name: Stun
     m_Color: {r: 0.7292704, g: 0.4292453, b: 1, a: 1}
-  - m_Name: 
+  - m_Name: Blind
     m_Color: {r: 1, g: 0.427451, b: 0.6512624, a: 1}
+  - m_Name: Root
+    m_Color: {r: 0, g: 0.6862745, b: 0.49019608, a: 1}
+  - m_Name: Reload
+    m_Color: {r: 0.7254902, g: 0.3529412, b: 0, a: 1}
