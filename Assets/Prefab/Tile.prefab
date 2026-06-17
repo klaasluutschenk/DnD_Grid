@@ -350,7 +350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5256703655698800480
 RectTransform:
   m_ObjectHideFlags: 0
@@ -563,11 +563,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObject_Selected: {fileID: 3314571528086227096}
-  gameObject_Highlighted: {fileID: 1224446619317017590}
   gameObject_Movement: {fileID: 5968586904182277060}
   transform_detectionCube: {fileID: 2870200677516894978}
   gameObject_Fog: {fileID: 3314571528086227096}
   gameObject_Fog_Highlight: {fileID: 1459326414247659264}
+  gameObject_Highlighted: {fileID: 1224446619317017590}
 --- !u!65 &2495522887303508829
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -587,7 +587,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.95, y: 0.95, z: 0.1}
+  m_Size: {x: 1, y: 1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4949522927089251151
 GameObject:

@@ -12,8 +12,6 @@ public class Manager_Game : MonoBehaviour
 
     private IEnumerator Start()
     {
-        yield return new WaitForSeconds(2);
-
         yield return Manager_Encounter.Instance.RunEncounter();
 
         yield return Manager_Environment.Instance.RunEnvironment();
@@ -27,5 +25,9 @@ public class Manager_Game : MonoBehaviour
         yield return Manager_Characters_2.Instance.RunCharacters();
 
         yield return Manager_Input_2.Instance.RunInput();
+
+        yield return Manager_Cursor.Instance.RunCursor();
+
+        Debug.Log("Loading Completed!");
     }
 }

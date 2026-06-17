@@ -25,6 +25,6 @@ public class PhysicsObject : MonoBehaviour
         if (tile == null)
             return;
 
-        Manager_Grid.Instance.RemoveTile(tile);
+        Manager_Grid_2.Instance.RemoveTile(tile);
     }
 }

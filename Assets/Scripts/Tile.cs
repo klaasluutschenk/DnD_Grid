@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class Tile : MonoBehaviour
 {
@@ -112,7 +113,16 @@ public class Tile : MonoBehaviour
     public static Action<Tile> OnTileHighlighted;
     public static Action<Tile> OnTileClicked;
 
+    public List<Tile> Neigbours => neighbours;
+
     [SerializeField] private GameObject gameObject_Highlighted = default;
+
+    private Tile upNeighbour;
+    private Tile rightNeighbour;
+    private Tile downNeighbour;
+    private Tile leftNeighbour;
+
+    private List<Tile> neighbours;
 
     private void OnMouseEnter()
     {
@@ -139,6 +149,31 @@ public class Tile : MonoBehaviour
         gameObject_Highlighted.SetActive(isHighlighted);
 
         OnTileHighlighted?.Invoke(this);
+    }
+
+    public void SetNeighbours()
+    {
+        neighbours = new List<Tile>();
+
+        upNeighbour = Manager_Grid_2.Instance.GetNeighbour(this, Vector2.up);
+
+        if (upNeighbour != null)
+            neighbours.Add(upNeighbour);
+
+        rightNeighbour = Manager_Grid_2.Instance.GetNeighbour(this, Vector2.right);
+
+        if (rightNeighbour != null)
+            neighbours.Add(rightNeighbour);
+
+        downNeighbour = Manager_Grid_2.Instance.GetNeighbour(this, -Vector2.up);
+
+        if (downNeighbour != null)
+            neighbours.Add(downNeighbour);
+
+        leftNeighbour = Manager_Grid_2.Instance.GetNeighbour(this, -Vector2.right);
+
+        if (leftNeighbour != null)
+            neighbours.Add(leftNeighbour);
     }
 
     #endregion

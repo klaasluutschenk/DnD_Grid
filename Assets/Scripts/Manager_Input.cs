@@ -24,19 +24,6 @@ public class Manager_Input : MonoBehaviour
 
     [SerializeField] private Camera playerCamera;
 
-    [SerializeField] private Texture2D cursor_Armor = default;
-    [SerializeField] private Texture2D cursor_Barrier = default;
-    [SerializeField] private Texture2D cursor_Bleed = default;
-    [SerializeField] private Texture2D cursor_Blinded = default;
-    [SerializeField] private Texture2D cursor_Burn = default;
-    [SerializeField] private Texture2D cursor_Movement = default;
-    [SerializeField] private Texture2D cursor_Reload = default;
-    [SerializeField] private Texture2D cursor_Root = default;
-    [SerializeField] private Texture2D cursor_Slowed = default;
-    [SerializeField] private Texture2D cursor_Stun = default;
-    [SerializeField] private Texture2D cursor_Venom = default;
-    [SerializeField] private Texture2D cursor_TrueDamage = default;
-
     private InputState inputState = InputState.Default;
 
     private int selectionRadius = 1;
@@ -68,8 +55,6 @@ public class Manager_Input : MonoBehaviour
 
     private void Update()
     {
-        SetCursor();
-
         SetMousePosition();
 
         if (HasMouseChanged())
@@ -229,92 +214,7 @@ public class Manager_Input : MonoBehaviour
             inputState = newInputState;
         else
             inputState = InputState.Default;
-    }
-
-    private void SetCursor()
-    {
-        switch (InputState)
-        {
-            case InputState.Default:
-                Cursor.SetCursor(
-                    null, Vector2.zero, CursorMode.Auto);
-                break;
-            case InputState.Movement:
-                Cursor.SetCursor(
-                    cursor_Movement,
-                    new Vector2(cursor_Movement.width / 2, cursor_Movement.height / 2),
-                    CursorMode.Auto);
-                break;
-            case InputState.Armor:
-                Cursor.SetCursor(
-                    cursor_Armor,
-                    new Vector2(cursor_Armor.width / 2, cursor_Armor.height / 2),
-                    CursorMode.Auto);
-                break;
-            case InputState.Barrier:
-                Cursor.SetCursor(
-                    cursor_Barrier,
-                    new Vector2(cursor_Barrier.width / 2, cursor_Barrier.height / 2),
-                    CursorMode.Auto);
-                break;
-            case InputState.Bleed:
-                Cursor.SetCursor(
-                    cursor_Bleed,
-                    new Vector2(cursor_Bleed.width / 2, cursor_Bleed.height / 2),
-                    CursorMode.Auto);
-                break;
-            case InputState.Blinded:
-                Cursor.SetCursor(
-                    cursor_Blinded,
-                    new Vector2(cursor_Blinded.width / 2, cursor_Blinded.height / 2),
-                    CursorMode.Auto);
-                break;
-            case InputState.Burn:
-                Cursor.SetCursor(
-                    cursor_Burn,
-                    new Vector2(cursor_Burn.width / 2, cursor_Burn.height / 2),
-                    CursorMode.Auto);
-                break;
-            case InputState.Reload:
-                Cursor.SetCursor(
-                    cursor_Reload,
-                    new Vector2(cursor_Reload.width / 2, cursor_Reload.height / 2),
-                    CursorMode.Auto);
-                break;
-            case InputState.Root:
-                Cursor.SetCursor(
-                    cursor_Root,
-                    new Vector2(cursor_Root.width / 2, cursor_Root.height / 2),
-                    CursorMode.Auto);
-                break;
-            case InputState.Slowed:
-                Cursor.SetCursor(
-                    cursor_Slowed,
-                    new Vector2(cursor_Slowed.width / 2, cursor_Slowed.height / 2),
-                    CursorMode.Auto);
-                break;
-            case InputState.Stun:
-                Cursor.SetCursor(
-                    cursor_Stun,
-                    new Vector2(cursor_Stun.width / 2, cursor_Stun.height / 2),
-                    CursorMode.Auto);
-                break;
-            case InputState.Venom:
-                Cursor.SetCursor(
-                    cursor_Venom,
-                    new Vector2(cursor_Venom.width / 2, cursor_Venom.height / 2),
-                    CursorMode.Auto);
-                break;
-            case InputState.TrueDamage:
-                Cursor.SetCursor(
-                    cursor_TrueDamage,
-                    new Vector2(cursor_TrueDamage.width / 2, cursor_TrueDamage.height / 2),
-                    CursorMode.Auto);
-                break;
-            default:
-                break;
-        }
-    }
+    }    
 
     #region Mouse
 
