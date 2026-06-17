@@ -3,6 +3,8 @@ using System;
 
 public class Tile : MonoBehaviour
 {
+    #region Old
+
     public World_Entity World_Entity => worldEntity;
     public bool IsSelected => isSelected;
     public bool IsHiglighted => isHighlighted;
@@ -14,7 +16,6 @@ public class Tile : MonoBehaviour
     public bool HasWorldEntity => worldEntity != null;
 
     [SerializeField] private GameObject gameObject_Selected = default;
-    [SerializeField] private GameObject gameObject_Highlighted = default;
     [SerializeField] private GameObject gameObject_Movement = default;
     [SerializeField] private Transform transform_detectionCube = default;
 
@@ -56,24 +57,9 @@ public class Tile : MonoBehaviour
         this.roomIndex = fogRoomIndex;
     }
 
-    public void Select(bool isSelected)
+    public void Select(bool temp)
     {
-        if (this.isSelected == isSelected)
-            return;
-
-        this.isSelected = isSelected;
-
-        gameObject_Selected.SetActive(isSelected);
-    }
-
-    public void Highlight(bool isHighlighted)
-    {
-        if (this.isHighlighted == isHighlighted)
-            return;
-
-        this.isHighlighted = isHighlighted;
-
-        gameObject_Highlighted.SetActive(isHighlighted);
+        OnTileClicked?.Invoke(this);
     }
 
     public void Movement(bool isMovement)
@@ -118,4 +104,42 @@ public class Tile : MonoBehaviour
         else
             worldEntity.Hide();
     }
+
+    #endregion
+
+    #region new
+
+    public static Action<Tile> OnTileHighlighted;
+    public static Action<Tile> OnTileClicked;
+
+    [SerializeField] private GameObject gameObject_Highlighted = default;
+
+    private void OnMouseEnter()
+    {
+        Highlight(true);
+    }
+
+    private void OnMouseDown()
+    {
+        Select();
+    }
+
+    private void OnMouseExit()
+    {
+        Highlight(false);
+    }
+
+    public void Select()
+    {
+        OnTileClicked?.Invoke(this);
+    }
+
+    public void Highlight(bool isHighlighted)
+    {
+        gameObject_Highlighted.SetActive(isHighlighted);
+
+        OnTileHighlighted?.Invoke(this);
+    }
+
+    #endregion
 }
