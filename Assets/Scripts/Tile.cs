@@ -64,6 +64,7 @@ public class Tile : MonoBehaviour
     public static Action<Tile> OnTileSelected;
     public static Action<Tile> OnTileClicked;
     public static Action<Tile> OnTileClickedAlternate;
+    public static Action<Tile> OnTileEntered;
 
     public Tile UpNeighbour => upNeighbour;
     public Tile RightNeighbour => rightNeighbour;
@@ -82,6 +83,8 @@ public class Tile : MonoBehaviour
     private void OnMouseEnter()
     {
         Highlight(true);
+
+        OnTileEntered?.Invoke(this);
     }
 
     private void OnMouseOver()

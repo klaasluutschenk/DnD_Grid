@@ -9,6 +9,8 @@ public class Manager_Input_2 : MonoBehaviour
     private List<Tile> movementTiles = new List<Tile>();
     private Character_World movementCharacter;
 
+    private Tile highlightedTile;
+
     private InputState inputState = InputState.Default;
 
     private void Awake()
@@ -24,6 +26,8 @@ public class Manager_Input_2 : MonoBehaviour
     private IEnumerator InitializeRoutine()
     {
         SwitchInput(InputState.Default);
+
+        Tile.OnTileEntered += OnTileEntered;
 
         Debug.Log("Input Loaded");
 
@@ -68,6 +72,8 @@ public class Manager_Input_2 : MonoBehaviour
         }
 
         EffectsControls();
+
+        TooltipControls();
     }
 
     private void SwitchInput(InputState inputState)
@@ -434,6 +440,27 @@ public class Manager_Input_2 : MonoBehaviour
 
     #endregion
 
+    #region Tooltip
+
+    private void OnTileEntered(Tile tile)
+    {
+        highlightedTile = tile;
+    }
+
+    private void TooltipControls()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Manager_Tooltip.Instance.SetToolTip(highlightedTile);
+        }
+        else
+        {
+            Manager_Tooltip.Instance.ClearTooltip();
+        }
+    }
+
+    #endregion
+
     #region Initiative
 
     private void InitiativeControls()
@@ -463,6 +490,23 @@ public class Manager_Input_2 : MonoBehaviour
     }
 
     #endregion
+}
 
-
+public enum InputState
+{
+    Default = -1,
+    Movement = 0,
+    Armor = 1,
+    Barrier = 2,
+    Bleed = 3,
+    Blinded = 4,
+    Burn = 5,
+    Reload = 6,
+    Root = 7,
+    Slowed = 8,
+    Stun = 9,
+    Venom = 10,
+    Initiative = 11,
+    Spawning = 12,
+    TrueDamage = 13
 }

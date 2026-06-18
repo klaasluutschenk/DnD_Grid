@@ -73,21 +73,6 @@ public class Manager_Input : MonoBehaviour
         else
             Manager_Tooltip.Instance.ClearTooltip();
 
-        // Initiative
-
-        if (Input.GetKey(KeyCode.LeftAlt))
-        {
-            Initiative();
-            inputState = InputState.Initiative;
-            return;
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftAlt))
-        {
-            inputState = InputState.Default;
-            return;
-        }
-
         // Spawning
 
         if (Input.GetKeyDown(KeyCode.Z))
@@ -110,19 +95,6 @@ public class Manager_Input : MonoBehaviour
             Spawning();
             return;
         }
-    }
-
-    private void Initiative()
-    {
-        Character_World character_World = mainTile.World_Entity as Character_World;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            character_World.SetInitiative(false);
-        }
-
-        if (Input.GetMouseButtonDown(1))
-            character_World.SetInitiative(true);
     }
 
     #region Spawning
@@ -166,23 +138,4 @@ public class Manager_Input : MonoBehaviour
     }
 
     #endregion
-}
-
-public enum InputState
-{
-    Default = -1,
-    Movement = 0,
-    Armor = 1,
-    Barrier = 2,
-    Bleed = 3,
-    Blinded = 4,
-    Burn = 5,
-    Reload = 6,
-    Root = 7,
-    Slowed = 8,
-    Stun = 9,
-    Venom = 10,
-    Initiative = 11,
-    Spawning = 12,
-    TrueDamage = 13
 }
