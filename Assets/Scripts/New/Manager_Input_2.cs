@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,8 +7,12 @@ public class Manager_Input_2 : MonoBehaviour
 {
     public static Manager_Input_2 Instance;
 
+    public static Action OnSpawnRequest;
+    public static Action OnStopSpawnRequest;
+
     private List<Tile> movementTiles = new List<Tile>();
     private Character_World movementCharacter;
+    private Character characterToSpawn;
 
     private Tile highlightedTile;
 
@@ -67,6 +72,13 @@ public class Manager_Input_2 : MonoBehaviour
         InitiativeControls();
 
         if (inputState == InputState.Initiative)
+        {
+            return;
+        }
+
+        SpawningControls();
+
+        if (inputState == InputState.Spawning)
         {
             return;
         }
@@ -437,6 +449,45 @@ public class Manager_Input_2 : MonoBehaviour
     #endregion
 
     #region Spawning
+
+    private void SpawningControls()
+    {
+        if (Input.GetKeyDown(KeyCode.Z) && inputState != InputState.Spawning)
+        {
+            SwitchInput(InputState.Spawning);
+            OnSpawnRequest?.Invoke();
+
+            Tile.OnTileClicked += OnTileClicked_Spawning;
+        }
+
+        if (Input.GetMouseButtonDown(1) && inputState == InputState.Spawning)
+        {
+            OnStopSpawnRequest?.Invoke();
+            ResetInputState();
+
+            Tile.OnTileClicked -= OnTileClicked_Spawning;
+        }
+    }
+
+    private void OnTileClicked_Spawning(Tile tile)
+    {
+        if (characterToSpawn == null)
+        {
+            return;
+        }
+
+        if (tile.HasWorldEntity)
+        {
+            return;
+        }
+
+        Manager_Characters_2.Instance.SpawnCharacter(characterToSpawn, tile.transform.position);
+    }
+
+    public void SetCharacterToSpawn(Character character)
+    {
+        characterToSpawn = character;
+    }
 
     #endregion
 

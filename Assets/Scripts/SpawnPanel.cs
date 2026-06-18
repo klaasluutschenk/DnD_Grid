@@ -12,15 +12,15 @@ public class SpawnPanel : MonoBehaviour
 
     private void Awake()
     {
-        Manager_Input.OnSpawnRequest += OnSpawnRequest;
-        Manager_Input.OnStopSpawnRequest += OnStopSpawnRequest;
+        Manager_Input_2.OnSpawnRequest += OnSpawnRequest;
+        Manager_Input_2.OnStopSpawnRequest += OnStopSpawnRequest;
     }
 
     private void OnSpawnRequest()
     {
         container.gameObject.SetActive(true);
 
-        foreach (Character character in Manager_Combat.Instance.ActiveCombatEncounter.SpawnableCharacters)
+        foreach (Character character in Manager_Encounter.Instance.CombatEncounter.SpawnableCharacters)
         {
             SpawnUI spawnUI = Instantiate(spawnUI_Prefab, prefabContainer);
 
@@ -46,6 +46,6 @@ public class SpawnPanel : MonoBehaviour
 
     private void OnClicked(Character character)
     {
-        Manager_Input.Instance.SetCharacterToSpawn(character);
+        Manager_Input_2.Instance.SetCharacterToSpawn(character);
     }
 }

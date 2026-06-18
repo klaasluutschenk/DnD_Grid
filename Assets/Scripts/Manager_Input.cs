@@ -26,16 +26,10 @@ public class Manager_Input : MonoBehaviour
 
     private InputState inputState = InputState.Default;
 
-    private int selectionRadius = 1;
-    private int damageValue = 1;
-
     public Vector3 mouseGridPosition;
     public Vector3 oldMouseGridPosition;
 
     private List<Tile> highlightedTiles = new List<Tile>();
-    private List<Tile> selectedtiles = new List<Tile>();
-    private List<Tile> movementTiles = new List<Tile>();
-    private List<Tile> fogTiles = new List<Tile>();
 
     private Tile mainTile;
 
@@ -55,23 +49,10 @@ public class Manager_Input : MonoBehaviour
 
     private void Update()
     {
-        if (highlightedTiles.Count == 0)
-        {
-            Manager_Tooltip.Instance.ClearTooltip();
-            return;
-        }
-
         mainTile = highlightedTiles[0];
 
         if (mainTile == null)
             return;
-
-        // Tooltip
-
-        if (Input.GetKey(KeyCode.Space))
-            Manager_Tooltip.Instance.SetToolTip(mainTile);
-        else
-            Manager_Tooltip.Instance.ClearTooltip();
 
         // Spawning
 
