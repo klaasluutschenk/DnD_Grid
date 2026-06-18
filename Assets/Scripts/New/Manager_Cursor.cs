@@ -32,7 +32,7 @@ public class Manager_Cursor : MonoBehaviour
 
     public void SetCursor(InputState inputState)
     {
-        if (inputState == InputState.Default)
+        if (!HasCursorChange(inputState))
         {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
@@ -58,6 +58,21 @@ public class Manager_Cursor : MonoBehaviour
         }
 
         return null;
+    }
+
+    private bool HasCursorChange(InputState inputState)
+    {
+        switch (inputState)
+        {
+            case InputState.Default:
+                return false;
+            case InputState.Initiative:
+                return false;
+            case InputState.Spawning:
+                return false;
+        }
+
+        return true;
     }
 }
 

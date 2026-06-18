@@ -60,6 +60,13 @@ public class Manager_Input_2 : MonoBehaviour
             return;
         }
 
+        InitiativeControls();
+
+        if (inputState == InputState.Initiative)
+        {
+            return;
+        }
+
         EffectsControls();
     }
 
@@ -422,4 +429,40 @@ public class Manager_Input_2 : MonoBehaviour
     }
 
     #endregion
+
+    #region Spawning
+
+    #endregion
+
+    #region Initiative
+
+    private void InitiativeControls()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            SwitchInput(InputState.Initiative);
+
+            Tile.OnTileClicked += OnTileClicked_Initiative;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftAlt))
+        {
+            Tile.OnTileClicked -= OnTileClicked_Initiative;
+            ResetInputState();
+        }
+    }
+
+    private void OnTileClicked_Initiative(Tile tile)
+    {
+        Character_World character_World = tile.World_Entity as Character_World;
+
+        if (character_World == null)
+            return;
+
+        character_World.SetInitiative(false);
+    }
+
+    #endregion
+
+
 }
