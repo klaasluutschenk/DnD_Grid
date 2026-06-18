@@ -70,6 +70,8 @@ public class Manager_Cursor : MonoBehaviour
                 return false;
             case InputState.Spawning:
                 return false;
+            case InputState.CustomImage:
+                return false;
         }
 
         return true;

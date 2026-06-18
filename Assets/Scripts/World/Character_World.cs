@@ -107,6 +107,12 @@ public class Character_World : World_Entity
             Ship.SetActive(character.HasShip);
     }
 
+    public void ToggleShip()
+    {
+        Ship.SetActive(!Ship.activeInHierarchy);
+    }
+
+
     private void SetupStats()
     {
         isAlive = true;

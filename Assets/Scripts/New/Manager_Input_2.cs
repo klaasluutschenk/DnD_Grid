@@ -76,6 +76,13 @@ public class Manager_Input_2 : MonoBehaviour
             return;
         }
 
+        CustomImageControls();
+
+        if (inputState == InputState.CustomImage)
+        {
+            return;
+        }
+
         SpawningControls();
 
         if (inputState == InputState.Spawning)
@@ -541,6 +548,36 @@ public class Manager_Input_2 : MonoBehaviour
     }
 
     #endregion
+
+    #region Initiative
+
+    private void CustomImageControls()
+    {
+        if (Input.GetKeyDown(KeyCode.RightAlt))
+        {
+            SwitchInput(InputState.CustomImage);
+
+            Tile.OnTileClicked += OnTileClicked_CustomImage;
+        }
+
+        if (Input.GetKeyUp(KeyCode.RightAlt))
+        {
+            Tile.OnTileClicked -= OnTileClicked_CustomImage;
+            ResetInputState();
+        }
+    }
+
+    private void OnTileClicked_CustomImage(Tile tile)
+    {
+        Character_World character_World = tile.World_Entity as Character_World;
+
+        if (character_World == null)
+            return;
+
+        character_World.ToggleShip();
+    }
+
+    #endregion
 }
 
 public enum InputState
@@ -559,5 +596,6 @@ public enum InputState
     Venom = 10,
     Initiative = 11,
     Spawning = 12,
-    TrueDamage = 13
+    TrueDamage = 13,
+    CustomImage = 14
 }

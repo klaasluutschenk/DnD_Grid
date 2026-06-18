@@ -31,7 +31,7 @@ public class CombatPrepCharacter : MonoBehaviour
         if (character.Sprite != null)
             spriteRenderer.sprite = character.Sprite;
 
-        float size = character.IsMinion ? 0.6f : 0.8f;
+        float size = GetSize(character.EntitySize);
         transform.localScale = new Vector3(size, size, size);
     }
 
@@ -41,5 +41,22 @@ public class CombatPrepCharacter : MonoBehaviour
             return null;
 
         return new CombatEncounter_Character(character, new Vector3(transform.position.x, transform.position.y, -1));
+    }
+
+    private float GetSize(EntitySize entitySize)
+    {
+        switch (entitySize)
+        {
+            case EntitySize.Default:
+                return 0.8f;
+            case EntitySize.Small:
+                return 0.8f;
+            case EntitySize.Big:
+                return 1.8f;
+            case EntitySize.Giant:
+                return 2.8f;
+        }
+
+        return 0.8f;
     }
 }
