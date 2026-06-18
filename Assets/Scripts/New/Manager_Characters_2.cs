@@ -65,7 +65,7 @@ public class Manager_Characters_2 : MonoBehaviour
         characters.Add(newWorldCharacter);
 
         Debug.LogWarning($"Add {character.Name} to Initiative!");
-        //Manager_Initative.Instance.AddToInitiative(character);
+        Manager_Initative.Instance.AddToInitiative(character);
     }
 
     private Character_World GetCharacterPrefab(EntitySize characterType)

@@ -130,7 +130,7 @@ public class Character_World : World_Entity
 
         this.character = character;
 
-        //SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.Name));
+        SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.Name));
 
         SetupStats();
 
@@ -390,8 +390,8 @@ public class Character_World : World_Entity
         if (isAlive)
         {
             SetLifeStatus(false);
-            Debug.LogError($"Remove {character} from Initiative!");
-            //Manager_Initative.Instance.RemoveCharacter(character);
+            Debug.LogWarning($"Remove {character} from Initiative!");
+            Manager_Initative.Instance.RemoveCharacter(character);
             return;
         }
 

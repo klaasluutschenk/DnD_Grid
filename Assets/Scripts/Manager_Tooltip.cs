@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 
@@ -47,7 +48,20 @@ public class Manager_Tooltip : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    public Coroutine Initialize()
+    {
+        return StartCoroutine(InitializeRoutine());
+    }
+
+    private IEnumerator InitializeRoutine()
+    {
         ClearTooltip();
+
+        Debug.Log("Initiative Loaded");
+
+        yield return null;
     }
 
     public void SetToolTip(Tile tile)

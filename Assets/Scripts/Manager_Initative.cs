@@ -6,13 +6,13 @@ using System.Collections.Generic;
 
 public class Manager_Initative : MonoBehaviour
 {
+    public static Manager_Initative Instance;
+
     public static Action<List<Character_Initiative>> OnInitiativeUpdated;
     public static Action<Character_Initiative> OnCharacterTurnStart;
     public static Action<Character_Initiative> OnCharacterTurnEnd;
 
     public static Action<List<Character>> OnCustomInitiativeRequest;
-
-    public static Manager_Initative Instance;
 
     [SerializeField] private List<Color> initiativeColors = new List<Color>();
 
@@ -26,10 +26,24 @@ public class Manager_Initative : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
 
-        Manager_Combat.OnCombatEncounterLoaded += OnCombatEncounterLoaded;
+    public Coroutine Initialize()
+    {
+        return StartCoroutine(InitializeRoutine());
+    }
+
+    private IEnumerator InitializeRoutine()
+    {
+        LoadColors();
+
+        UpdateInitiativeOrder();
 
         CustomInitiativeUI.OnCharacterSet += OnCharacterSet;
+
+        Debug.Log("Initiative Loaded");
+
+        yield return null;
     }
 
     private void Update()
@@ -302,13 +316,6 @@ public class Manager_Initative : MonoBehaviour
             index++;
 
         SelectCharacter(activeCharacters[index]);
-    }
-
-    private void OnCombatEncounterLoaded(CombatEncounter combatEncounter)
-    {
-        LoadColors();
-
-        UpdateInitiativeOrder();
     }
 
     private void OnCharacterSet(Character_Initiative_Custom character_Initiative_Custom)

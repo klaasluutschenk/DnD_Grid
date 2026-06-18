@@ -18,7 +18,9 @@ public class Manager_Game : MonoBehaviour
 
         yield return Manager_Grid_2.Instance.Initialize();
 
-        yield return Manager_Initiative_2.Instance.Initialize();
+        yield return Manager_Initative.Instance.Initialize();
+
+        //yield return Manager_Initiative_2.Instance.Initialize();
 
         yield return Manager_Players.Instance.Initialize();
 
@@ -29,6 +31,8 @@ public class Manager_Game : MonoBehaviour
         yield return Manager_Cursor.Instance.Initialize();
 
         yield return Manager_Camera.Instance.Initialize();
+
+        yield return Manager_Tooltip.Instance.Initialize();
 
         Debug.Log("Loading Completed!");
     }
