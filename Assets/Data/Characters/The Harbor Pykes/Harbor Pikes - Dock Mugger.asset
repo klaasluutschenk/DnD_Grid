@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Dock Mugger
   Description: Mercenary of the Harbor Pikes
   Sprite: {fileID: 21300000, guid: e862f5f63129c0c42b616e9dec82b930, type: 3}
+  EntitySize: 1
   IsPlayer: 0
   CustomInitiative: 0
   IsMinion: 1

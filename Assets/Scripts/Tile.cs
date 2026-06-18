@@ -12,27 +12,17 @@ public class Tile : MonoBehaviour
     public bool IsMovement => isMovement;
     public Vector2 GridPosition => gridPosition;
     public Transform DetectionCube => transform_detectionCube;
-    public int RoomIndex => roomIndex;
-    public bool IsRevealed => isRevealed;
     public bool HasWorldEntity => worldEntity != null;
 
     [SerializeField] private GameObject gameObject_Selected = default;
     [SerializeField] private GameObject gameObject_Movement = default;
     [SerializeField] private Transform transform_detectionCube = default;
 
-    [SerializeField] private GameObject gameObject_Fog = default;
-    [SerializeField] private GameObject gameObject_Fog_Highlight = default;
-
     private World_Entity worldEntity;
 
     private bool isSelected = false;
     private bool isHighlighted = false;
     private bool isMovement = false;
-
-    private bool isRevealed = false;
-    private bool isFogHighlighted = false;
-
-    private int roomIndex;
 
     private Vector2 gridPosition;
 
@@ -44,18 +34,11 @@ public class Tile : MonoBehaviour
     public void SetWorldEntity(World_Entity worldEntity)
     {
         this.worldEntity = worldEntity;
-
-        RevealWorldEntity(isRevealed);
     }
 
     public void ClearEntity()
     {
         worldEntity = null;
-    }
-
-    public void SetFogRoomIndex(int fogRoomIndex)
-    {
-        this.roomIndex = fogRoomIndex;
     }
 
     public void Select(bool temp)
@@ -73,46 +56,18 @@ public class Tile : MonoBehaviour
         gameObject_Movement.SetActive(isMovement);
     }
 
-    public void Reveal(bool isRevealed)
-    {
-        if (isRevealed == this.isRevealed)
-            return;
-
-        this.isRevealed = isRevealed;
-
-        gameObject_Fog.SetActive(!isRevealed);
-
-        RevealWorldEntity(isRevealed);
-    }
-
-    public void FogHighlight(bool isFogHighlighted)
-    {
-        if (isFogHighlighted == this.isFogHighlighted)
-            return;
-
-        this.isFogHighlighted = isFogHighlighted;
-
-        gameObject_Fog_Highlight.SetActive(isFogHighlighted);
-    }
-
-    private void RevealWorldEntity(bool reveal)
-    {
-        if (worldEntity == null)
-            return;
-
-        if (reveal)
-            worldEntity.Reveal();
-        else
-            worldEntity.Hide();
-    }
-
     #endregion
 
     #region new
 
     public static Action<Tile> OnTileHighlighted;
+    public static Action<Tile> OnTileSelected;
     public static Action<Tile> OnTileClicked;
 
+    public Tile UpNeighbour => upNeighbour;
+    public Tile RightNeighbour => rightNeighbour;
+    public Tile DownNeighbour => downNeighbour;
+    public Tile LeftNeighbour => leftNeighbour;
     public List<Tile> Neigbours => neighbours;
 
     [SerializeField] private GameObject gameObject_Highlighted = default;
@@ -121,7 +76,6 @@ public class Tile : MonoBehaviour
     private Tile rightNeighbour;
     private Tile downNeighbour;
     private Tile leftNeighbour;
-
     private List<Tile> neighbours;
 
     private void OnMouseEnter()
@@ -149,6 +103,13 @@ public class Tile : MonoBehaviour
         gameObject_Highlighted.SetActive(isHighlighted);
 
         OnTileHighlighted?.Invoke(this);
+    }
+
+    public void HighlightSelection(bool isSelected)
+    {
+        gameObject_Selected.SetActive(isSelected);
+
+        OnTileSelected?.Invoke(this);
     }
 
     public void SetNeighbours()

@@ -72,13 +72,13 @@ public class Manager_Characters : MonoBehaviour
 
         newWorldCharacter.Setup(character);
 
-        if (newWorldCharacter.Tile.IsRevealed)
-        {
-            activeWorldCharacters.Add(newWorldCharacter);
-            Manager_Initative.Instance.AddToInitiative(character);
-        }
-        else
-            hiddenWorldCharacters.Add(newWorldCharacter);
+        //if (newWorldCharacter.Tile.IsRevealed)
+        //{
+        //    activeWorldCharacters.Add(newWorldCharacter);
+        //    Manager_Initative.Instance.AddToInitiative(character);
+        //}
+        //else
+        //    hiddenWorldCharacters.Add(newWorldCharacter);
     }
 
     public void RevealCharacter(Character_World character)

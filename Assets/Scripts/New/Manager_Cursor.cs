@@ -25,6 +25,11 @@ public class Manager_Cursor : MonoBehaviour
         yield return null;
     }
 
+    public void ResetCursor()
+    {
+        SetCursor(InputState.Default);
+    }
+
     public void SetCursor(InputState inputState)
     {
         if (inputState == InputState.Default)

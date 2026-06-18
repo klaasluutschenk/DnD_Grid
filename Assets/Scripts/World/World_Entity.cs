@@ -11,7 +11,7 @@ public class World_Entity : MonoBehaviour
     public static Action<World_Entity> OnDeSpawned;
 
     public bool IsRevealed => isRevealed;
-    public Tile Tile => tile;
+    public List<Tile> Tiles => tiles;
     public Entity Entity => entity;
 
     [SerializeField] protected Image image_Sprite;
@@ -19,7 +19,7 @@ public class World_Entity : MonoBehaviour
 
     protected Entity entity;
 
-    protected Tile tile;
+    protected List<Tile> tiles;
 
     protected bool isRevealed;
 
@@ -40,50 +40,36 @@ public class World_Entity : MonoBehaviour
         image_Sprite.enabled = entity.Sprite != null;
         image_Sprite.sprite = entity.Sprite;
 
-        tile = Manager_Grid.Instance.GetTileByWorldPosition(transform.position);
-        tile.SetWorldEntity(this);
+        tiles = new List<Tile>();
+    }
+
+    public void SetPosition(Tile targetTile)
+    {
+        ClearPosition();
+
+        transform.position = targetTile.transform.position;
+
+        tiles = Manager_Grid_2.Instance.GetTilesBySize(targetTile, entity.EntitySize);
+
+        tiles.ForEach(t => t.SetWorldEntity(this));
+    }
+    
+    public void ClearPosition()
+    {
+        if (tiles.Count == 0)
+        {
+            return;
+        }
+
+        tiles.ForEach(t => t.ClearEntity());
+        tiles.Clear();
     }
 
     public virtual void Remove()
     {
         OnDeSpawned?.Invoke(this);
-        tile.ClearEntity();
+        ClearPosition();
 
         Destroy(this.gameObject);
     }
-
-    #region Revealing & Hiding
-
-    public virtual void Reveal()
-    {
-        if (isRevealed)
-            return;
-
-        gameObject_Canvas.SetActive(true);
-        isRevealed = true;
-    }
-
-    public void Hide()
-    {
-        gameObject_Canvas.SetActive(false);
-        isRevealed = false;
-    }
-
-    #endregion
-
-    #region Movement
-
-    public void Move(Tile targetTile)
-    {
-        if (tile != null)
-            tile.SetWorldEntity(null);
-
-        tile = targetTile;
-
-        transform.position = tile.transform.position;
-
-        tile.SetWorldEntity(this);
-    }
-
-    #endregion
 }

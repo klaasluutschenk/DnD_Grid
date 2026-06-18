@@ -9765,6 +9765,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &541926206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 541926207}
+  m_Layer: 0
+  m_Name: Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &541926207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541926206}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2136445451}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &559432940
 GameObject:
   m_ObjectHideFlags: 0
@@ -15918,51 +15949,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981956155}
   m_CullTransparentMesh: 1
---- !u!1 &982933923
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 982933924}
-  - component: {fileID: 982933925}
-  m_Layer: 0
-  m_Name: Manager_Fog
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &982933924
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 982933923}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.28565958, y: 4.802949, z: -0.76173955}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &982933925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 982933923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be683050fab2c004ba3ddf1a763ddf0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fogRooms: []
 --- !u!1 &984222947
 GameObject:
   m_ObjectHideFlags: 0
@@ -17952,18 +17938,6 @@ MonoBehaviour:
   button_Spawn: {fileID: 505451072}
   button_Impact: {fileID: 1674095846}
   playerCamera: {fileID: 519420031}
-  cursor_Armor: {fileID: 2800000, guid: 41c18b13f314ffe409c72887aa75ad0c, type: 3}
-  cursor_Barrier: {fileID: 2800000, guid: 76e9635590857dd47b371d5b283089d0, type: 3}
-  cursor_Bleed: {fileID: 2800000, guid: 279a245004980bc42929e454022e5c93, type: 3}
-  cursor_Blinded: {fileID: 2800000, guid: 3991e7b2a8298da468228755de4b1b20, type: 3}
-  cursor_Burn: {fileID: 2800000, guid: 9113a00a32d397e4ba0decab00c41cad, type: 3}
-  cursor_Movement: {fileID: 2800000, guid: 7666cffb3817c6044b3f62445cf578ad, type: 3}
-  cursor_Reload: {fileID: 2800000, guid: f7047b3b177704c4782400659fae1cbf, type: 3}
-  cursor_Root: {fileID: 2800000, guid: fa603c052f9af5044a1c4c09f507dd7c, type: 3}
-  cursor_Slowed: {fileID: 2800000, guid: b9449c1f8fd1b1d489ecf4267f02ca0d, type: 3}
-  cursor_Stun: {fileID: 2800000, guid: 9f9e8e0fdcdf5274f816c08d189ace77, type: 3}
-  cursor_Venom: {fileID: 2800000, guid: be0fba21fcad84b4ca0ceeb70f7226b6, type: 3}
-  cursor_TrueDamage: {fileID: 2800000, guid: d7402d70eef69f745b3de3121b1f7408, type: 3}
   mouseGridPosition: {x: 0, y: 0, z: 0}
   oldMouseGridPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &1068726223
@@ -25783,18 +25757,6 @@ MonoBehaviour:
     CursorTexture: {fileID: 2800000, guid: be0fba21fcad84b4ca0ceeb70f7226b6, type: 3}
   - InputState: 10
     CursorTexture: {fileID: 0}
-  cursor_Armor: {fileID: 2800000, guid: 41c18b13f314ffe409c72887aa75ad0c, type: 3}
-  cursor_Barrier: {fileID: 2800000, guid: 76e9635590857dd47b371d5b283089d0, type: 3}
-  cursor_Bleed: {fileID: 2800000, guid: 279a245004980bc42929e454022e5c93, type: 3}
-  cursor_Blinded: {fileID: 2800000, guid: 3991e7b2a8298da468228755de4b1b20, type: 3}
-  cursor_Burn: {fileID: 2800000, guid: 9113a00a32d397e4ba0decab00c41cad, type: 3}
-  cursor_Movement: {fileID: 2800000, guid: 7666cffb3817c6044b3f62445cf578ad, type: 3}
-  cursor_Reload: {fileID: 2800000, guid: f7047b3b177704c4782400659fae1cbf, type: 3}
-  cursor_Root: {fileID: 2800000, guid: fa603c052f9af5044a1c4c09f507dd7c, type: 3}
-  cursor_Slowed: {fileID: 2800000, guid: b9449c1f8fd1b1d489ecf4267f02ca0d, type: 3}
-  cursor_Stun: {fileID: 2800000, guid: 9f9e8e0fdcdf5274f816c08d189ace77, type: 3}
-  cursor_Venom: {fileID: 2800000, guid: be0fba21fcad84b4ca0ceeb70f7226b6, type: 3}
-  cursor_TrueDamage: {fileID: 2800000, guid: d7402d70eef69f745b3de3121b1f7408, type: 3}
 --- !u!1 &1479088792
 GameObject:
   m_ObjectHideFlags: 0
@@ -35989,8 +35951,6 @@ MonoBehaviour:
   character_Reload_Value: {fileID: 1851694876}
   character_Rooted: {fileID: 833319552}
   character_Rooted_Value: {fileID: 95169825}
-  fog_Container: {fileID: 1921658923}
-  fog_LoadBar: {fileID: 1414331640}
 --- !u!4 &2007154624
 Transform:
   m_ObjectHideFlags: 0
@@ -38164,7 +38124,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 541926207}
   m_Father: {fileID: 1171810429}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2136445452
@@ -38179,6 +38140,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdf037be0c1debf49b9c3b174c356b7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterContainer: {fileID: 541926207}
+  characterPrefabData:
+  - CharacterType: 0
+    Prefab: {fileID: 191859965173050626, guid: 96880467fa8cf0145b0480562ce2d3cf, type: 3}
+  - CharacterType: 1
+    Prefab: {fileID: 191859965173050626, guid: 4a5b1296a9035774099ecbf68c80b821, type: 3}
+  - CharacterType: 2
+    Prefab: {fileID: 191859965173050626, guid: dde51c3dbd4961d48aa1a109b60a644d, type: 3}
+  - CharacterType: 3
+    Prefab: {fileID: 519244796753071348, guid: fd54383313aa5684e820d166136101e1, type: 3}
 --- !u!1 &2137468707
 GameObject:
   m_ObjectHideFlags: 0
@@ -38407,7 +38378,6 @@ SceneRoots:
   - {fileID: 1169088051}
   - {fileID: 219123302}
   - {fileID: 1068726223}
-  - {fileID: 982933924}
   - {fileID: 2007154624}
   - {fileID: 814616652}
   - {fileID: 221540273}

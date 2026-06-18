@@ -59,16 +59,6 @@ public class Character_World : World_Entity
         base.OnDestroy();
     }
 
-    public override void Reveal()
-    {
-        base.Reveal();
-
-        if (!isRevealed)
-            return;
-
-        Manager_Characters.Instance.RevealCharacter(this);
-    }
-
     public void SetInitiative(bool active)
     {
         gameObject_InitiativeSelection.SetActive(active);
@@ -140,7 +130,7 @@ public class Character_World : World_Entity
 
         this.character = character;
 
-        SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.Name));
+        //SetInitativeColor(Manager_Initative.Instance.GetInitiativeCharacter(character.Name));
 
         SetupStats();
 
@@ -400,7 +390,8 @@ public class Character_World : World_Entity
         if (isAlive)
         {
             SetLifeStatus(false);
-            Manager_Initative.Instance.RemoveCharacter(character);
+            Debug.LogError($"Remove {character} from Initiative!");
+            //Manager_Initative.Instance.RemoveCharacter(character);
             return;
         }
 

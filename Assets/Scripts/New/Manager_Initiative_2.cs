@@ -17,8 +17,8 @@ public class Manager_Initiative_2 : MonoBehaviour
 
     private IEnumerator RunInitiativeRoutine()
     {
-        yield return new WaitForSeconds(1);
-
         Debug.Log("Initiative Loaded");
+
+        yield return null;
     }
 }

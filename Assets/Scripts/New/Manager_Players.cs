@@ -17,8 +17,8 @@ public class Manager_Players : MonoBehaviour
 
     private IEnumerator RunPlayersRoutine()
     {
-        yield return new WaitForSeconds(1);
-
         Debug.Log("Players Loaded");
+
+        yield return null;
     }
 }

@@ -39,17 +39,11 @@ public class Manager_Grid : MonoBehaviour
     {
         ClearPhysics();
         ClearGrid();
-        ClearFog();
     }
 
     private void OnGridRequest(CombatEncounter combatEncounter)
     {
         SpawnPhysics(combatEncounter.PhysicsObject);
-
-        if (combatEncounter.FogObject != null)
-        {
-            SpawnFog(combatEncounter.FogObject);
-        }
 
         GenerateGrid(combatEncounter);
 
@@ -112,29 +106,6 @@ public class Manager_Grid : MonoBehaviour
 
     #endregion
 
-    #region Fog
-
-    private void ClearFog()
-    {
-        if (fogObject == null)
-            return;
-
-        Destroy(fogObject);
-        fogObject = null;
-    }
-    
-    private void SpawnFog(GameObject fogObjectToSpawn)
-    {
-        if (fogObjectToSpawn == null)
-        {
-            tiles.ForEach(t => t.Reveal(true));
-        }
-
-        fogObject = Instantiate(fogObjectToSpawn, fogContainer);
-    }
-
-    #endregion
-
     #region Functions
 
     public void RemoveTile(Tile tile)
@@ -144,11 +115,6 @@ public class Manager_Grid : MonoBehaviour
 
         tiles.Remove(tile);
         Destroy(tile.gameObject);
-    }
-
-    public List<Tile> GetTilesByRoomIndex(int roomIndex)
-    {
-        return tiles.Where(t => t.RoomIndex == roomIndex).ToList().ToList();
     }
 
     public Tile GetTileByWorldPosition(Vector3 position)

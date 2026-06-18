@@ -80,9 +80,6 @@ public class Manager_Grid_2 : MonoBehaviour
 
                 newTile.gameObject.name = $"Tile {x} {y}";
 
-                Debug.LogError("Remove this auto Revealing!");
-                newTile.Reveal(true);
-
                 tiles.Add(newTile);
             }
         }
@@ -130,6 +127,27 @@ public class Manager_Grid_2 : MonoBehaviour
         return neighbour;
     }
 
+    public List<Tile> GetSurroundingAlliedTile(Tile tile, bool IsPlayerTeam)
+    {
+        List<Tile> alliedTiles = new List<Tile>();
+
+        foreach (Tile surroundingTile in tile.Neigbours)
+        {
+            Character_World character_World = surroundingTile.World_Entity as Character_World;
+
+            if (character_World == null)
+            {
+                alliedTiles.Add(surroundingTile);
+            }
+            else if (character_World.Character.IsPlayerTeam == IsPlayerTeam)
+            {
+                alliedTiles.Add(surroundingTile);
+            }
+        }
+
+        return alliedTiles;
+    }
+
     public bool HasLineOfSight(Tile originTile, Tile targetTile, Vector3 direction)
     {
         float distance = Vector3.Distance(originTile.transform.position, targetTile.transform.position);
@@ -147,6 +165,119 @@ public class Manager_Grid_2 : MonoBehaviour
 
         if (Physics.Raycast(originTile.DetectionCube.position, direction, distance, layerMask))
             return false;
+
+        return true;
+    }
+
+    public List<Tile> GetTilesBySize(Tile targetTile, EntitySize entitySize)
+    {
+        List<Tile> tiles = new List<Tile>();
+
+        tiles.Add(targetTile);
+
+        switch (entitySize)
+        {
+            case EntitySize.Big:
+                if (tiles[0].RightNeighbour != null)
+                    tiles.Add(tiles[0].RightNeighbour);
+                else
+                    return null;
+
+                if (tiles[0].DownNeighbour != null)
+                    tiles.Add(tiles[0].DownNeighbour);
+                else
+                    return null;
+
+                if (tiles[1].DownNeighbour != null)
+                    tiles.Add(tiles[1].DownNeighbour);
+                else
+                    return null;
+                break;
+
+            case EntitySize.Giant:
+                if (tiles[0].RightNeighbour != null)
+                    tiles.Add(tiles[0].RightNeighbour);
+                else
+                    return null;
+
+                if (tiles[1].RightNeighbour != null)
+                    tiles.Add(tiles[1].RightNeighbour);
+                else
+                    return null;
+
+                if (tiles[0].DownNeighbour != null)
+                    tiles.Add(tiles[0].DownNeighbour);
+                else
+                    return null;
+
+                if (tiles[1].DownNeighbour != null)
+                    tiles.Add(tiles[1].DownNeighbour);
+                else
+                    return null;
+
+                if (tiles[2].DownNeighbour != null)
+                    tiles.Add(tiles[2].DownNeighbour);
+                else
+                    return null;
+
+                if (tiles[3].DownNeighbour != null)
+                    tiles.Add(tiles[3].DownNeighbour);
+                else
+                    return null;
+
+                if (tiles[4].DownNeighbour != null)
+                    tiles.Add(tiles[4].DownNeighbour);
+                else
+                    return null;
+
+                if (tiles[5].DownNeighbour != null)
+                    tiles.Add(tiles[5].DownNeighbour);
+                else
+                    return null;
+                break;
+        }
+
+        return tiles;
+    }
+
+    public bool RoomAvailable(Tile targetTile, EntitySize entitySize, World_Entity entity = null)
+    {
+        List<Tile> targetTiles = GetTilesBySize(targetTile, entitySize);
+
+        if (targetTiles == null || targetTiles.Count == 0)
+        {
+            return false;
+        }
+
+        foreach (Tile tile in targetTiles)
+        {
+            if (tile.HasWorldEntity)
+            {
+                if (entity != null)
+                {
+                    if (tile.World_Entity != entity)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        switch (entitySize)
+        {
+            case EntitySize.Default:
+                return targetTiles.Count == 1;
+            case EntitySize.Small:
+                return targetTiles.Count == 1;
+            case EntitySize.Big:
+                return targetTiles.Count == 4;
+            case EntitySize.Giant:
+                return targetTiles.Count == 9;
+        }
 
         return true;
     }

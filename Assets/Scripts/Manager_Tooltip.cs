@@ -44,10 +44,6 @@ public class Manager_Tooltip : MonoBehaviour
     [SerializeField] private GameObject character_Rooted = default;
     [SerializeField] private TextMeshProUGUI character_Rooted_Value = default;
 
-    [Header("Fog")]
-    [SerializeField] private GameObject fog_Container = default;
-    [SerializeField] private Image fog_LoadBar = default;
-
     private void Awake()
     {
         Instance = this;
@@ -60,16 +56,7 @@ public class Manager_Tooltip : MonoBehaviour
 
         tooltipContainer.SetActive(true);
 
-        //tooltipContainer.transform.position = Input.mousePosition;
-
-        if (tile.IsRevealed)
-        {
-            SetTileTooltip(tile);
-        }
-        else
-        {
-            SetFogTooltip(tile);
-        }        
+        SetTileTooltip(tile);
     }
 
     public void ClearTooltip()
@@ -77,7 +64,6 @@ public class Manager_Tooltip : MonoBehaviour
         tooltipContainer.SetActive(false);
         tile_Container.SetActive(false);
         character_Container.SetActive(false);
-        fog_Container.SetActive(false);
     }
 
     private void SetTileTooltip(Tile tile)
@@ -135,11 +121,5 @@ public class Manager_Tooltip : MonoBehaviour
 
         character_Rooted.SetActive(character.Rooted.StatActive);
         character_Rooted_Value.text = character.Rooted.StatValue.ToString();
-    }
-
-    private void SetFogTooltip(Tile tile)
-    {
-        fog_Container.SetActive(true);
-        fog_LoadBar.fillAmount = Manager_Input.Instance.FogTimer;
     }
 }

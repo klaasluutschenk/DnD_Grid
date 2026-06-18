@@ -15,9 +15,12 @@ MonoBehaviour:
   Name: Spear Fisher
   Description: Mercenary of the Harbor Pikes
   Sprite: {fileID: 21300000, guid: c8adbb4b40ce45a49a2ea882619146f2, type: 3}
+  EntitySize: 0
   IsPlayer: 0
   CustomInitiative: 0
   IsMinion: 0
+  IsBig: 0
+  IsGiant: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 1}
   CombatPrepColor: {r: 1, g: 0.45637324, b: 0.3820755, a: 1}
@@ -41,3 +44,4 @@ MonoBehaviour:
   Abilities:
   - {fileID: 11400000, guid: 2c56a0b72d214664faefcfb0b207c277, type: 2}
   - {fileID: 11400000, guid: 64d16f7101e98c04ab78666c33247336, type: 2}
+  HasShip: 0

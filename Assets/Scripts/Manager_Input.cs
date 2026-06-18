@@ -80,16 +80,6 @@ public class Manager_Input : MonoBehaviour
         else
             Manager_Tooltip.Instance.ClearTooltip();
 
-        // Fog
-
-        if (!mainTile.IsRevealed)
-        {
-            Fog();
-            return;
-        }
-        else
-            ClearFogtiles();
-
         // Initiative
 
         if (Input.GetKey(KeyCode.LeftAlt))
@@ -214,7 +204,7 @@ public class Manager_Input : MonoBehaviour
             inputState = newInputState;
         else
             inputState = InputState.Default;
-    }    
+    }
 
     #region Mouse
 
@@ -598,7 +588,7 @@ public class Manager_Input : MonoBehaviour
                 Tile movementTile = highlightedTiles.FirstOrDefault();
                 if (movementTile.World_Entity == null)
                 {
-                    movementSelection.Move(movementTile);
+                    //movementSelection.Move(movementTile);
                     movementSelection = null;
                     ClearSelection();
                     ClearMovementTiles();
@@ -626,63 +616,6 @@ public class Manager_Input : MonoBehaviour
         ClearMovementTiles();
 
         inputState = InputState.Default;
-    }
-
-    #endregion
-
-    #region Fog
-
-    private void Fog()
-    {
-        HighLightFogTiles();
-
-        if (Input.GetMouseButton(0))
-        {
-            fogTimer += Time.deltaTime;
-
-            if (fogTimer >= 1)
-            {
-                fogTiles.ForEach(ft => ft.Reveal(true));
-                Manager_Fog.Instance.RevealRoom(currentRoomSelection);
-
-                ClearFogtiles();
-
-                fogTimer = 0;
-            }
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            fogTimer = 0;
-        }
-    }
-
-    private void HighLightFogTiles()
-    {
-        ClearFogtiles();
-
-        // Get Main Tile
-        Tile highlightedTile = Manager_Grid.Instance.GetTileByWorldPosition(mouseGridPosition);
-
-        if (highlightedTile == null)
-            return;
-
-        if (Manager_Fog.Instance.IsRoomRevealed(highlightedTile.RoomIndex))
-            return;
-
-        currentRoomSelection = highlightedTile.RoomIndex;
-
-        fogTiles.AddRange(Manager_Grid.Instance.GetTilesByRoomIndex(highlightedTile.RoomIndex));
-
-        fogTiles.ForEach(t => t.FogHighlight(true));
-    }
-
-    private void ClearFogtiles()
-    {
-        fogTiles.ForEach(ht => ht.FogHighlight(false));
-        fogTiles.Clear();
-
-        currentRoomSelection = -1;
     }
 
     #endregion

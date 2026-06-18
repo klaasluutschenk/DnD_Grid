@@ -7,4 +7,6 @@ public class Entity : ScriptableObject
     [TextArea] public string Description;
 
     public Sprite Sprite;
+
+    public EntitySize EntitySize;
 }

@@ -15,9 +15,12 @@ MonoBehaviour:
   Name: The Harbor Master
   Description: Mercenary of the Harbor Pikes
   Sprite: {fileID: 21300000, guid: 21869fcc5482e8b42983a7d0aff5fe83, type: 3}
+  EntitySize: 0
   IsPlayer: 0
   CustomInitiative: 0
   IsMinion: 0
+  IsBig: 0
+  IsGiant: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 1}
   CombatPrepColor: {r: 0.6981132, g: 0.16099468, b: 0, a: 1}
@@ -41,3 +44,4 @@ MonoBehaviour:
   Abilities:
   - {fileID: 11400000, guid: 8e8ed260dd4a3584a8e309ef52fe81a7, type: 2}
   - {fileID: 11400000, guid: 7a5fb88c1a5d9cc46827a17ab8a78a37, type: 2}
+  HasShip: 0
