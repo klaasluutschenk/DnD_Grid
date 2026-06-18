@@ -63,6 +63,7 @@ public class Tile : MonoBehaviour
     public static Action<Tile> OnTileHighlighted;
     public static Action<Tile> OnTileSelected;
     public static Action<Tile> OnTileClicked;
+    public static Action<Tile> OnTileClickedAlternate;
 
     public Tile UpNeighbour => upNeighbour;
     public Tile RightNeighbour => rightNeighbour;
@@ -83,19 +84,22 @@ public class Tile : MonoBehaviour
         Highlight(true);
     }
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
-        Select();
+        if(Input.GetMouseButtonDown(0))
+        {
+            OnTileClicked?.Invoke(this);
+        }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            OnTileClickedAlternate?.Invoke(this);
+        }
     }
 
     private void OnMouseExit()
     {
         Highlight(false);
-    }
-
-    public void Select()
-    {
-        OnTileClicked?.Invoke(this);
     }
 
     public void Highlight(bool isHighlighted)

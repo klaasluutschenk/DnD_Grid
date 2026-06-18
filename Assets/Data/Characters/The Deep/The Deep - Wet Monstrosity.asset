@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Wet Monstrosity
   Description: A misterious wet creature risen from the depths
   Sprite: {fileID: 21300000, guid: e87d13f673d549649be3dc6e0e311c60, type: 3}
+  EntitySize: 3
   IsPlayer: 0
   CustomInitiative: 0
   IsMinion: 0

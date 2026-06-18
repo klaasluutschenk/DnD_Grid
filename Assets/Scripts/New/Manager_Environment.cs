@@ -18,12 +18,12 @@ public class Manager_Environment : MonoBehaviour
         Instance = this;
     }
 
-    public Coroutine RunEnvironment()
+    public Coroutine Initialize()
     {
-        return StartCoroutine(RunEnvironmentRoutine());
+        return StartCoroutine(InitializeRoutine());
     }
 
-    private IEnumerator RunEnvironmentRoutine()
+    private IEnumerator InitializeRoutine()
     {
         CombatEncounter combatEncounter = Manager_Encounter.Instance.CombatEncounter;
 

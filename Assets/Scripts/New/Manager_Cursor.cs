@@ -13,12 +13,12 @@ public class Manager_Cursor : MonoBehaviour
         Instance = this;
     }
 
-    public Coroutine RunCursor()
+    public Coroutine Initialize()
     {
-        return StartCoroutine(RunCursorRoutine());
+        return StartCoroutine(InitializeRoutine());
     }
 
-    private IEnumerator RunCursorRoutine()
+    private IEnumerator InitializeRoutine()
     {
         Debug.Log("Cursor Loaded");
 

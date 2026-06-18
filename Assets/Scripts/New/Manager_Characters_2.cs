@@ -16,12 +16,12 @@ public class Manager_Characters_2 : MonoBehaviour
         Instance = this;
     }
 
-    public Coroutine RunCharacters()
+    public Coroutine Initialize()
     {
-        return StartCoroutine(RunCharactersRoutine());
+        return StartCoroutine(InitializeRoutine());
     }
 
-    private IEnumerator RunCharactersRoutine()
+    private IEnumerator InitializeRoutine()
     {
         CombatEncounter combatEncounter = Manager_Encounter.Instance.CombatEncounter;
 

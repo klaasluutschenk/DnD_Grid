@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Manager_Camera : MonoBehaviour
 {
@@ -17,6 +19,18 @@ public class Manager_Camera : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    public Coroutine Initialize()
+    {
+        return StartCoroutine(InitializeRoutine());
+    }
+
+    private IEnumerator InitializeRoutine()
+    {
+        Debug.Log("Cursor Loaded");
+
+        yield return null;
     }
 
     private void Update()

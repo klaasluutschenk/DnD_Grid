@@ -25755,8 +25755,8 @@ MonoBehaviour:
     CursorTexture: {fileID: 2800000, guid: 9f9e8e0fdcdf5274f816c08d189ace77, type: 3}
   - InputState: 10
     CursorTexture: {fileID: 2800000, guid: be0fba21fcad84b4ca0ceeb70f7226b6, type: 3}
-  - InputState: 10
-    CursorTexture: {fileID: 0}
+  - InputState: 13
+    CursorTexture: {fileID: 2800000, guid: d7402d70eef69f745b3de3121b1f7408, type: 3}
 --- !u!1 &1479088792
 GameObject:
   m_ObjectHideFlags: 0

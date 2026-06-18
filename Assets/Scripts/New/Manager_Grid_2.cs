@@ -24,12 +24,12 @@ public class Manager_Grid_2 : MonoBehaviour
         Instance = this;
     }
 
-    public Coroutine RunGrid()
+    public Coroutine Initialize()
     {
-        return StartCoroutine(RunGridRoutine());
+        return StartCoroutine(InitializeRoutine());
     }
 
-    private IEnumerator RunGridRoutine()
+    private IEnumerator InitializeRoutine()
     {
         tempGrid.SetActive(false);
 
@@ -46,6 +46,8 @@ public class Manager_Grid_2 : MonoBehaviour
         ClearPhysicsObject();
 
         Debug.Log("Grid Loaded");
+
+        yield return null;
     }
 
     private void SpawnPhysics(GameObject encounterPhysicsObject)

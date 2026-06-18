@@ -10,12 +10,12 @@ public class Manager_Initiative_2 : MonoBehaviour
         Instance = this;
     }
 
-    public Coroutine RunInitiative()
+    public Coroutine Initialize()
     {
-        return StartCoroutine(RunInitiativeRoutine());
+        return StartCoroutine(InitializeRoutine());
     }
 
-    private IEnumerator RunInitiativeRoutine()
+    private IEnumerator InitializeRoutine()
     {
         Debug.Log("Initiative Loaded");
 

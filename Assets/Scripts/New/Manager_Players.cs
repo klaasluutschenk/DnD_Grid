@@ -10,12 +10,12 @@ public class Manager_Players : MonoBehaviour
         Instance = this;
     }
 
-    public Coroutine RunPlayers()
+    public Coroutine Initialize()
     {
-        return StartCoroutine(RunPlayersRoutine());
+        return StartCoroutine(InitializeRoutine());
     }
 
-    private IEnumerator RunPlayersRoutine()
+    private IEnumerator InitializeRoutine()
     {
         Debug.Log("Players Loaded");
 

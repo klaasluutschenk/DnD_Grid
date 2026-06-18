@@ -47,7 +47,7 @@ MonoBehaviour:
     Position: {x: 4.5, y: -8.5, z: -1}
   - Character: {fileID: 11400000, guid: febca0f2244f9d045999a753e5f654f0, type: 2}
     Position: {x: 3.5, y: -6.5, z: -1}
-  - Character: {fileID: 11400000, guid: febca0f2244f9d045999a753e5f654f0, type: 2}
+  - Character: {fileID: 11400000, guid: e4f1b1c1ef8b40c43a6642260b9aab7c, type: 2}
     Position: {x: -3.5, y: 6.5, z: -1}
   - Character: {fileID: 11400000, guid: 8583f9065839dca49bbf447b98ec02b4, type: 2}
     Position: {x: -2.5, y: -8.5, z: -1}
