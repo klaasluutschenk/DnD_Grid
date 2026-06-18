@@ -20,8 +20,6 @@ public class Manager_Game : MonoBehaviour
 
         yield return Manager_Initative.Instance.Initialize();
 
-        //yield return Manager_Initiative_2.Instance.Initialize();
-
         yield return Manager_Players.Instance.Initialize();
 
         yield return Manager_Characters_2.Instance.Initialize();
