@@ -454,7 +454,8 @@ MonoBehaviour:
     Icon: {fileID: 9022983708696888555}
   Rooted:
     Icon: {fileID: 546917336218001127}
-  Ship: {fileID: 0}
+  Ship: {fileID: 3939022133964267866}
+  ShipActive: 0
 --- !u!1 &1802645633434510786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1447,8 +1448,8 @@ RectTransform:
   m_LocalScale: {x: 0.01388889, y: 0.01388889, z: 0.01388889}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3564319438018659582}
   - {fileID: 2275139352625041624}
+  - {fileID: 3564319438018659582}
   - {fileID: 5310611663649888461}
   - {fileID: 1501142738417608636}
   - {fileID: 7698815678618614533}

@@ -1,10 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Manager_Characters_2 : MonoBehaviour
 {
     public static Manager_Characters_2 Instance;
+
+    public List<Character_World> Characters => characters;
 
     [SerializeField] private Transform characterContainer = default;
     [SerializeField] private List<CharacterPrefabData> characterPrefabData;
@@ -26,6 +29,8 @@ public class Manager_Characters_2 : MonoBehaviour
         CombatEncounter combatEncounter = Manager_Encounter.Instance.CombatEncounter;
 
         SpawnAllCharacters(combatEncounter.Characters);
+
+        Character_World.OnDeSpawned += OnDespawned;
 
         Debug.Log("Characters Loaded");
 
@@ -64,8 +69,24 @@ public class Manager_Characters_2 : MonoBehaviour
 
         characters.Add(newWorldCharacter);
 
-        Debug.LogWarning($"Add {character.Name} to Initiative!");
         Manager_Initative.Instance.AddToInitiative(character);
+    }
+
+    private void OnDespawned(World_Entity world_Entity)
+    {
+        Character_World character_World = world_Entity as Character_World;
+
+        if (character_World == null)
+        {
+            return;
+        }
+
+        if (!characters.Contains(character_World))
+        {
+            return;
+        }
+
+        characters.Remove(character_World);
     }
 
     private Character_World GetCharacterPrefab(EntitySize characterType)
@@ -80,6 +101,11 @@ public class Manager_Characters_2 : MonoBehaviour
 
         Debug.LogError("There is no Character Prefab for this entry!");
         return null;
+    }
+
+    public List<Character_World> GetPlayerCharacters()
+    {
+        return characters.Where(c => c.Character.IsPlayer).ToList();
     }
 }
 

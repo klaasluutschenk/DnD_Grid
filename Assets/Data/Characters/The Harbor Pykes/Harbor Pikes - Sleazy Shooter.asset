@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: Harbor Pikes - Tide Seeker Adrianna
+  m_Name: Harbor Pikes - Sleazy Shooter
   m_EditorClassIdentifier: 
-  Name: Tide Seeker Adrianna
-  Description: one of the mysterious Tide Seekers, part of The Harbor Pike.
-  Sprite: {fileID: 21300000, guid: 617cf1d4c841c174aaf34136f82ded1a, type: 3}
-  EntitySize: 0
+  Name: Sleezy Shooter
+  Description: Mercenary of the Harbor Pikes
+  Sprite: {fileID: 21300000, guid: dd5fe43c84c35e74a805d80b946e0976, type: 3}
+  EntitySize: 1
   IsPlayer: 0
   CustomInitiative: 0
-  IsMinion: 0
+  IsMinion: 1
   IsBig: 0
   IsGiant: 0
   IsPlayerTeam: 0
   InitativeColor: {r: 0, g: 0, b: 0, a: 1}
-  CombatPrepColor: {r: 0.6981132, g: 0.16099468, b: 0, a: 1}
+  CombatPrepColor: {r: 0.03404235, g: 0.8018868, b: 0.11935844, a: 1}
   HasNoInitiative: 0
-  initiative: 0
+  initiative: 14
   AdditionalInitiatives: 
-  HealthPoints: 60
+  HealthPoints: 4
   Armor: 0
-  Barier: 10
-  Movement: 6
-  Perception: 8
+  Barier: 0
+  Movement: 8
+  Perception: 5
   Dodge: 0
   Bleed: 0
   Blinded: 0
@@ -41,5 +41,7 @@ MonoBehaviour:
   Slowed: 0
   Stun: 0
   Venom: 0
-  Abilities: []
+  Abilities:
+  - {fileID: 11400000, guid: f87f6118b7933394d8f8357052ac6af1, type: 2}
+  - {fileID: 11400000, guid: f3c2892f57a95554a8dab445acbc1400, type: 2}
   HasShip: 0

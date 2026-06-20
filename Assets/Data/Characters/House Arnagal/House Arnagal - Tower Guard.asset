@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337912f8cb171484faa653a854864cf7, type: 3}
-  m_Name: Harbor Pikes - Tide Seeker Adrianna
+  m_Name: House Arnagal - Tower Guard
   m_EditorClassIdentifier: 
-  Name: Tide Seeker Adrianna
-  Description: one of the mysterious Tide Seekers, part of The Harbor Pike.
-  Sprite: {fileID: 21300000, guid: 617cf1d4c841c174aaf34136f82ded1a, type: 3}
+  Name: Tower Guard
+  Description: A Tower Guard of House Arnagal, spear in Hand.
+  Sprite: {fileID: 21300000, guid: c8adbb4b40ce45a49a2ea882619146f2, type: 3}
   EntitySize: 0
   IsPlayer: 0
   CustomInitiative: 0
   IsMinion: 0
   IsBig: 0
   IsGiant: 0
-  IsPlayerTeam: 0
-  InitativeColor: {r: 0, g: 0, b: 0, a: 1}
-  CombatPrepColor: {r: 0.6981132, g: 0.16099468, b: 0, a: 1}
+  IsPlayerTeam: 1
+  InitativeColor: {r: 0, g: 0, b: 0, a: 0}
+  CombatPrepColor: {r: 0, g: 0, b: 0, a: 0}
   HasNoInitiative: 0
-  initiative: 0
+  initiative: 10
   AdditionalInitiatives: 
-  HealthPoints: 60
-  Armor: 0
-  Barier: 10
+  HealthPoints: 10
+  Armor: 4
+  Barier: 0
   Movement: 6
-  Perception: 8
+  Perception: 0
   Dodge: 0
   Bleed: 0
   Blinded: 0
@@ -41,5 +41,6 @@ MonoBehaviour:
   Slowed: 0
   Stun: 0
   Venom: 0
-  Abilities: []
+  Abilities:
+  - {fileID: 11400000, guid: e68913216ccc6b2498b4122155cfecf3, type: 2}
   HasShip: 0

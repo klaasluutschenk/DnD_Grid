@@ -94,6 +94,8 @@ public class Character_World : World_Entity
 
     // Testing
     public GameObject Ship;
+    public bool ShipActive;
+
     public override void Setup(Entity entity)
     {
         Character character = entity as Character;
@@ -103,13 +105,21 @@ public class Character_World : World_Entity
         base.Setup(entity);
 
         // Testing
-        if (Ship != null)
-            Ship.SetActive(character.HasShip);
+        if (character.HasShip)
+        {
+            ToggleShip();
+        }
     }
 
     public void ToggleShip()
     {
-        Ship.SetActive(!Ship.activeInHierarchy);
+        if (Ship == null)
+        {
+            return;
+        }
+
+        ShipActive = !ShipActive;
+        Ship.SetActive(ShipActive);
     }
 
 

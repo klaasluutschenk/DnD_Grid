@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Manager_Environment : MonoBehaviour
 {
@@ -52,10 +53,82 @@ public class Manager_Environment : MonoBehaviour
             ControlDynamicBackground(0, 0);
 
         if (Input.GetKey(KeyCode.N))
-            ControlDynamicBackground(0.01f, 0);
+            ControlDynamicBackground(0, 0.01f);
 
         if (Input.GetKey(KeyCode.M))
-            ControlDynamicBackground(0.03f, 0);
+            ControlDynamicBackground(0, 0.03f);
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            StartCoroutine(WavesRoutine());
+        }
+    }
+
+    private IEnumerator WavesRoutine()
+    {
+        List<Character_World> characters = Manager_Characters_2.Instance.Characters;
+
+        float maxSpeed = 0.04f;
+        float timer = 0;
+
+        while (timer <= 1f)
+        {
+            ControlDynamicBackground(timer * maxSpeed * 2, 0);
+            timer += Time.deltaTime;
+
+            yield return null;
+        }
+
+        timer = 1;
+        ControlDynamicBackground(timer * maxSpeed * 2, 0);
+
+        foreach (Character_World character in characters)
+        {
+            if (!character.ShipActive)
+            {
+                continue;
+            }
+
+            if (character.Tiles[0].LeftNeighbour != null)
+            {
+                character.SetPosition(character.Tiles[0].LeftNeighbour);
+            }
+        }
+
+        while (timer <= 2)
+        {
+            ControlDynamicBackground(timer * maxSpeed * 2, 0);
+            timer += Time.deltaTime;
+
+            yield return null;
+        }
+
+        timer = 2;
+        ControlDynamicBackground(timer * maxSpeed * 2, 0);
+
+        foreach (Character_World characters2 in characters)
+        {
+            if (!characters2.ShipActive)
+            {
+                continue;
+            }
+
+            if (characters2.Tiles[0].LeftNeighbour != null)
+            {
+                characters2.SetPosition(characters2.Tiles[0].LeftNeighbour);
+            }
+        }
+
+        while (timer >= 0)
+        {
+            ControlDynamicBackground(timer * maxSpeed * 2, 0);
+            timer -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        timer = 0;
+        ControlDynamicBackground(timer * maxSpeed * 2, 0);
     }
 
     private void ControlDynamicBackground(float horizontalSpeed, float verticalSpeed)
