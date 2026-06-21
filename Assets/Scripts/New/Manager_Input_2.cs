@@ -46,7 +46,7 @@ public class Manager_Input_2 : MonoBehaviour
 
     private void ToggleInputState(InputState newInputState)
     {
-1        if (inputState != newInputState)
+        if (inputState != newInputState)
             inputState = newInputState;
         else
             inputState = InputState.Default;
