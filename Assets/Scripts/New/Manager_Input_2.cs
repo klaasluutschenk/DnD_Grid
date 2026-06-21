@@ -46,7 +46,7 @@ public class Manager_Input_2 : MonoBehaviour
 
     private void ToggleInputState(InputState newInputState)
     {
-        if (inputState != newInputState)
+1        if (inputState != newInputState)
             inputState = newInputState;
         else
             inputState = InputState.Default;
@@ -104,8 +104,6 @@ public class Manager_Input_2 : MonoBehaviour
 
         if (!IsInEffectinputState())
         {
-            Tile.OnTileClicked -= ApplyDefaultEffect;
-            Tile.OnTileClickedAlternate -= ApplyAlternateEffect;
             return;
         }
 
@@ -117,14 +115,14 @@ public class Manager_Input_2 : MonoBehaviour
 
     private void MovementControls()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && inputState == InputState.Default)
         {
             SwitchInput(InputState.Movement);
 
             Tile.OnTileClicked += OnTileClicked_Movement;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) && inputState == InputState.Movement)
         {
             Tile.OnTileClicked -= OnTileClicked_Movement;
             ResetInputState();
@@ -354,6 +352,8 @@ public class Manager_Input_2 : MonoBehaviour
                 return false;
             case InputState.TrueDamage:
                 return true;
+            case InputState.CustomImage:
+                return true;
             default:
                 return false;
         }
@@ -459,7 +459,7 @@ public class Manager_Input_2 : MonoBehaviour
 
     private void SpawningControls()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && inputState != InputState.Spawning)
+        if (Input.GetKeyDown(KeyCode.Z) && inputState == InputState.Default)
         {
             SwitchInput(InputState.Spawning);
             OnSpawnRequest?.Invoke();
@@ -523,14 +523,14 @@ public class Manager_Input_2 : MonoBehaviour
 
     private void InitiativeControls()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        if (Input.GetKeyDown(KeyCode.LeftAlt) && inputState == InputState.Default)
         {
             SwitchInput(InputState.Initiative);
 
             Tile.OnTileClicked += OnTileClicked_Initiative;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftAlt))
+        if (Input.GetKeyUp(KeyCode.LeftAlt) && inputState == InputState.Initiative)
         {
             Tile.OnTileClicked -= OnTileClicked_Initiative;
             ResetInputState();
@@ -553,14 +553,14 @@ public class Manager_Input_2 : MonoBehaviour
 
     private void CustomImageControls()
     {
-        if (Input.GetKeyDown(KeyCode.RightAlt))
+        if (Input.GetKeyDown(KeyCode.RightAlt) && inputState == InputState.Default)
         {
             SwitchInput(InputState.CustomImage);
 
             Tile.OnTileClicked += OnTileClicked_CustomImage;
         }
 
-        if (Input.GetKeyUp(KeyCode.RightAlt))
+        if (Input.GetKeyUp(KeyCode.RightAlt) && inputState == InputState.CustomImage)
         {
             Tile.OnTileClicked -= OnTileClicked_CustomImage;
             ResetInputState();

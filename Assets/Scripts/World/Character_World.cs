@@ -406,7 +406,6 @@ public class Character_World : World_Entity
         if (isAlive)
         {
             SetLifeStatus(false);
-            Debug.LogWarning($"Remove {character} from Initiative!");
             Manager_Initative.Instance.RemoveCharacter(character);
             return;
         }
