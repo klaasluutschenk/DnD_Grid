@@ -42,6 +42,7 @@ public class Manager_Input_2 : MonoBehaviour
     private void Update()
     {
         Controls();
+        HardReset();
     }
 
     private void ToggleInputState(InputState newInputState)
@@ -109,6 +110,30 @@ public class Manager_Input_2 : MonoBehaviour
 
         Tile.OnTileClicked += ApplyDefaultEffect;
         Tile.OnTileClickedAlternate += ApplyAlternateEffect;
+    }
+
+    private void HardReset()
+    {
+        if (!Input.GetKeyDown(KeyCode.Equals))
+        {
+            return;
+        }
+
+        inputState = InputState.Default;
+
+        Tile.OnTileClicked -= ApplyDefaultEffect;
+        Tile.OnTileClickedAlternate -= ApplyAlternateEffect;
+        Tile.OnTileClicked -= OnTileClicked_Movement;
+        Tile.OnTileClicked -= OnTileClicked_Initiative;
+        Tile.OnTileClicked -= OnTileClicked_Spawning;
+        Tile.OnTileClicked -= OnTileClicked_CustomImage;
+
+        ClearMovementCharacter();
+        ClearMovementTiles();
+
+        characterToSpawn = null;
+
+        Manager_Cursor.Instance.ResetCursor();
     }
 
     #region Movement
