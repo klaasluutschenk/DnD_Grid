@@ -13,8 +13,19 @@ MonoBehaviour:
   m_Name: Ability_Passive_InfuriatingQuality
   m_EditorClassIdentifier: 
   Name: 'Passive: Infuriating Quality'
-  Description: Gain a permanent +1 on Attack rolls whenever an ally is defeated.
+  HasDescription: 1
+  Description: When an Ally Dies, if the Attacker is within Radius 3, Instantly Move
+    towards them and Attack.
   HasOutcomes: 0
   Outcome1: 
   Outcome2: 
   Outcome3: 
+  HasOutcome1: 0
+  Outcome1Roll: 0
+  Outcome1Description: 
+  HasOutcome2: 0
+  Outcome2Roll: 0
+  Outcome2Description: 
+  HasOutcome3: 0
+  Outcome3Roll: 0
+  Outcome3Description: 

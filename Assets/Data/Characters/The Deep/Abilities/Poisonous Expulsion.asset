@@ -13,8 +13,18 @@ MonoBehaviour:
   m_Name: Poisonous Expulsion
   m_EditorClassIdentifier: 
   Name: Poisonous Expulsion
+  HasDescription: 1
   Description: Explode for 5 Poison Damage 1 turn after your Death.
   HasOutcomes: 0
   Outcome1: 
   Outcome2: 
   Outcome3: 
+  HasOutcome1: 0
+  Outcome1Roll: 0
+  Outcome1Description: 
+  HasOutcome2: 0
+  Outcome2Roll: 0
+  Outcome2Description: 
+  HasOutcome3: 0
+  Outcome3Roll: 0
+  Outcome3Description: 

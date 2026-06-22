@@ -13,12 +13,22 @@ MonoBehaviour:
   m_Name: Ability_Active_LeakyFishBone
   m_EditorClassIdentifier: 
   Name: Leaky Fish Bone
-  Description: Don't touch the pointy end.
-  HasOutcomes: 1
-  Outcome1: Miss
-  Outcome2: '1 Damage
+  HasDescription: 1
+  Description: Melee Attack
+  HasOutcomes: 0
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: Miss
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: '1 Damage
 
     1 Poison Damage'
-  Outcome3: '1 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: '1 Damage
 
     1 Venom'

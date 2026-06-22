@@ -13,12 +13,22 @@ MonoBehaviour:
   m_Name: Ability_Active_TenderizingHammer
   m_EditorClassIdentifier: 
   Name: Tenderizing Hammer
-  Description: 
-  HasOutcomes: 1
-  Outcome1: 2 Damage
-  Outcome2: '4 Damage
+  HasDescription: 1
+  Description: Melee Attack
+  HasOutcomes: 0
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: 2 Damage
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: '4 Damage
 
     Knockback 2'
-  Outcome3: '8 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: '8 Damage
 
     Knockback 4'

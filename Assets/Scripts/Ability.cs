@@ -8,12 +8,6 @@ public class Ability : ScriptableObject
     public bool HasDescription;
     [TextArea] public string Description;
 
-    public bool HasOutcomes;
-
-    [TextArea] public string Outcome1;
-    [TextArea] public string Outcome2;
-    [TextArea] public string Outcome3;
-
     public bool HasOutcome1;
     public OutcomeRoll Outcome1Roll;
     [TextArea] public string Outcome1Description;

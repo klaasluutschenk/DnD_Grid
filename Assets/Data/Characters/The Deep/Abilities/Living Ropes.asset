@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Living Ropes
   m_EditorClassIdentifier: 
   Name: Living Ropes
+  HasDescription: 1
   Description: 'Both roll a D10.
 
     Knockback 4 + Won Amount.'
@@ -20,3 +21,12 @@ MonoBehaviour:
   Outcome1: 
   Outcome2: 
   Outcome3: 
+  HasOutcome1: 0
+  Outcome1Roll: 0
+  Outcome1Description: 
+  HasOutcome2: 0
+  Outcome2Roll: 0
+  Outcome2Description: 
+  HasOutcome3: 0
+  Outcome3Roll: 0
+  Outcome3Description: 

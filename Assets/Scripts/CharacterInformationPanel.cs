@@ -14,10 +14,10 @@ public class CharacterInformationPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text_Perception = default;
     [SerializeField] private TextMeshProUGUI text_Dodge = default;
 
-    [SerializeField] private Ability_UI prefab_Ability = default;
-    [SerializeField] private Transform container = default;
+    [SerializeField] private Transform abilityContainer = default;
+    [SerializeField] private PlayerAbility_UI abilityPrefab = default;
 
-    private List<Ability_UI> activeUIs = new List<Ability_UI>();
+    private List<PlayerAbility_UI> activeUIs = new List<PlayerAbility_UI>();
 
     private void Awake()
     {
@@ -37,15 +37,13 @@ public class CharacterInformationPanel : MonoBehaviour
         text_HealthPoints.text = character.HealthPoints.ToString();
         text_Armor.text = character.Armor.ToString();
         text_Movement.text = character.Movement.ToString();
-        text_Perception.text = character.Perception.ToString();
-        text_Dodge.text = character.Dodge.ToString();
 
         activeUIs.ForEach(aUI => Destroy(aUI.gameObject));
         activeUIs.Clear();
 
         foreach (Ability ability in character.Abilities)
         {
-            Ability_UI newUI = Instantiate(prefab_Ability, container);
+            PlayerAbility_UI newUI = Instantiate(abilityPrefab, abilityContainer);
 
             newUI.Setup(ability);
 
@@ -58,27 +56,27 @@ public class CharacterInformationPanel : MonoBehaviour
     // Very Hacky solution to circumvent the dynamic size breaking.
     private IEnumerator RefreshContainer()
     {
-        container.gameObject.SetActive(false);
+        abilityContainer.gameObject.SetActive(false);
 
         yield return null;
 
-        container.gameObject.SetActive(true);
+        abilityContainer.gameObject.SetActive(true);
 
         yield return null;
 
-        container.gameObject.SetActive(false);
+        abilityContainer.gameObject.SetActive(false);
 
         yield return null;
 
-        container.gameObject.SetActive(true);
+        abilityContainer.gameObject.SetActive(true);
 
         yield return null;
 
-        container.gameObject.SetActive(false);
+        abilityContainer.gameObject.SetActive(false);
 
         yield return null;
 
-        container.gameObject.SetActive(true);
+        abilityContainer.gameObject.SetActive(true);
     }
 
 }

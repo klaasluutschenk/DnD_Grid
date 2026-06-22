@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Moonstone Shines Bright
   m_EditorClassIdentifier: 
   Name: Moonstone Shines Bright
+  HasDescription: 1
   Description: 'Can be used 6 times in this battle.
 
 
@@ -22,3 +23,12 @@ MonoBehaviour:
   Outcome1: 
   Outcome2: 
   Outcome3: 
+  HasOutcome1: 0
+  Outcome1Roll: 0
+  Outcome1Description: 
+  HasOutcome2: 0
+  Outcome2Roll: 0
+  Outcome2Description: 
+  HasOutcome3: 0
+  Outcome3Roll: 0
+  Outcome3Description: 

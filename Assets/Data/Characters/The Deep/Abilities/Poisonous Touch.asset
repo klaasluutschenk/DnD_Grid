@@ -13,12 +13,22 @@ MonoBehaviour:
   m_Name: Poisonous Touch
   m_EditorClassIdentifier: 
   Name: Poisonous Touch
+  HasDescription: 1
   Description: Your skin burns with acidic poison.
   HasOutcomes: 1
-  Outcome1: 1 Damage
-  Outcome2: '1 Damage
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: 1 Damage
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: '1 Damage
 
     1 Poison Damage'
-  Outcome3: '1 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: '1 Damage
 
     2 Poison Damage'

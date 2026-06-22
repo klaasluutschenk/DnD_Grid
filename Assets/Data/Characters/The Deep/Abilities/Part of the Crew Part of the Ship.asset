@@ -13,8 +13,18 @@ MonoBehaviour:
   m_Name: Part of the Crew Part of the Ship
   m_EditorClassIdentifier: 
   Name: Part of the Crew Part of the Ship
+  HasDescription: 1
   Description: Every 5 HP Lost, Spawn a Coral Reef.
   HasOutcomes: 0
   Outcome1: 
   Outcome2: 
   Outcome3: 
+  HasOutcome1: 0
+  Outcome1Roll: 0
+  Outcome1Description: 
+  HasOutcome2: 0
+  Outcome2Roll: 0
+  Outcome2Description: 
+  HasOutcome3: 0
+  Outcome3Roll: 0
+  Outcome3Description: 

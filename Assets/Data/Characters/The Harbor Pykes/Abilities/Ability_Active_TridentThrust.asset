@@ -13,12 +13,20 @@ MonoBehaviour:
   m_Name: Ability_Active_TridentThrust
   m_EditorClassIdentifier: 
   Name: Trident Thrust
-  Description: 'Strike out with your trident.
+  HasDescription: 1
+  Description: Melee Attack, Range 2
+  HasOutcomes: 0
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: Miss
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: 2 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: '5 Damage
 
-    Range 2'
-  HasOutcomes: 1
-  Outcome1: Miss.
-  Outcome2: 2 Damage.
-  Outcome3: '5 Damage.
-
-    Cast Net Throw on the target.'
+    Root, Cleansed with an Action or Movement'

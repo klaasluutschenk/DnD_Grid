@@ -25,12 +25,12 @@ MonoBehaviour:
   InitativeColor: {r: 0, g: 0, b: 0, a: 1}
   CombatPrepColor: {r: 0.8490566, g: 0.5486828, b: 0.8038676, a: 1}
   HasNoInitiative: 0
-  initiative: 5
+  initiative: 14
   AdditionalInitiatives: 
-  HealthPoints: 40
+  HealthPoints: 15
   Armor: 10
   Barier: 0
-  Movement: 6
+  Movement: 10
   Perception: 0
   Dodge: 0
   Bleed: 0

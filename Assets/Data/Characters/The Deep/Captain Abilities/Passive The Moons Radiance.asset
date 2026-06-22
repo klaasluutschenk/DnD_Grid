@@ -13,8 +13,18 @@ MonoBehaviour:
   m_Name: Passive The Moons Radiance
   m_EditorClassIdentifier: 
   Name: 'Passive: The Moons Radiance'
+  HasDescription: 1
   Description: At the start of your Turn, heal and cleanse everyone for 3.
   HasOutcomes: 0
   Outcome1: 
   Outcome2: 
   Outcome3: 
+  HasOutcome1: 0
+  Outcome1Roll: 0
+  Outcome1Description: 
+  HasOutcome2: 0
+  Outcome2Roll: 0
+  Outcome2Description: 
+  HasOutcome3: 0
+  Outcome3Roll: 0
+  Outcome3Description: 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Fish Grader
   Description: Mercenary of the Harbor Pikes
-  Sprite: {fileID: 21300000, guid: e87d13f673d549649be3dc6e0e311c60, type: 3}
+  Sprite: {fileID: 21300000, guid: d8dc073c6d6f2dc46818fca47aa2562e, type: 3}
   EntitySize: 0
   IsPlayer: 0
   CustomInitiative: 0

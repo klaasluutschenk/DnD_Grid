@@ -10,21 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee61d1f82d0e2224a93d4576de9fa4bb, type: 3}
-  m_Name: Void Barrier
+  m_Name: Ability_Passive_FishyCraftsmanship
   m_EditorClassIdentifier: 
-  Name: Void Barrier
+  Name: 'Passive: Fishy Craftsmanship'
   HasDescription: 1
-  Description: Summon an icy <b> Barrier </b> around yourself.
+  Description: 'The weapon is destroyed when reaching 50 HP.
+
+    The weapon is instantly
+    destroyed when taking Light Damage aimed at the weapon. (Tier 3)'
   HasOutcomes: 0
   Outcome1: 
   Outcome2: 
   Outcome3: 
-  HasOutcome1: 1
-  Outcome1Roll: 4
-  Outcome1Description: Barrier 2
-  HasOutcome2: 1
-  Outcome2Roll: 5
-  Outcome2Description: Barrier 3
-  HasOutcome3: 1
-  Outcome3Roll: 3
-  Outcome3Description: Barrier 5
+  HasOutcome1: 0
+  Outcome1Roll: 0
+  Outcome1Description: 
+  HasOutcome2: 0
+  Outcome2Roll: 0
+  Outcome2Description: 
+  HasOutcome3: 0
+  Outcome3Roll: 0
+  Outcome3Description: 

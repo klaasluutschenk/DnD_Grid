@@ -13,10 +13,20 @@ MonoBehaviour:
   m_Name: Broken Bow
   m_EditorClassIdentifier: 
   Name: Broken Bow
+  HasDescription: 1
   Description: 'Slam out with a part of the ships bow.
 
     Cleave 1'
-  HasOutcomes: 1
-  Outcome1: 2 Damge
-  Outcome2: 4 Damage
-  Outcome3: 6 Damage
+  HasOutcomes: 0
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: 2 Damge
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: 4 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: 6 Damage

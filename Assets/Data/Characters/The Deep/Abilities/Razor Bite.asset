@@ -13,8 +13,18 @@ MonoBehaviour:
   m_Name: Razor Bite
   m_EditorClassIdentifier: 
   Name: Razor Bite
+  HasDescription: 1
   Description: Rocklike teeth rip into your target.
   HasOutcomes: 1
-  Outcome1: 1
-  Outcome2: 3
-  Outcome3: 5
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: 1 Damage
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: 3 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: 5 Damage

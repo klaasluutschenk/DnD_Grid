@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee61d1f82d0e2224a93d4576de9fa4bb, type: 3}
-  m_Name: Ability_Passive_EmptyHearted
+  m_Name: Ability_Active_StolenArrows
   m_EditorClassIdentifier: 
-  Name: Empty Hearted
-  Description: 'Mounted while armored.
-
-    Gain an additioal Movement Phase when
-    mounted.
-
-    Gain 5 barrier at the start of your turn.'
+  Name: Stolen Arrows
+  HasDescription: 1
+  Description: Ranged Attack, Range 6
   HasOutcomes: 0
   Outcome1: 
   Outcome2: 
   Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: Miss
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: 2 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: 4 Damage

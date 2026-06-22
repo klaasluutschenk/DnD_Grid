@@ -13,11 +13,21 @@ MonoBehaviour:
   m_Name: Bone Shot
   m_EditorClassIdentifier: 
   Name: Bone Shot
-  Description: 'Launch a sharp fishbone
+  HasDescription: 1
+  Description: 'Ranged Attack, Range 8
 
-    If you get hit, limit the damage to
-    Tier 2.'
+    If you get hit, limit the damage to Tier
+    2.'
   HasOutcomes: 1
-  Outcome1: Miss
-  Outcome2: 2 Damage
-  Outcome3: 6 Damage
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: Miss
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: 2 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: 6 Damage

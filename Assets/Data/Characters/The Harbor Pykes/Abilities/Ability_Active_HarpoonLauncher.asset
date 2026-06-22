@@ -13,13 +13,22 @@ MonoBehaviour:
   m_Name: Ability_Active_HarpoonLauncher
   m_EditorClassIdentifier: 
   Name: Harpoon Launcher
-  Description: 'Reloads between turns:
+  HasDescription: 1
+  Description: Ranged Attack, Range 8, Reload
+  HasOutcomes: 0
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: Miss
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: '5 Damage
 
-    If interupted, limit the attack to Tier
-    2.'
-  HasOutcomes: 1
-  Outcome1: Miss.
-  Outcome2: 4 Damage.
-  Outcome3: '10 Damage.
+    Pierce 1'
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: '10 Damage
 
-    Pierce 1 with no penalties.'
+    True Pierce 1'

@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Spear Thrust
   HasDescription: 1
-  Description: 2 Range
-  HasOutcomes: 1
-  Outcome1: 2 Damage
-  Outcome2: 4 Damage
-  Outcome3: 6 Damage
-  HasOutcome1: 0
+  Description: Melee Attack, 2 Range
+  HasOutcomes: 0
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
   Outcome1Roll: 0
-  Outcome1Description: 
-  HasOutcome2: 0
-  Outcome2Roll: 0
-  Outcome2Description: 
-  HasOutcome3: 0
-  Outcome3Roll: 0
-  Outcome3Description: 
+  Outcome1Description: 2 Damage
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: 4 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: 6 Damage

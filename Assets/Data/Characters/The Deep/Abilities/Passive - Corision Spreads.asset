@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Passive - Corision Spreads
   m_EditorClassIdentifier: 
   Name: Passive - Corrosion Spreads
+  HasDescription: 1
   Description: 'When Attacked, grant bleeding 2 by covering them in spiky weeds.
 
     When
@@ -21,3 +22,12 @@ MonoBehaviour:
   Outcome1: 
   Outcome2: 
   Outcome3: 
+  HasOutcome1: 0
+  Outcome1Roll: 0
+  Outcome1Description: 
+  HasOutcome2: 0
+  Outcome2Roll: 0
+  Outcome2Description: 
+  HasOutcome3: 0
+  Outcome3Roll: 0
+  Outcome3Description: 

@@ -13,12 +13,20 @@ MonoBehaviour:
   m_Name: Ability_Active_FishyArrows
   m_EditorClassIdentifier: 
   Name: Fishy Arrows
-  Description: 'Launch a Barrage of Fishy Arrows at your target
-
-    Range 6'
-  HasOutcomes: 1
-  Outcome1: Miss Miss Miss
-  Outcome2: 1 1 1 Damage
-  Outcome3: '1 1 1 Damage
+  HasDescription: 1
+  Description: Ranged Attack, Range 6
+  HasOutcomes: 0
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: Miss Miss Miss
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: 1 1 1 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: '1 1 1 Damage
 
     1 1 1 Poison Damage'

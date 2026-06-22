@@ -13,8 +13,18 @@ MonoBehaviour:
   m_Name: Ability_Active_FilletingKnife
   m_EditorClassIdentifier: 
   Name: Filleting Knife
-  Description: Lash out with a sharp knife that cuts through both flesh and fish.
-  HasOutcomes: 1
-  Outcome1: Miss.
-  Outcome2: 2 Damage.
-  Outcome3: 4 Damage.
+  HasDescription: 1
+  Description: Melee Attack
+  HasOutcomes: 0
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 0
+  Outcome1Roll: 0
+  Outcome1Description: Miss
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: 2 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: 4 Damage

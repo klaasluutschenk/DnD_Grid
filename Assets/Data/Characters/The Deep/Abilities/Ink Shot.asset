@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ink Shot
   m_EditorClassIdentifier: 
   Name: Ink Shot
+  HasDescription: 1
   Description: 'Grants Blind 1.
 
     Range 4'
@@ -20,3 +21,12 @@ MonoBehaviour:
   Outcome1: 
   Outcome2: 
   Outcome3: 
+  HasOutcome1: 0
+  Outcome1Roll: 0
+  Outcome1Description: 
+  HasOutcome2: 0
+  Outcome2Roll: 0
+  Outcome2Description: 
+  HasOutcome3: 0
+  Outcome3Roll: 0
+  Outcome3Description: 

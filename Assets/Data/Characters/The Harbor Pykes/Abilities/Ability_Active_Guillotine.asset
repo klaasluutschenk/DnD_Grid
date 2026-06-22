@@ -10,13 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee61d1f82d0e2224a93d4576de9fa4bb, type: 3}
-  m_Name: Ability_Active_SpearThrust
+  m_Name: Ability_Active_Guillotine
   m_EditorClassIdentifier: 
-  Name: Spear Thrust
-  Description: 'Thrust forward to penetrate the enemy.
-
-    Range 2'
-  HasOutcomes: 1
-  Outcome1: 0 Damage
-  Outcome2: 3 Damage
-  Outcome3: 6 Damage
+  Name: Guillotine
+  HasDescription: 1
+  Description: Melee Attack
+  HasOutcomes: 0
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: Miss
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: 4 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: 8 Damage

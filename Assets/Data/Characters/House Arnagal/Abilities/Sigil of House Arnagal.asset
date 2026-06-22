@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Sigil of House Arnagal
   HasDescription: 1
-  Description: Grant a nearby Ally Barrier 5
+  Description: Grant an Ally in Melee Range Barrier 5.
   HasOutcomes: 0
   Outcome1: 
   Outcome2: 

@@ -13,15 +13,25 @@ MonoBehaviour:
   m_Name: Agonizing Tendrils
   m_EditorClassIdentifier: 
   Name: Agonizing Tendrils
+  HasDescription: 1
   Description: 'A massive tendril of plantlife shoots forth.
 
     Range 6, can hit
     around corners'
   HasOutcomes: 1
-  Outcome1: 2 Damage
-  Outcome2: '4 Damage
+  Outcome1: 
+  Outcome2: 
+  Outcome3: 
+  HasOutcome1: 1
+  Outcome1Roll: 0
+  Outcome1Description: 2 Damage
+  HasOutcome2: 1
+  Outcome2Roll: 1
+  Outcome2Description: '4 Damage
 
     Bleeding 1'
-  Outcome3: '6 Damage
+  HasOutcome3: 1
+  Outcome3Roll: 2
+  Outcome3Description: '6 Damage
 
     Bleeding 2'

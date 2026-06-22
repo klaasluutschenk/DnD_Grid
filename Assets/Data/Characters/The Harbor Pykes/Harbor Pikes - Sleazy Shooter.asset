@@ -27,11 +27,11 @@ MonoBehaviour:
   HasNoInitiative: 0
   initiative: 14
   AdditionalInitiatives: 
-  HealthPoints: 4
+  HealthPoints: 3
   Armor: 0
   Barier: 0
   Movement: 8
-  Perception: 5
+  Perception: 0
   Dodge: 0
   Bleed: 0
   Blinded: 0
@@ -42,6 +42,5 @@ MonoBehaviour:
   Stun: 0
   Venom: 0
   Abilities:
-  - {fileID: 11400000, guid: f87f6118b7933394d8f8357052ac6af1, type: 2}
-  - {fileID: 11400000, guid: f3c2892f57a95554a8dab445acbc1400, type: 2}
+  - {fileID: 11400000, guid: 22283dd56aca9324e8a1487120ba3bb2, type: 2}
   HasShip: 0

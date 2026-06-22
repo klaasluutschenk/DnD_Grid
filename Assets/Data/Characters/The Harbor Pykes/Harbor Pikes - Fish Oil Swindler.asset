@@ -30,7 +30,7 @@ MonoBehaviour:
   HealthPoints: 1
   Armor: 0
   Barier: 0
-  Movement: 4
+  Movement: 5
   Perception: 0
   Dodge: 0
   Bleed: 0
@@ -43,5 +43,4 @@ MonoBehaviour:
   Venom: 0
   Abilities:
   - {fileID: 11400000, guid: c56c2ec410eda4b4fb6f00c0f04064ed, type: 2}
-  - {fileID: 11400000, guid: f3c2892f57a95554a8dab445acbc1400, type: 2}
   HasShip: 0

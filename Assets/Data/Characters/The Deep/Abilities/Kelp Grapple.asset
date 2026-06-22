@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Kelp Grapple
   m_EditorClassIdentifier: 
   Name: Kelp Grapple
+  HasDescription: 1
   Description: 'Latches on to a Target, applying Root 1, Dealing 2 Damage.
 
     The
@@ -21,3 +22,12 @@ MonoBehaviour:
   Outcome1: 
   Outcome2: 
   Outcome3: 
+  HasOutcome1: 0
+  Outcome1Roll: 0
+  Outcome1Description: 
+  HasOutcome2: 0
+  Outcome2Roll: 0
+  Outcome2Description: 
+  HasOutcome3: 0
+  Outcome3Roll: 0
+  Outcome3Description: 
