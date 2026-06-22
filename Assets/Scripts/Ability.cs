@@ -29,5 +29,7 @@ public enum OutcomeRoll
     Tier3,
     Action,
     InstantAction,
-    BonusAction
+    BonusAction,
+    Movement,
+    Passive
 }

@@ -55,6 +55,10 @@ public class PlayerAbility_UI : MonoBehaviour
                 return "Instant Action";
             case OutcomeRoll.BonusAction:
                 return "Bonus Action";
+            case OutcomeRoll.Movement:
+                return "Movement";
+            case OutcomeRoll.Passive:
+                return "Passive";
         }
 
         return "";
