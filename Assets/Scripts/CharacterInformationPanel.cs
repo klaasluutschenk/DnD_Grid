@@ -11,8 +11,6 @@ public class CharacterInformationPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text_HealthPoints = default;
     [SerializeField] private TextMeshProUGUI text_Armor = default;
     [SerializeField] private TextMeshProUGUI text_Movement = default;
-    [SerializeField] private TextMeshProUGUI text_Perception = default;
-    [SerializeField] private TextMeshProUGUI text_Dodge = default;
 
     [SerializeField] private Transform abilityContainer = default;
     [SerializeField] private PlayerAbility_UI abilityPrefab = default;

@@ -249,6 +249,13 @@ public class Character_World : World_Entity
             return;
 
         image_Initiative.color = character_Initative.InitativeColor;
+        SetColor(character_Initative.InitativeColor);
+    }
+
+    private void SetColor(Color color)
+    {
+        float luminance = (0.299f * color.r) + (0.587f * color.g) + (0.114f * color.b);
+        image_Sprite.color = (luminance > 0.8f) ? Color.black : Color.white;
     }
 
     public void Damage(float damage, bool ignoreBarrier = false, bool ignoreArmor = false)

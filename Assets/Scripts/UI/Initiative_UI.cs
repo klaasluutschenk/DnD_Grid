@@ -31,6 +31,8 @@ public class Initiative_UI : MonoBehaviour
         image_Initiative.color = character.InitativeColor;
         image_CharacterSprite.sprite = character.Character.Sprite;
 
+        SetColor(character.InitativeColor);
+
         text_CharacterName.text = character.Character.Name;
 
         if (text_Initative != null)
@@ -114,5 +116,11 @@ public class Initiative_UI : MonoBehaviour
     private void SetScale(float scale)
     {
         container.localScale = new Vector3(scale, scale, scale);
+    }
+
+    private void SetColor(Color color)
+    {
+        float luminance = (0.299f * color.r) + (0.587f * color.g) + (0.114f * color.b);
+        image_CharacterSprite.color = (luminance > 0.8f) ? Color.black : Color.white;
     }
 }

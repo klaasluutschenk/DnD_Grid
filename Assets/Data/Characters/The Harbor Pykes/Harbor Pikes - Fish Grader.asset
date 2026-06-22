@@ -30,7 +30,7 @@ MonoBehaviour:
   HealthPoints: 20
   Armor: 5
   Barier: 0
-  Movement: 10
+  Movement: 8
   Perception: 14
   Dodge: 0
   Bleed: 0

@@ -25,8 +25,6 @@ public class Character : Entity
     public int Armor;
     public int Barier;
     public int Movement;
-    public int Perception;
-    public int Dodge;
 
     [Header("Base Effects")]
     public int Bleed;
