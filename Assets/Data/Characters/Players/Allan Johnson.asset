@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Allan Johnson
   Description: 
   Sprite: {fileID: 0}
-  EntitySize: 0
+  EntitySize: 4
   IsPlayer: 1
   CustomInitiative: 1
   IsMinion: 0

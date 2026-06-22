@@ -36661,6 +36661,8 @@ MonoBehaviour:
     Prefab: {fileID: 191859965173050626, guid: dde51c3dbd4961d48aa1a109b60a644d, type: 3}
   - CharacterType: 3
     Prefab: {fileID: 519244796753071348, guid: fd54383313aa5684e820d166136101e1, type: 3}
+  - CharacterType: 4
+    Prefab: {fileID: 191859965173050626, guid: 217981ff606e9cd4faf61dd0a4791e93, type: 3}
 --- !u!1 &2137468707
 GameObject:
   m_ObjectHideFlags: 0

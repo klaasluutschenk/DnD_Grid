@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Siegfried
   Description: 
   Sprite: {fileID: 0}
+  EntitySize: 4
   IsPlayer: 1
   CustomInitiative: 1
   IsMinion: 0

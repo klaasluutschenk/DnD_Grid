@@ -121,5 +121,6 @@ public enum EntitySize
     Default = 0,
     Small = 1,
     Big = 2,
-    Giant = 3
+    Giant = 3,
+    Player
 }

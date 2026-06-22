@@ -15,11 +15,16 @@ MonoBehaviour:
   Name: Eldrin Thaddeus
   Description: 
   Sprite: {fileID: 0}
+  EntitySize: 4
   IsPlayer: 1
   CustomInitiative: 1
   IsMinion: 0
+  IsBig: 0
+  IsGiant: 0
   IsPlayerTeam: 1
   InitativeColor: {r: 0, g: 0, b: 0, a: 0}
+  CombatPrepColor: {r: 0, g: 0, b: 0, a: 0}
+  HasNoInitiative: 0
   initiative: 0
   AdditionalInitiatives: 
   HealthPoints: 20
@@ -28,4 +33,13 @@ MonoBehaviour:
   Movement: 6
   Perception: 0
   Dodge: 0
+  Bleed: 0
+  Blinded: 0
+  Burn: 0
+  Reload: 0
+  Root: 0
+  Slowed: 0
+  Stun: 0
+  Venom: 0
   Abilities: []
+  HasShip: 0
