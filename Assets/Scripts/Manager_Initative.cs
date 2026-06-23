@@ -15,11 +15,13 @@ public class Manager_Initative : MonoBehaviour
     public static Action<List<Character>> OnCustomInitiativeRequest;
 
     [SerializeField] private List<Color> initiativeColors = new List<Color>();
+    [SerializeField] private List<Color> initiativeColorsPlayers = new List<Color>();
 
     private List<Character_Initiative> activeCharacters = new List<Character_Initiative>();
     private List<Inactive_Character_Initiative> inactiveCharacters = new List<Inactive_Character_Initiative>();
     private List<Character> customInitiativesToSetup = new List<Character>();
     private List<Color> availableColors = new List<Color>();
+    private List<Color> availableColorsPlayers = new List<Color>();
 
     private Character_Initiative activeCharacter;
 
@@ -84,8 +86,18 @@ public class Manager_Initative : MonoBehaviour
             return;
         }
 
-        Color asignedColor = GetRandomAvailableColor();
-        LockColor(asignedColor);
+        Color asignedColor = Color.white;
+
+        if (character.IsPlayer)
+        {
+            asignedColor = GetRandomAvailableColorPlayer();
+            LockColorPlayer(asignedColor);
+        }
+        else
+        {
+            asignedColor = GetRandomAvailableColor();
+            LockColor(asignedColor);
+        }
 
         Character_Initiative newCharacter =
                 new Character_Initiative(
@@ -255,6 +267,7 @@ public class Manager_Initative : MonoBehaviour
     private void LoadColors()
     {
         initiativeColors.ForEach(c => availableColors.Add(c));
+        initiativeColorsPlayers.ForEach(c => availableColorsPlayers.Add(c));
     }
 
     private void LockColor(Color color)
@@ -265,11 +278,28 @@ public class Manager_Initative : MonoBehaviour
         availableColors.Remove(color);
     }
 
+    private void LockColorPlayer(Color color)
+    {
+        if (!availableColorsPlayers.Contains(color))
+            return;
+
+        availableColorsPlayers.Remove(color);
+    }
+
     private Color GetRandomAvailableColor()
     {
         int randomIndex = UnityEngine.Random.Range(0, availableColors.Count);
 
         Color randomColor = availableColors[randomIndex];
+
+        return randomColor;
+    }
+
+    private Color GetRandomAvailableColorPlayer()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, availableColorsPlayers.Count);
+
+        Color randomColor = availableColorsPlayers[randomIndex];
 
         return randomColor;
     }
